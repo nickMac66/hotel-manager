@@ -1,15 +1,77 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
+<link rel="stylesheet" href="css/styles.css" type="text/css">
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Booking Details</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>TODO write content</div>
+        <div class="container">
+            <form>
+                <table>
+                    <tr>
+                        <th>
+                            <label for="fname">First name ===></label>
+                        </th>
+                        <td>
+                            <input type="text" id="fname" name="fname">
+                        </td>
+                        <th>
+                            <label for="lname">Last name ===></label>
+                        </th>
+                        <td>
+                            <input type="text" id="lname" name="lname">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="phone">Phone ===></label>
+                        </th>
+                        <td>
+                            <input type="text" id="phone" name="phone">
+                        </td>
+                        <th>
+                            <label for="email">Email ===></label>
+                        </th>
+                        <td>
+                            <input type="text" id="email" name="email">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="checkin">Check in ===></label>
+                        </th>
+                        <td>
+                            <input type="date" id="checkin" name="checkin">
+                        </td>
+                        <th>
+                            <label for="checkout">Check out ===></label>
+                        </th>
+                        <td>
+                            <input type="date" id="checkout" name="checkout">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="room-type">Room type ===></label>
+                        </th>
+                        <td>
+                            <input type="radio" id="basic" name="room-type" value="basic">
+                            <label for="basic">Basic</label><br>
+                            <input type="radio" id="deluxe" name="room-type" value="deluxe">
+                            <label for="deluxe">Deluxe</label><br>
+                            <input type="radio" id="luxury" name="room-type" value="luxury">
+                            <label for="luxury">Luxury</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="submit" value="Submit">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
     </body>
 </html>
