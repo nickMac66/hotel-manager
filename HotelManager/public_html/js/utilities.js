@@ -7,7 +7,7 @@
  */
 
 function formGenerator(formData) {
-    
+
     let tableHeader = " ";
 
     // Start building the form
@@ -26,8 +26,8 @@ function formGenerator(formData) {
         for (let key in nestedObject) {
             let value = formData[formField][key];  // Get the value for the current key in the nested object
             console.log(key);
-            console.log(value);  
-
+            console.log(value);
+            
             if (key == "nextRow") {
                 form += "</tr>" // Close the current table row if the key is "nextRow"
             } else if (key == "inputType") {
