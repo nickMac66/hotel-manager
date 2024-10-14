@@ -6,10 +6,21 @@
  * Last Modified: October 12, 2024
  */
 
+const form = {
+    cell1: {fname: "First name ===>", inputType: "text"},
+    cell2: {lname: "Last name ===>", inputType: "text"},
+    cell3: {phone: "Phone ===>", inputType: "text"},
+    cell4: {email: "Email ===>", inputType: "text"},
+    cell5: {checkin: "Check in", inputType: "date"},
+    cell6: {checkout: "Check out", inputType: "date"},
+    cell7: {roomType: "Room type", inputType: "text"}
+};
+
 document.addEventListener("DOMContentLoaded", function () {
-    console.log("The DOM is fully loaded and parsed!");
-
     let bookingFormHtml = document.querySelector(".container");
-    bookingFormHtml.innerHTML = 'SAMPLE TEXT';
-
+    if (bookingFormHtml) {
+        bookingFormHtml.innerHTML = formGenerator(form);
+    } else {
+        console.error("No container found.");
+    }
 });
