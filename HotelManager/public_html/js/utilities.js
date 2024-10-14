@@ -17,13 +17,42 @@ function formGenerator(formData) {
     for (let obj in formData) {
         let formField = obj;
         let nestedObject = formData[obj];
+
         for (let key in nestedObject) {
             let value = formData[formField][key];
+            console.log(key);
             console.log(value);
+
+            if (key == "nextRow") {
+                form += "</tr>";
+            } else if (key == "inputType") {
+                form += "<td>";
+
+                switch (value) {
+                    case "text":
+                        form += "<input type=text id=" + key + "name=" + key + ">";
+                        break;
+                    case "date":
+                        form += "<input type=date id=" + key + "name=" + key + ">";
+                        break;
+                    case "radio":
+                        form += "<input type=radio id=" + key + "name=" + key + ">";
+                        break;
+                    case "submit":
+                        form += "<input type=submit>";
+                        break;
+
+                    default:
+                    case "text":
+                        form += "<input type=text id=" + key + "name=" + key + ">";
+                        break;
+                }
+
+                form += "</td>";
+            } else {
+                form += "<th>" + value + "</th>";
+            }
         }
-
-
-
     }
 
 
