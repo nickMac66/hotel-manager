@@ -8,11 +8,11 @@
 
 const form = {
     cell1: {fname: "First name ===>", inputType: "text"},
-    cell2: {lname: "Last name ===>", inputType: "text", nextRow: "true"},
+    cell2: {lname: "Last name ===>", inputType: "text", nextRow: true},
     cell3: {phone: "Phone ===>", inputType: "text"},
-    cell4: {email: "Email ===>", inputType: "text", nextRow: "true"},
+    cell4: {email: "Email ===>", inputType: "text", nextRow: true},
     cell5: {checkin: "Check in", inputType: "date"},
-    cell6: {checkout: "Check out", inputType: "date", nextRow: "true"},
+    cell6: {checkout: "Check out", inputType: "date", nextRow: true},
     cell7: {roomType: "Room type", inputType: "text"},
     cell8: {inputType: "submit"}
 };
