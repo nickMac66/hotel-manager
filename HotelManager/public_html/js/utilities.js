@@ -16,14 +16,17 @@ function formGenerator(formData) {
 
     // Loop through each key in the formData object
     for (let obj in formData) {
-        let formField = obj; // Get the current form field
+        
+        let formField = obj; // Get the current form field        
         let nestedObject = formData[obj]; // Get the nested object for the current form field
+        let keys = Object.keys(nestedObject);
+        let inputId = keys[0];
 
         // Loop through each key in the nested object
         for (let key in nestedObject) {
             let value = formData[formField][key]; // Get the value for the current key in the nested object
-            console.log(key);
-            console.log(value); 
+//            console.log(key);
+//            console.log(value);                         
             
             if (key == "nextRow") {
                 // If the key is "nextRow", close the current table row
@@ -35,20 +38,21 @@ function formGenerator(formData) {
                 // Use a switch statement to handle different input types
                 switch (value) {
                     case "text":                        
-                        form += "<input type=text id=" + key + " name=" + key + ">";
+                        form += `<input type="text" id="${inputId}" name="${inputId}">`
+                        console.log(inputId);
                         break;
                     case "date":                        
-                        form += "<input type=date id=" + key + " name=" + key + ">";
+                        form += `<input type="date" id="${inputId}" name="${inputId}">`
                         break;
                     case "radio":                        
-                        form += "<input type=radio id=" + key + " name=" + key + ">";
+                        form += `<input type="radio" id="${inputId}" name="${inputId}">`
                         break;
                     case "submit":                       
                         form += "<input type=submit>";
                         break;
                     default:
                         // Default case to handle unknown input types, create a text input field
-                        form += "<input type=text id=" + key + " name=" + key + ">";
+                        form += `<input type="text" id="${inputId}" name="${inputId}">`
                         break;
                 }
                 form += "</td>"; // Close the table cell
