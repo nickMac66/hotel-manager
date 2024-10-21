@@ -1,6 +1,10 @@
 /* 
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/ClientSide/javascript.js to edit this template
+ * Name: formHandler.js
+ * Description: JavaScript file for handling form submissions and related functionality.
+ *  This file accepts user input from the form and processes it accordingly.
+ * Author: NicMac
+ * Created On: October 16, 2024 
  */
+
 
 
