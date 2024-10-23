@@ -66,10 +66,10 @@ document.addEventListener("DOMContentLoaded", function () {
         // Log the check out date
         console.log(`Check out: ${checkout}`);
 
-//        let roomType = bookingForm.elements['roomType'];
-//        roomType = roomType.value;
-//        // Log the check out date
-//        console.log(`Room type: ${roomType}`);
+        let roomType = bookingForm.elements['roomType'];
+        roomType = roomType.value;
+        // Log the check out date
+        console.log(`Room type: ${roomType}`);
 
         pageContent.innerHTML = `First name: ${fname}<br>`;
         pageContent.innerHTML += `Last name: ${lname}<br>`;
@@ -77,7 +77,6 @@ document.addEventListener("DOMContentLoaded", function () {
         pageContent.innerHTML += `Email: ${email}<br>`;
         pageContent.innerHTML += `Check in: ${checkin}<br>`;
         pageContent.innerHTML += `Check out: ${checkout}<br>`;
-        pageContent.innerHTML += `Room type: ${roomType}<br>`;
-        
+        pageContent.innerHTML += `Room type: ${roomType}<br>`;        
     });
 });
