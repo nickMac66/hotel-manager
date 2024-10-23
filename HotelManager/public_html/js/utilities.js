@@ -64,10 +64,10 @@ function formGenerator(formData) {
 
                             for (let key in radio[id]) {
                                 if (key == "name") {
-                                    let name = radio[id][key];
+                                    name = radio[id][key];
                                 } else {
                                     let value = radio[id][key];
-                                    form += `<input type="radio" id="${id}" name="${name} value="${value}"`;
+                                    form += `<input type="radio" id="${id}" name="${name}" value="${value}"`;
                                     form += `<label for="${id}">${value}</label><br>`;
                                 }
                             }
@@ -91,5 +91,6 @@ function formGenerator(formData) {
 
     form += "</table>"; // Close the table
     form += "</form>"; // Close the form
+    console.log(form);
     return form; // Return the completed form string
 }
