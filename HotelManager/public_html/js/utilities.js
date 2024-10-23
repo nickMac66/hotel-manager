@@ -8,14 +8,12 @@
 
 function formGenerator(formData) {
 
-
-
     let tableHeader = " "; // Initialize an empty table header string
 
     // Start building the form
-    let form = "<form>";
-    form += "<table>";
-    form += "<tr>"; // Start the first row of the table
+    let form = '<form id="form">';
+    form += '<table>';
+    form += '<tr>'; // Start the first row of the table
 
     // Loop through each key in the formData object
     for (let obj in formData) {
@@ -23,7 +21,7 @@ function formGenerator(formData) {
         let formField = obj; // Get the current form field        
         let nestedObject = formData[obj]; // Get the nested object for the current form field
         let keys = Object.keys(nestedObject);
-        let firstKey = keys[0];
+        let firstKey = keys[0];        
 
         // Loop through each key in the nested object
         for (let key in nestedObject) {
@@ -77,7 +75,7 @@ function formGenerator(formData) {
                         break;
 
                     case "submit":
-                        form += "<input type=submit>";
+                        form += '<input type="submit" name="submit">';
                         break;
 
                     default:
