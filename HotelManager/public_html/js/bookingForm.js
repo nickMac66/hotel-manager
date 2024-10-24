@@ -26,51 +26,37 @@ const formData = {
 
 document.addEventListener("DOMContentLoaded", function () {
 
+    // Add dynamic page content
     let pageContent = document.querySelector(".container");
-
     pageContent.innerHTML = formGenerator(formData);
 
     document.getElementById("form").addEventListener("submit", function (event) {
-
-        // Get the booking form
+        
+        // Prevent default form action
+        event.preventDefault();
+                
+        // Get references to the booking form
         let bookingForm = document.getElementById("form");
-
-        // Get values from user input
+        
+        // Get references to the booking form input fields
         let fname = bookingForm.elements['fname'];
-        fname = fname.value;
-        // Log the first name
-        console.log(`first name: ${fname}`);
-
         let lname = bookingForm.elements['lname'];
-        lname = lname.value;
-        // Log the last name
-        console.log(`last name: ${lname}`)
-
         let phone = bookingForm.elements['phone'];
-        phone = phone.value;
-        // Log the phone number
-        console.log(`Phone: ${phone}`);
-
         let email = bookingForm.elements['email'];
-        email = email.value;
-        // Log the email address
-        console.log(`Email: ${email}`);
-
         let checkin = bookingForm.elements['checkin'];
-        checkin = checkin.value;
-        // Log the check in date
-        console.log(`Check in: ${checkin}`);
-
         let checkout = bookingForm.elements['checkout'];
-        checkout = checkout.value;
-        // Log the check out date
-        console.log(`Check out: ${checkout}`);
-
         let roomType = bookingForm.elements['roomType'];
-        roomType = roomType.value;
-        // Log the check out date
-        console.log(`Room type: ${roomType}`);
 
+        // Assign the input field values to variables
+        fname = fname.value;        
+        lname = lname.value;       
+        phone = phone.value;
+        email = email.value;
+        checkin = checkin.value;
+        checkout = checkout.value;
+        roomType = roomType.value;
+
+        // Display user input data
         pageContent.innerHTML = `First name: ${fname}<br>`;
         pageContent.innerHTML += `Last name: ${lname}<br>`;
         pageContent.innerHTML += `Phone: ${phone}<br>`;
