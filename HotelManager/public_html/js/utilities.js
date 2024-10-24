@@ -6,13 +6,13 @@
  * Last Modified: October 13, 2024
  */
 
-function formGenerator(formData) {
-    console.log("function called");
+function formGenerator(formData, formAction) {
 
-// Start building the form
-    let form = '<form id="form">';
+    // Start building the form
+    let form = `<form id="form" action="${formAction}">`;
     form += '<table>';
     form += '<tr>';
+
     // Loop through each form field
     for (let formField in formData) {
 
@@ -46,42 +46,47 @@ function formGenerator(formData) {
                 switch (value) {
 
                     case "text":
+
                         form += `<input type="text" id="${formField}" name="${formField}">`;
                         break;
 
                     case "date":
+
                         form += `<input type="date" id="${formField}" name="${formField}">`;
                         break;
 
                     case radio:
-//                        let name = "";
-//                        let value = "";
-//                                                
+
                         // Get the radio fields
                         for (let radioField in radio) {
 
                             // Create a reference to the current radio field object
                             let radioFieldObject = radio[radioField];
-                            let radioName = "";
-                            let radioValue = "";
+                            let nameAttribute = "";
+                            let valueAttribute = "";
 
                             // Get the keys from the current radio field object
                             for (let key in radioFieldObject) {
 
                                 if (key == "name") {
-                                    radioName = radioFieldObject[key];
-                                    console.log("radio name: " + radioName);
+
+                                    // Set the name attribute for the current radio field
+                                    nameAttribute = radioFieldObject[key];
+
                                 } else {
-                                    radioValue = radioFieldObject[key];
-                                    form += `<input type="radio" id="${radioField}" name="${radioName}" value="${radioValue}"`;
-                                    form += `<label for="${radioField}">${radioValue}</label><br>`;
+
+                                    // Set the value attribute for the current radio field
+                                    valueAttribute = radioFieldObject[key];
+                                    form += `<input type="radio" id="${radioField}" name="${nameAttribute}" value="${valueAttribute}"`;
+                                    form += `<label for="${radioField}">${valueAttribute}</label><br>`;
                                 }
                             }
                         }
                         break;
 
                     case "submit":
-                        form += '<input type="submit" name="submit">';
+                        formAction =
+                                form += '<input type="submit" name="submit">';
                         break;
 
                     default:
@@ -90,7 +95,7 @@ function formGenerator(formData) {
                         break;
                 }
 
-                form += "</td>"; // Close the table cell
+                form += "</td>"; // Close the table cell           
             }
         }
     }
