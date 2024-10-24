@@ -7,68 +7,74 @@
  */
 
 function formGenerator(formData) {
+    console.log("function called");
 
-    let tableHeader = " "; // Initialize an empty table header string
-
-    // Start building the form
+// Start building the form
     let form = '<form id="form">';
     form += '<table>';
-    form += '<tr>'; // Start the first row of the table
+    form += '<tr>';
+    // Loop through each form field
+    for (let formField in formData) {
 
-    // Loop through each key in the formData object
-    for (let obj in formData) {
+        // Get the form field object containing the input field attributes
+        let formFieldObject = formData[formField];
 
-        let formField = obj; // Get the current form field        
-        let nestedObject = formData[obj]; // Get the nested object for the current form field
-        let keys = Object.keys(nestedObject);
-        let firstKey = keys[0];        
+        // Loop through the keys in the current form field object
+        for (let key in formFieldObject) {
 
-        // Loop through each key in the nested object
-        for (let key in nestedObject) {
-            let value = formData[formField][key]; // Get the value for the current key in the nested object
-//            console.log(key);
-//            console.log(value); 
+            // Get the value for the current key in the form field object
+            let value = formData[formField][key];
 
             if (key == "nextRow") {
-                // If the key is "nextRow", close the current table row
+
+                // Close the current table row
                 form += "</tr>";
             }
 
-            if (key == firstKey) {
+            if (key == "value") {
+
                 // Create a table header with the value
                 form += "<th>" + value + "</th>";
             }
 
             if (key == "inputType") {
-                // If the key is "inputType", start a new table cell
+
+                // Start a new table cell
                 form += "<td>";
 
-                // Use a switch statement to handle different input types
+                // Handle the different input types
                 switch (value) {
 
                     case "text":
-                        form += `<input type="text" id="${firstKey}" name="${firstKey}">`
-//                        console.log(firstKey);
+                        form += `<input type="text" id="${formField}" name="${formField}">`;
                         break;
 
                     case "date":
-                        form += `<input type="date" id="${firstKey}" name="${firstKey}">`
+                        form += `<input type="date" id="${formField}" name="${formField}">`;
                         break;
 
                     case radio:
-                        let name = "";
-                        let value = "";
+//                        let name = "";
+//                        let value = "";
+//                                                
+                        // Get the radio fields
+                        for (let radioField in radio) {
 
-                        for (let obj in radio) {
-                            let id = obj;
+                            // Create a reference to the current radio field object
+                            let radioFieldObject = radio[radioField];
+                            let radioName = "";
+                            let radioValue = "";
 
-                            for (let key in radio[id]) {
+                            // Get the keys from the current radio field object
+                            for (let key in radioFieldObject) {
+
                                 if (key == "name") {
-                                    name = radio[id][key];
+                                    radioName = radioFieldObject[key];
+                                    console.log("radio name: " + radioName);
                                 } else {
-                                    let value = radio[id][key];
-                                    form += `<input type="radio" id="${id}" name="${name}" value="${value}"`;
-                                    form += `<label for="${id}">${value}</label><br>`;
+                                    radioValue = radioFieldObject[key];
+                                    form += `<input type="radio" id="${radioField}" name="${radioName}" value="${radioValue}"`;
+                                    form += `<label for="${radioField}">${radioValue}</label><br>`;
                                 }
                             }
                         }
@@ -80,7 +86,7 @@ function formGenerator(formData) {
 
                     default:
                         // Default case to handle unknown input types, create a text input field
-                        form += `<input type="text" id="${firstKey}" name="${firstKey}">`
+                        form += '<input type="text" id="default" name="default">';
                         break;
                 }
 
@@ -91,6 +97,5 @@ function formGenerator(formData) {
 
     form += "</table>"; // Close the table
     form += "</form>"; // Close the form
-    console.log(form);
     return form; // Return the completed form string
 }
