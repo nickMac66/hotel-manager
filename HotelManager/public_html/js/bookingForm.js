@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Add dynamic page content
     let pageContent = document.getElementById("home");
-    pageContent.innerHTML = formGenerator(formData);
+    let formAction = "bookingDetails.html"
+    pageContent.innerHTML = formGenerator(formData, formAction);
 
 });
