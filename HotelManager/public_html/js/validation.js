@@ -31,8 +31,43 @@ function validateForm() {
     checkin = checkin.value;
     checkout = checkout.value;
     roomType = roomType.value;
+    
+    if (fname == "") {
+        isValid = false;
+        alert("first name is required");
+    }
+    
+    if (lname == "") {
+        isValid = false;
+        alert("last name is required");
+    }
+    
+    if (phone == "") {
+        isValid = false;
+        alert("phone number is required");
+    }
+    
+    if (email == "") {
+        isValid = false;
+        alert("email is required");
+    }
+    
+    if (checkin == "") {
+        isValid = false;
+        alert("check in is required");
+    }
+    
+    if (checkout == "") {
+        isValid = false;
+        alert("check out is required");
+    }
+    
+    if (roomType == "") {
+        isValid = false;
+        alert("room type is required");
+    }
 
-    return false;
+    return isValid;
 }
 
 
