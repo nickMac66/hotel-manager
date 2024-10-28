@@ -33,39 +33,35 @@ function validateForm() {
     roomType = roomType.value;
     
     if (fname == "") {
+        $("#textError").html("**First name is required").css("color", "red");
         isValid = false;
-        alert("first name is required");
+        
     }
     
     if (lname == "") {
         isValid = false;
-        alert("last name is required");
+        
     }
     
     if (phone == "") {
-        isValid = false;
-        alert("phone number is required");
+        isValid = false;       
     }
     
     if (email == "") {
-        isValid = false;
-        alert("email is required");
+        isValid = false;        
     }
     
     if (checkin == "") {
-        isValid = false;
-        alert("check in is required");
+        isValid = false;       
     }
     
     if (checkout == "") {
-        isValid = false;
-        alert("check out is required");
+        isValid = false;        
     }
     
     if (roomType == "") {
-        isValid = false;
-        alert("room type is required");
-    }
+        isValid = false;        
+    }        
 
     return isValid;
 }
