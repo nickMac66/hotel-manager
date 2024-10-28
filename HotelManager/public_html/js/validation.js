@@ -5,75 +5,31 @@
  * Created On: October 24, 2024
  */
 
-function validateForm() {
+function formIsValid() {
 
-    console.log("validating...");
-    
-    let isValid = true;
+    let isValid = false;
 
-    // Create a reference to the booking form
-    let bookingForm = document.getElementById("form");
+    let fname = $("#fname").val();
+    let lname = $("#lname").val();
 
-    // Create references to the booking form input fields
-    let fname = bookingForm.elements['fname'];
-    let lname = bookingForm.elements['lname'];
-    let phone = bookingForm.elements['phone'];
-    let email = bookingForm.elements['email'];
-    let checkin = bookingForm.elements['checkin'];
-    let checkout = bookingForm.elements['checkout'];
-    let roomType = bookingForm.elements['roomType'];
-
-    // Assign the user input data to variables
-    fname = fname.value;    
-    lname = lname.value;
-    phone = phone.value;
-    email = email.value;
-    checkin = checkin.value;
-    checkout = checkout.value;
-    roomType = roomType.value;
-    
     if (fname == "") {
-        $("#textError").html("**First name is required").css("color", "red");
+
+        $("h5#fname").html("**First name is required").css("color", "red");
         isValid = false;
-        
+
     }
+    else if (lname == "") {
+
+
+        $("h5#lname").html("**Last name is required").css("color", "red");
     
-    if (lname == "") {
-        isValid = false;
-        
+    } else {
+
+        isValid = true;
     }
-    
-    if (phone == "") {
-        isValid = false;       
-    }
-    
-    if (email == "") {
-        isValid = false;        
-    }
-    
-    if (checkin == "") {
-        isValid = false;       
-    }
-    
-    if (checkout == "") {
-        isValid = false;        
-    }
-    
-    if (roomType == "") {
-        isValid = false;        
-    }        
+
+
 
     return isValid;
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
