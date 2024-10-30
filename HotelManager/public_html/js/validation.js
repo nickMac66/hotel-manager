@@ -7,61 +7,51 @@
 
 function validateForm() {
 
-    console.log("validating...");
-    
     let isValid = true;
 
-    // Create a reference to the booking form
-    let bookingForm = document.getElementById("form");
+    const formEntries = [];
 
-    // Create references to the booking form input fields
-    let fname = bookingForm.elements['fname'];
-    let lname = bookingForm.elements['lname'];
-    let phone = bookingForm.elements['phone'];
-    let email = bookingForm.elements['email'];
-    let checkin = bookingForm.elements['checkin'];
-    let checkout = bookingForm.elements['checkout'];
-    let roomType = bookingForm.elements['roomType'];
+    $("#myForm th, #myForm input").each(function (index) {
 
-    // Assign the user input data to variables
-    fname = fname.value;    
-    lname = lname.value;
-    phone = phone.value;
-    email = email.value;
-    checkin = checkin.value;
-    checkout = checkout.value;
-    roomType = roomType.value;
-    
-    if (fname == "") {
-        $("#textError").html("**First name is required").css("color", "red");
-        isValid = false;
+        if ($(this).is("th")) {
+           
+            formEntries[index] = {label: $(this).text(), value: null};            
         
-    }
-    
-    if (lname == "") {
-        isValid = false;
+        } else if ($(this).is("input")) {
         
-    }
-    
-    if (phone == "") {
-        isValid = false;       
-    }
-    
-    if (email == "") {
-        isValid = false;        
-    }
-    
-    if (checkin == "") {
-        isValid = false;       
-    }
-    
-    if (checkout == "") {
-        isValid = false;        
-    }
-    
-    if (roomType == "") {
-        isValid = false;        
-    }        
+            formEntries[index][index] = {label: null, value: $(this).val()};            
+        
+        }
+
+    });
+
+
+
+
+
+
+
+
+
+
+
+//    // Create references to the booking form input fields
+//    let fname = bookingForm.elements['fname'];
+//    let lname = bookingForm.elements['lname'];
+//    let phone = bookingForm.elements['phone'];
+//    let email = bookingForm.elements['email'];
+//    let checkin = bookingForm.elements['checkin'];
+//    let checkout = bookingForm.elements['checkout'];
+//    let roomType = bookingForm.elements['roomType'];
+
+//    // Assign the user input data to variables
+//    fname = fname.value;    
+//    lname = lname.value;
+//    phone = phone.value;
+//    email = email.value;
+//    checkin = checkin.value;
+//    checkout = checkout.value;
+//    roomType = roomType.value;          
 
     return isValid;
 }
