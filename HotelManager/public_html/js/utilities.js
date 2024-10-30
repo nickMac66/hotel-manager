@@ -9,7 +9,7 @@
 function formGenerator(formData, formAction) {
 
     // Start building the form
-    let form = `<form id="form" action="${formAction}">`;
+    let form = `<form id="myForm" action="${formAction}">`;
     form += '<table>';
     form += '<tr>';
 
@@ -48,6 +48,7 @@ function formGenerator(formData, formAction) {
                     case "text":
 
                         form += `<input type="text" id="${formField}" name="${formField}">`;
+                        form += `<h5 id="${formField}"> </h5>`;
                         break;
 
                     case "date":
@@ -102,5 +103,6 @@ function formGenerator(formData, formAction) {
 
     form += "</table>"; // Close the table
     form += "</form>"; // Close the form
+    console.log(form);
     return form; // Return the completed form string
 }
