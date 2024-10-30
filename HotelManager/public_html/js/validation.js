@@ -5,7 +5,9 @@
  * Created On: October 24, 2024
  */
 
-function formIsValid() {
+function validateForm() {
+
+//    console.log("validating...");
 
     let isValid = true;
 
@@ -13,17 +15,36 @@ function formIsValid() {
 
     $("#myForm th, #myForm input").each(function (index) {
 
+        let label = "";
+        let userInput = "";
+        let isEmpty = "";
+
         if ($(this).is("th")) {
-           
-            formEntries[index] = {label: $(this).text(), value: null};            
-        
+
+            label = $(this).text();
+            console.log("input label: " + label);
+
         } else if ($(this).is("input")) {
-        
-            formEntries[index][index] = {label: null, value: $(this).val()};            
-        
+
+            userInput = $(this).val();
+            console.log("user input: " + userInput);
+
+            if (userInput == isEmpty) {
+
+//                console.log("!!!empty fields!!!");
+
+                console.log(label);
+                $("h5#fname").html("**Required").css("color", "red");
+                isValid = false;
+
+            } else {
+
+                formEntries[index] = {label: label, value: userInput};
+
+            }
         }
     });
 
     return isValid;
-    
+
 }
