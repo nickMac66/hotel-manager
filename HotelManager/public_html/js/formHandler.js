@@ -8,11 +8,11 @@
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    document.getElementById("form").addEventListener("submit", function (event) {
+    document.getElementById("myForm").addEventListener("submit", function (event) {
 
-        valid = validateForm();
+        isValid = validateForm();                        
 
-        if (valid) {
+        if (isValid) {
             // Submit the form
             alert("the form is valid");
 
