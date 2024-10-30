@@ -5,7 +5,7 @@
  * Created On: October 24, 2024
  */
 
-function validateForm() {
+function formIsValid() {
 
     let isValid = true;
 
@@ -22,48 +22,8 @@ function validateForm() {
             formEntries[index][index] = {label: null, value: $(this).val()};            
         
         }
-
     });
 
-
-
-
-
-
-
-
-
-
-
-//    // Create references to the booking form input fields
-//    let fname = bookingForm.elements['fname'];
-//    let lname = bookingForm.elements['lname'];
-//    let phone = bookingForm.elements['phone'];
-//    let email = bookingForm.elements['email'];
-//    let checkin = bookingForm.elements['checkin'];
-//    let checkout = bookingForm.elements['checkout'];
-//    let roomType = bookingForm.elements['roomType'];
-
-//    // Assign the user input data to variables
-//    fname = fname.value;    
-//    lname = lname.value;
-//    phone = phone.value;
-//    email = email.value;
-//    checkin = checkin.value;
-//    checkout = checkout.value;
-//    roomType = roomType.value;          
-
     return isValid;
+    
 }
-
-
-
-
-
-
-
-
-
-
-
-
