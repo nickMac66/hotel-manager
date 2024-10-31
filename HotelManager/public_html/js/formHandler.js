@@ -10,9 +10,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById("myForm").addEventListener("submit", function (event) {
 
-        isValid = validateForm();                        
+        formIsValid = validateForm();                        
 
-        if (isValid) {
+        if (formIsValid) {
             // Submit the form
             alert("the form is valid");
 
