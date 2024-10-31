@@ -7,39 +7,30 @@
 
 function validateForm() {
 
-//    console.log("validating...");
-
     let isValid = true;
+    let inputLabel = "";
+    let userInput = "";
+    let isEmpty = "";
 
     const formEntries = [];
 
     $("#myForm th, #myForm input").each(function (index) {
 
-        let label = "";
-        let userInput = "";
-        let isEmpty = "";
-
         if ($(this).is("th")) {
 
-            label = $(this).text();
-            console.log("input label: " + label);
+            inputLabel = $(this).text();
 
-        } else if ($(this).is("input")) {
+        }
+
+        if ($(this).is("input")) {
 
             userInput = $(this).val();
-            console.log("user input: " + userInput);
+            inputId = $(this).attr('id');
 
-            if (userInput == isEmpty) {
+            if (userInput === isEmpty) {
 
-//                console.log("!!!empty fields!!!");
-
-                console.log(label);
-                $("h5#fname").html("**Required").css("color", "red");
+                $(`h5#${inputId}`).html(`${inputLabel} is required`).css("color", "red");
                 isValid = false;
-
-            } else {
-
-                formEntries[index] = {label: label, value: userInput};
 
             }
         }
