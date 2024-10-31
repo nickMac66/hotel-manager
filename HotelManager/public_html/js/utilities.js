@@ -82,13 +82,16 @@ function formGenerator(formData, formAction) {
                                     // Set the value attribute for the current radio field
                                     valueAttribute = radioFieldObject[key];
                                     form += `<input type="radio" id="${radioField}" name="${nameAttribute}" value="${valueAttribute}"`;
-                                    form += `<h5 id="${formField}"> </h5>`;
+
+                                    // Error message for no radio option selected
+
                                     form += `<label for="${radioField}">${valueAttribute}</label><br>`;
-                                    // Error message for invalid user input
-                                    
-                                }
-                            }
+                                }                              
+                            }                                                                                    
                         }
+                        
+                        form += `<h5 id="radioError"></h5>`;
+                        
                         break;
 
                     case "submit":
@@ -107,8 +110,9 @@ function formGenerator(formData, formAction) {
         }
     }
 
-    form += "</table>"; // Close the table
-    form += "</form>"; // Close the form
+    form += "</table>";
+    form += "</form>";
     console.log(form);
-    return form; // Return the completed form string
+    return form; // Return the completed form
+
 }
