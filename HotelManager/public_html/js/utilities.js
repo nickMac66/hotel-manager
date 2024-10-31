@@ -48,12 +48,15 @@ function formGenerator(formData, formAction) {
                     case "text":
 
                         form += `<input type="text" id="${formField}" name="${formField}">`;
+                        // Error message for invalid user input
                         form += `<h5 id="${formField}"> </h5>`;
                         break;
 
                     case "date":
 
                         form += `<input type="date" id="${formField}" name="${formField}">`;
+                        // Error message for invalid user input
+                        form += `<h5 id="${formField}"> </h5>`;
                         break;
 
                     case radio:
@@ -79,7 +82,10 @@ function formGenerator(formData, formAction) {
                                     // Set the value attribute for the current radio field
                                     valueAttribute = radioFieldObject[key];
                                     form += `<input type="radio" id="${radioField}" name="${nameAttribute}" value="${valueAttribute}"`;
+                                    form += `<h5 id="${formField}"> </h5>`;
                                     form += `<label for="${radioField}">${valueAttribute}</label><br>`;
+                                    // Error message for invalid user input
+                                    
                                 }
                             }
                         }
