@@ -10,23 +10,24 @@ function validateForm() {
     let inputLabel = "";
     let isValid = true;
 
-    // Get the user input & associated labels from the form
+    // Get user input & associated labels from the form
     $("#myForm th, #myForm input").each(function () {
 
         // Variables to hold input field attributes and values        
         let inputType = $(this).attr('type');
-        let inputName = $(this).attr('name');
+        let inputName = $(this).attr('name');        
         let userInput = $(this).val();
+        
+        const noInput = (inputType !== "submit" || userInput === "" || ($(`input[name='${inputName}']:checked`).length === 0)); // Constant checks for empty input fields
+        const isInputLabel = ($(this).is("th")); // Constant checks if input label
 
-        // Constant checks for empty input fields
-        const noInput = (inputType !== "submit" || userInput === "" || ($(`input[name='${inputName}']:checked`).length === 0));
-
-        // Input labels
-        if ($(this).is("th")) {
+        // Label the input fields
+        if (isInputLabel) {
 
             inputLabel = $(this).text();
             
         }
+        
         // Display an error message if there are empty input fields
         if (noInput) {
 
