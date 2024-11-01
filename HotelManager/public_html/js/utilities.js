@@ -90,7 +90,6 @@ function formGenerator(formData, formAction) {
                             }                                                                                    
                         }
                         
-                        console.log(`form field: ${formField}`);
                         form += `<h5 id="${formField}"></h5>`;
                         
                         break;
@@ -113,7 +112,7 @@ function formGenerator(formData, formAction) {
 
     form += "</table>";
     form += "</form>";
-    console.log(form);
+//    console.log(form);
     return form; // Return the completed form
 
 }
