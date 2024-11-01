@@ -24,10 +24,10 @@ const formData = {
     submit: {inputType: "submit", name: "submit", action: "bookingDetails.html"}
 };
 
-document.addEventListener("DOMContentLoaded", function () {
+$(document).ready(function () {
 
     // Add dynamic page content
-    let pageContent = document.getElementById("home");
+    let pageContent = $("#home")[0];
     let formAction = "bookingDetails.html";
     pageContent.innerHTML = formGenerator(formData, formAction);
 
