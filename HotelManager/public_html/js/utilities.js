@@ -90,7 +90,8 @@ function formGenerator(formData, formAction) {
                             }                                                                                    
                         }
                         
-                        form += `<h5 id="radioError"></h5>`;
+                        console.log(`form field: ${formField}`);
+                        form += `<h5 id="${formField}"></h5>`;
                         
                         break;
 
