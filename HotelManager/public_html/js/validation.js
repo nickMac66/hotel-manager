@@ -7,59 +7,39 @@
 
 function validateForm() {
 
-    // Variables to hold input field attributes and values
     let inputLabel = "";
-    let inputType = "";
-    let inputId = "";
-    let inputName = "";
-    let userInput = "";    
     let isValid = true;
 
     // Get the user input & associated labels from the form
     $("#myForm th, #myForm input").each(function () {
 
-        
-        // Boolean variables for validation checks
-        const isRadioInput = (inputType === "radio"); // Checks is the input type is radio
-        const radioIsUnchecked = ($(`input[name='${inputName}']:checked`).length === 0); // Checks if no radio buttons are checked
-        const emptyFields = (`${userInput}` === ""); // Checks if the user input is empty
-        const isNotSubmitButton = (`${inputType}` !== "submit"); // Checks if the input type is not submit
+        // Variables to hold input field attributes and values        
+        let inputType = $(this).attr('type');
+        let inputName = $(this).attr('name');
+        let userInput = $(this).val();
+
+        // Constant checks for empty input fields
+        const noInput = (inputType !== "submit" || userInput === "" || ($(`input[name='${inputName}']:checked`).length === 0));
 
         // Input labels
         if ($(this).is("th")) {
 
             inputLabel = $(this).text();
+            
+        }
+        // Display an error message if there are empty input fields
+        if (noInput) {
 
-        // User input
-        } else {
-
-            // Current input field attributes
-            inputType = $(this).attr('type');
-            inputId = $(this).attr('id');
-            inputName = $(this).attr('name');
-            userInput = $(this).val();
-
-            // Check for empty
-            if (emptyFields && isNotSubmitButton) {
-
-                // Empty field error message
-                $(`h5#${inputId}`).html(`**${inputLabel} is required`).css("color", "red");
-                isValid = false;
-
-            }
-
-            if (isRadioInput && radioIsUnchecked) {
-
-                // No radio checked error message
-                $("h5#radioError").html(`**${inputLabel} is required`).css("color", "red");
-                isValid = false;
-
-            }
+            // Error message
+            $(`h5#${inputName}`).html(`**${inputLabel} is required`).css("color", "red");
+            
+            // The form is not valid
+            isValid = false;
+            
         }
     });
 
     return isValid;
-
 }
 
 
