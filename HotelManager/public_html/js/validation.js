@@ -18,8 +18,9 @@ function validateForm() {
         let inputName = $(this).attr('name');        
         let userInput = $(this).val();
         
-        const noInput = (inputType !== "submit" || userInput === "" || ($(`input[name='${inputName}']:checked`).length === 0)); // Constant checks for empty input fields
-        const isInputLabel = ($(this).is("th")); // Constant checks if input label
+        // Constants to check various conditions
+        const noInput = (inputType !== "submit" || userInput === "" || ($(`input[name='${inputName}']:checked`).length === 0)); // Check for empty input fields
+        const isInputLabel = ($(this).is("th")); // Check if input label
 
         // Label the input fields
         if (isInputLabel) {
