@@ -6,29 +6,27 @@
  * Last Modified: October 12, 2024
  */
 
-// input id is the object
-const radio = {
-    basic: {name: "roomType", value: "Basic"},
-    deluxe: {name: "roomType", value: "Deluxe"},
-    luxury: {name: "roomType", value: "Luxury"}
-};
+const formFieldsPerRow = 2;
 
-const formData = {
-    fname: {value: "First name", inputType: "text", name: "fname"},
-    lname: {value: "Last name", inputType: "text", name: "lname", nextRow: true},
-    phone: {value: "Phone", inputType: "text", name: "phone"},
-    email: {value: "Email", inputType: "text", name: "email", nextRow: true},
-    checkin: {value: "Check in", inputType: "date", name: "checkin"},
-    checkout: {value: "Check out", inputType: "date", name: "checkout", nextRow: true},
-    roomType: {value: "Room type", inputType: radio, name: "roomType"},
-    submit: {inputType: "submit", name: "submit", action: "bookingDetails.html"}
+const formFields = {
+
+    fname: {label: "First name", inputType: "text", id: "fname", name: "fname"},
+    lname: {label: "Last name", inputType: "text", id: "lname", name: "lname"},
+    phone: {label: "Phone", inputType: "text", id: "phone", name: "phone"},
+    email: {label: "Email", inputType: "text", id: "email", name: "email"},
+    checkin: {label: "Check in", inputType: "date", id: "checkin", name: "checkin"},
+    checkout: {label: "Check out", inputType: "date", id: "checkout", name: "checkout"},
+    basicRoom: {label: "Basic room", inputType: "radio", id: "basic", name: "roomType"},
+    deluxeRoom: {label: "Deluxe room", inputType: "radio", id: "deluxe", name: "roomType"},
+    luxuryRoom: {label: "Luxury room", inputType: "radio", id: "luxury", name: "roomType"}
+
 };
 
 $(document).ready(function () {
 
-    // Add dynamic page content
+// Add dynamic page content
     let pageContent = $("#home")[0];
     let formAction = "bookingDetails.html";
-    pageContent.innerHTML = formGenerator(formData, formAction);
-
+    pageContent.innerHTML = generateForm(formFields, formFieldsPerRow, formAction);
+    
 });
