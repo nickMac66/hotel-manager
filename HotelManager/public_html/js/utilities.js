@@ -5,6 +5,7 @@
  * Created On: October 13, 2024
  */
 
+// Form field attribute variables
 let label = "";
 let inputType = "";
 let id = "";
@@ -64,6 +65,7 @@ function getCurrentFieldAttributes(fieldObject) {
     // Access the attributes from the current form field
     for (let fieldAttribute in fieldObject) {
 
+        // Get the current attribute value
         let attributeValue = fieldObject[fieldAttribute];
 
         // Handle the different attributes
@@ -75,7 +77,7 @@ function getCurrentFieldAttributes(fieldObject) {
                 break;
 
             case "inputType":
-
+                
                 inputType = attributeValue;
                 break;
 
