@@ -6,8 +6,6 @@
  * Last Modified: October 12, 2024
  */
 
-const formFieldsPerRow = 2;
-
 const formFields = {
 
     fname: {label: "First name", inputType: "text", id: "fname", name: "fname"},
@@ -16,9 +14,9 @@ const formFields = {
     email: {label: "Email", inputType: "text", id: "email", name: "email"},
     checkin: {label: "Check in", inputType: "date", id: "checkin", name: "checkin"},
     checkout: {label: "Check out", inputType: "date", id: "checkout", name: "checkout"},
-    basicRoom: {label: "Basic room", inputType: "radio", id: "basic", name: "roomType"},
-    deluxeRoom: {label: "Deluxe room", inputType: "radio", id: "deluxe", name: "roomType"},
-    luxuryRoom: {label: "Luxury room", inputType: "radio", id: "luxury", name: "roomType"}
+    basicRoom: {label: "Basic room", inputType: "radio", id: "basic", name: "roomType", value: "basic"},
+    deluxeRoom: {label: "Deluxe room", inputType: "radio", id: "deluxe", name: "roomType", value: "deluxe"},
+    luxuryRoom: {label: "Luxury room", inputType: "radio", id: "luxury", name: "roomType", value: "luxury"}    
 
 };
 
@@ -27,6 +25,6 @@ $(document).ready(function () {
 // Add dynamic page content
     let pageContent = $("#home")[0];
     let formAction = "bookingDetails.html";
-    pageContent.innerHTML = generateForm(formFields, formFieldsPerRow, formAction);
+    pageContent.innerHTML = buildForm(formFields, formAction);
     
 });
