@@ -10,8 +10,7 @@ $( document ).ready(function() {
 
     $("#myForm").submit(function (event) {
 
-        formIsValid = validateForm();
-        console.log(formIsValid);
+        formIsValid = validateForm();        
 
         if (formIsValid) {
 
