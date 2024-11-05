@@ -7,10 +7,11 @@
 
 // Form field attribute variables
 let label = "";
-let inputType = "";
+let type = "";
 let id = "";
 let name = "";
 let value = "";
+let group = "";
 
 function buildForm(formFields, formAction) {
 
@@ -31,7 +32,7 @@ function buildForm(formFields, formAction) {
         // Build the current field
         form += `<th>${label}</th>`;
         form += '<td>';
-        form += `<input type="${inputType}" id="${id}" name="${name}">`;
+        form += `<input type="${type}" id="${id}" name="${name}">`;
         form += `<h5 id="${id}"></h5>`;
         form += '</td>';
         form += '</tr>';
@@ -76,9 +77,9 @@ function getCurrentFieldAttributes(fieldObject) {
                 label = attributeValue;
                 break;
 
-            case "inputType":
-                
-                inputType = attributeValue;
+            case "type":
+
+                type = attributeValue;
                 break;
 
             case "id":
@@ -90,10 +91,15 @@ function getCurrentFieldAttributes(fieldObject) {
 
                 name = attributeValue;
                 break;
-                
+
             case "value":
-                
+
                 value = attributeValue;
+                break;
+
+            case "group":
+
+                group = attributeValue;
                 break;
 
             default:
