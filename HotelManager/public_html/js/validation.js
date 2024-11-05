@@ -7,39 +7,55 @@
 
 function validateForm() {
 
-    let inputLabel = "";
+    const noRadioSelected = $(`input[name='${name}']:checked`).length === 0;
+
     let isValid = true;
+    let inputLabel = "";
+//    let radioSelection = $(`input[type='radio'][name='roomType']:checked`).val();   
+
 
     // Get user input & associated labels from the form
     $("#myForm th, #myForm input").each(function () {
 
+        // Constants to check various conditions        
+        const emptyFields = ""; // Check for empty input fields
+        const isLabel = ($(this).is("th")); // Check if input label
+
         // Variables to hold input field attributes and values        
-        let inputType = $(this).attr('type');
-        let inputName = $(this).attr('name');        
-        let userInput = $(this).val();
-        
-        // Constants to check various conditions
-        const noInput = (inputType !== "submit" || userInput === "" || ($(`input[name='${inputName}']:checked`).length === 0)); // Check for empty input fields
-        const isInputLabel = ($(this).is("th")); // Check if input label
+        let type = $(this).attr('type');
+        let id = $(this).attr('id');
+        let name = $(this).attr('name');
+        let group = $(this).attr('group');
+        let userResponse = $(this).val();
 
         // Label the input fields
-        if (isInputLabel) {
+        if (isLabel) {
 
             inputLabel = $(this).text();
-            
-        }
-        
-        // Display an error message if there are empty input fields
-        if (noInput) {
 
-            // Error message
-            $(`h5#${inputName}`).html(`**${inputLabel} is required`).css("color", "red");
-            
-            // The form is not valid
-            isValid = false;
-            
+        } else {
+
+            // Handle the different input element errors
+            switch (userResponse) {
+
+                case emptyFields:
+
+                    $(`h5#${id}`).html(`**${inputLabel} is required`).css("color", "red");
+                    isValid = false;
+                    break;
+
+            }
         }
     });
 
+    // Handle no radio selection error
+    if (noRadioSelected) {
+
+        $(`h5#${id}`).html(`**${group} is required`).css("color", "red");
+        isValid = false;
+
+    }
+
     return isValid;
+
 }
