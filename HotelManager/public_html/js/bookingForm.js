@@ -8,15 +8,15 @@
 
 const formFields = {
 
-    fname: {label: "First name", inputType: "text", id: "fname", name: "fname"},
-    lname: {label: "Last name", inputType: "text", id: "lname", name: "lname"},
-    phone: {label: "Phone", inputType: "text", id: "phone", name: "phone"},
-    email: {label: "Email", inputType: "text", id: "email", name: "email"},
-    checkin: {label: "Check in", inputType: "date", id: "checkin", name: "checkin"},
-    checkout: {label: "Check out", inputType: "date", id: "checkout", name: "checkout"},
-    basicRoom: {label: "Basic room", inputType: "radio", id: "basic", name: "roomType", value: "basic"},
-    deluxeRoom: {label: "Deluxe room", inputType: "radio", id: "deluxe", name: "roomType", value: "deluxe"},
-    luxuryRoom: {label: "Luxury room", inputType: "radio", id: "luxury", name: "roomType", value: "luxury"}    
+    fname: {label: "First name", type: "text", id: "fname", name: "fname"},
+    lname: {label: "Last name", type: "text", id: "lname", name: "lname"},
+    phone: {label: "Phone", type: "text", id: "phone", name: "phone"},
+    email: {label: "Email", type: "text", id: "email", name: "email"},
+    checkin: {label: "Check in", type: "date", id: "checkin", name: "checkin"},
+    checkout: {label: "Check out", type: "date", id: "checkout", name: "checkout"},
+    basicRoom: {label: "Basic room", type: "radio", id: "basic", name: "roomType", value: "basic", group: "Room type"},
+    deluxeRoom: {label: "Deluxe room", type: "radio", id: "deluxe", name: "roomType", value: "deluxe", group: "Room type"},
+    luxuryRoom: {label: "Luxury room", type: "radio", id: "luxury", name: "roomType", value: "luxury", group: "Room type"}    
 
 };
 
