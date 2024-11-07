@@ -47,17 +47,20 @@ function validateForm() {
             userInput.trim();
 
             // Checks the length
-            const phoneLength = /^\d{10}$/;
-            // Checks for valid characters
-            const validCharacters = /^[0-9-+]+$/;
+            const phonePattern = /^(?=.*[0-9-+])\d{10}$/;
 
-            let validPhone = (phoneLength.test(userInput) && validCharacters.test(userInput));
+            let validPhone = (phonePattern.test(userInput));
 
             if (!validPhone) {
 
+                console.log("invalid phone");
                 $(`h5#${id}`).html(`**Invalid phone number`).css("color", "red");
                 isValid = false;
 
+            } else {
+                
+                console.log("phone is valid");
+                
             }
         }
 
@@ -67,9 +70,9 @@ function validateForm() {
 
             // Regular Expression (Not accepts second @ symbol
             // before the @gmail.com and accepts everything else)
-            let email = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-            let valid = (email.test(userInput));
+            let valid = (emailPattern.test(userInput));
 
             if (!valid) {
 
