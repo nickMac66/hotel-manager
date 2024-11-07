@@ -41,13 +41,6 @@ function validateForm() {
 
         }
 
-        if (emptyFields) {
-
-            $(`h5#${id}`).html(`**${label} is required`).css("color", "red");
-            isValid = false;
-
-        }
-
         if (isPhone) {
 
             // Remove whitespace from user input
@@ -70,9 +63,33 @@ function validateForm() {
 
         if (isEmail) {
 
+            console.log("is email");
 
+            // Regular Expression (Not accepts second @ symbol
+            // before the @gmail.com and accepts everything else)
+            let email = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+            let valid = (email.test(userInput));
+
+            if (!valid) {
+
+                console.log("invalid email");
+                $(`h5#${id}`).html("**Invalid email address").css("color", "red");
+
+            } else {
+
+                console.log("email is valid");
+
+            }
+        }
+
+        if (emptyFields) {
+
+            $(`h5#${id}`).html(`**${label} is required`).css("color", "red");
+            isValid = false;
 
         }
+
     });
 
     // Handle no radio selection 
