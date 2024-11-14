@@ -30,10 +30,25 @@ function buildForm(formFields, formAction) {
         getCurrentFieldAttributes(fieldObject);
 
         // Build the current field
-        form += `<th>${label}</th>`;
+        form += `<th><label for='${id}'>${label}</label></th>`;
         form += '<td>';
-        form += `<input type="${type}" id="${id}" name="${name}">`;
-        form += `<h5 id="${id}"></h5>`;
+        form += `<input type="${type}" id="${id}" name="${name}" value="${value}">`;
+        if (type !== "radio") {
+
+            form += `<h5 id="emptyTextMsg"></h5>`;
+
+        }
+
+        form += '</td>';
+        form += '</tr>';
+
+    }
+
+    if (type === "radio") {
+
+        form += '<tr>';
+        form += '<td>';
+        form += '<h5 name="radioNotCheckedMsg"></h5>';
         form += '</td>';
         form += '</tr>';
 
@@ -42,13 +57,14 @@ function buildForm(formFields, formAction) {
     // Add the submit button
     form += '<tr>';
     form += '<td>';
-    form += '<input type="submit" name="submit">';
+    form += '<input type="submit" id="submitButton" name="submitButton">';
     form += '</td>';
     form += '</tr>';
 
     // Close the form
     form += '</table>';
     form += '</form>';
+    console.log(form);
 
     return form;
 
