@@ -35,7 +35,7 @@ function buildForm(formFields, formAction) {
         form += `<input type="${type}" id="${id}" name="${name}" value="${value}">`;
         if (type !== "radio") {
 
-            form += `<h5 id="emptyTextMsg"></h5>`;
+            form += `<h5 id="${id}ErrorMsg"></h5>`;
 
         }
 
