@@ -15,7 +15,7 @@ function validateForm() {
     let email = $("#myForm #email").val();
     let checkin = $("#myForm #checkin").val();
     let checkout = $("#myForm #checkout").val();
-    let roomType = $('#myForm input[name="roomType"]:checked');
+
 
     const fieldsAreEmpty = (fname === "" || lname === "" || phone === "" || email === "" || checkin === "" || checkout === "");
     const radioNotChecked = $('#myForm input[name="roomType"]:checked').length === 0;
@@ -29,13 +29,122 @@ function validateForm() {
 
     $("#myForm").find("*").each(function () {
 
+        const isEmpty = ($(this).val() === "");
+
         let id = $(this).attr('id');
-        let name = $(this).attr('name');
 
-        if (fieldsAreEmpty) {
+        switch (id) {
 
-            $(`h5#${id}`).html('**Required').css("color", "red");
-            isValid = false;
+            case "fname":
+
+                let fname = $("#myForm #fname").val();
+                const fnamepattern = /^[a-zA-Z]/;
+                const fnameInvalid = (!fnamepattern.test(fname));
+
+                if (isEmpty) {
+
+                    $(`h5#${id}errorMsg`).html('**Required').css("color", "red");
+                    isValid = false;
+
+                } else if (fnameInvalid) {
+
+                    $(`h5#${id}errorMsg`).html('**Invalid').css("color", "red");
+                    isValid = false;
+
+                }
+
+                break;
+
+            case "lname":
+
+                let lname = $("#myForm #lname").val();
+                const lnamePattern = /^[a-zA-Z]/;
+                const lnameInvalid = (!lnamePattern.test(lname));
+
+                if (isEmpty) {
+
+                    $(`h5#${id}errorMsg`).html('**Required').css("color", "red");
+                    isValid = false;
+
+                } else if (lnameInvalid) {
+
+                    $(`h5#${id}errorMsg`).html('**Invalid').css("color", "red");
+                    isValid = false;
+
+                }
+
+                break;
+
+            case "phone":
+
+                // Regex pattern for 10-digit phone number
+                const phonePattern = /^\d{10}$/;
+                let phone = $("#myForm #phone").val();
+                const phoneInvalid = (!phonePattern.test(phone));
+
+                if (isEmpty) {
+
+                    $(`h5#${id}errorMsg`).html('**Required').css("color", "red");
+                    isValid = false;
+
+                } else if (phoneInvalid) {
+
+                    $(`h5#${id}errorMsg`).html('**Invalid').css("color", "red");
+                    isValid = false;
+
+                }
+
+                break;
+
+            case "email":
+
+                const emailPattern = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                let email = $("#myForm #email").val();
+                const emailInvalid = (!emailPattern.test(email));
+
+                if (isEmpty) {
+
+                    $(`h5#${id}errorMsg`).html('**Required').css("color", "red");
+                    isValid = false;
+
+                } else if (emailInvalid) {
+
+                    $(`h5#${id}errorMsg`).html('**Invalid').css("color", "red");
+                    isValid = false;
+
+                }
+
+                break;
+
+            case "checkin":
+
+                let checkin = $("#myForm #checkin").val();
+
+                if (isEmpty) {
+
+                    $(`h5#${id}errorMsg`).html('**Required').css("color", "red");
+                    isValid = false;
+
+                }
+
+                break;
+
+            case "checkout":
+
+                let checkout = $("#myForm #checkout").val();
+
+                if (isEmpty) {
+
+                    $(`h5#${id}errorMsg`).html('**Required').css("color", "red");
+                    isValid = false;
+
+                }
+
+                break;
+
+            default:
+
+                break;
 
         }
     });
