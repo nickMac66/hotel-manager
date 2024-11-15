@@ -8,7 +8,7 @@
 
 $( document ).ready(function() {
 
-    $("#myForm").submit(function (event) {
+    $("#myForm").submit(function (event) {        
 
         formIsValid = validateForm();        
 

@@ -37,8 +37,8 @@ function validateForm() {
 
             case "fname":
 
-                let fname = $("#myForm #fname").val();
-                const fnamepattern = /^[a-zA-Z]/;
+                const fname = $("#myForm #fname").val();
+                const fnamepattern = /^[a-zA-Z]{1,50}$/;
                 const fnameInvalid = (!fnamepattern.test(fname));
 
                 if (isEmpty) {
@@ -57,8 +57,8 @@ function validateForm() {
 
             case "lname":
 
-                let lname = $("#myForm #lname").val();
-                const lnamePattern = /^[a-zA-Z]/;
+                const lname = $("#myForm #lname").val();
+                const lnamePattern = /^[a-zA-Z]{1,50}$/;
                 const lnameInvalid = (!lnamePattern.test(lname));
 
                 if (isEmpty) {
@@ -76,10 +76,9 @@ function validateForm() {
                 break;
 
             case "phone":
-
-                // Regex pattern for 10-digit phone number
-                const phonePattern = /^\d{10}$/;
-                let phone = $("#myForm #phone").val();
+                
+                const phone = $("#myForm #phone").val();
+                const phonePattern = /^\d{10}$/;                
                 const phoneInvalid = (!phonePattern.test(phone));
 
                 if (isEmpty) {
@@ -98,8 +97,8 @@ function validateForm() {
 
             case "email":
 
-                const emailPattern = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-                let email = $("#myForm #email").val();
+                const email = $("#myForm #email").val();
+                const emailPattern = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;                
                 const emailInvalid = (!emailPattern.test(email));
 
                 if (isEmpty) {
@@ -118,7 +117,7 @@ function validateForm() {
 
             case "checkin":
 
-                let checkin = $("#myForm #checkin").val();
+                const checkin = $("#myForm #checkin").val();
 
                 if (isEmpty) {
 
@@ -131,7 +130,7 @@ function validateForm() {
 
             case "checkout":
 
-                let checkout = $("#myForm #checkout").val();
+                const checkout = $("#myForm #checkout").val();
 
                 if (isEmpty) {
 
