@@ -16,6 +16,7 @@ let group = "";
 function buildForm(formFields, formAction) {
 
     // Start building the form
+//    let form = `<form id="myForm" action="${formAction}" method="post">`;
     let form = `<form id="myForm" action="${formAction}">`;
     form += '<table>';
     form += '<tr>';
