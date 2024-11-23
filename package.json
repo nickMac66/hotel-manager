@@ -10,9 +10,9 @@
     ],
     "author": "nejma",
     "contributors": [],
-    "main": "Gruntfile.js",
+    "main": "public_html/index.html",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "start": "node src/server.js"
     },
     "license": "ISC",
     "description": "",

@@ -5,7 +5,7 @@
  * Created On: October 24, 2024
  */
 
-function validateForm() {
+function validateForm() {        
 
     let isValid = true;
 
@@ -148,6 +148,6 @@ function validateForm() {
         }
     });
 
-    return isValid;
+    return isValid = false;
 
 }
