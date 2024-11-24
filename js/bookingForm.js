@@ -21,6 +21,8 @@ const formFields = {
 };
 
 $(document).ready(function () {
+    
+    console.log("bookingForm.js");
 
 // Add dynamic page content
     let pageContent = $("#home")[0];

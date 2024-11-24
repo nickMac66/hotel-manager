@@ -5,7 +5,9 @@
  * Created On: October 24, 2024
  */
 
-function validateForm() {        
+function validateForm() {   
+    
+    console.log("validating");
 
     let isValid = true;
 
