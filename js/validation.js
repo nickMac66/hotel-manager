@@ -7,7 +7,7 @@
 
 function validateForm() {   
     
-    console.log("validating");
+    console.log("validating...");
 
     let isValid = true;
 
@@ -25,6 +25,7 @@ function validateForm() {
     if (radioNotChecked) {
 
         $('h5[name="radioNotCheckedMsg"]').html('**Required').css("color", "red");
+        console.log("radio not checked");
         isValid = false;
 
     }
@@ -46,15 +47,17 @@ function validateForm() {
                 if (isEmpty) {
 
                     $(`h5#${id}errorMsg`).html('**Required').css("color", "red");
+                    console.log("first name is empty");
                     isValid = false;
 
                 } else if (fnameInvalid) {
 
                     $(`h5#${id}errorMsg`).html('**Invalid').css("color", "red");
+                    console.log("first name is invalid");
                     isValid = false;
 
                 }
-
+                                
                 break;
 
             case "lname":
@@ -66,11 +69,13 @@ function validateForm() {
                 if (isEmpty) {
 
                     $(`h5#${id}errorMsg`).html('**Required').css("color", "red");
+                    console.log("last name is empty");
                     isValid = false;
 
                 } else if (lnameInvalid) {
 
                     $(`h5#${id}errorMsg`).html('**Invalid').css("color", "red");
+                    console.log("first name is invalid");
                     isValid = false;
 
                 }
@@ -86,11 +91,13 @@ function validateForm() {
                 if (isEmpty) {
 
                     $(`h5#${id}errorMsg`).html('**Required').css("color", "red");
+                    console.log("phone is empty");
                     isValid = false;
 
                 } else if (phoneInvalid) {
 
                     $(`h5#${id}errorMsg`).html('**Invalid').css("color", "red");
+                    console.log("phone is invalid");
                     isValid = false;
 
                 }
@@ -106,11 +113,13 @@ function validateForm() {
                 if (isEmpty) {
 
                     $(`h5#${id}errorMsg`).html('**Required').css("color", "red");
+                    console.log("email is empty");
                     isValid = false;
 
                 } else if (emailInvalid) {
 
                     $(`h5#${id}errorMsg`).html('**Invalid').css("color", "red");
+                    console.log("email is invalid");
                     isValid = false;
 
                 }
@@ -124,6 +133,7 @@ function validateForm() {
                 if (isEmpty) {
 
                     $(`h5#${id}errorMsg`).html('**Required').css("color", "red");
+                    console.log("check in is empty");
                     isValid = false;
 
                 }
@@ -137,6 +147,7 @@ function validateForm() {
                 if (isEmpty) {
 
                     $(`h5#${id}errorMsg`).html('**Required').css("color", "red");
+                    console.log("checkout is empty");
                     isValid = false;
 
                 }
@@ -150,6 +161,6 @@ function validateForm() {
         }
     });
 
-    return isValid = false;
+    return isValid;
 
 }
