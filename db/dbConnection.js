@@ -1,37 +1,34 @@
-//const sql = `INSERT INTO bookings (fname) VALUES ("Rosie")`;
-//const mysql = require('mysql');
-//
-//
-//function dbConnect() {
-//
-//
-//    console.log("attempting to connect");
-//
-//    const connection = mysql.createConnection({
-//        host: 'localhost',
-//        user: 'root',
-//        password: '',
-//        database: 'hotel_manager'
-//    });
-//
-//    connection.connect((err) => {
-//        if (err) {
-//            console.log("error connecting");
-//            throw err;
-//        }
-//
-//        console.log('Connected to the MySQL server.');
-//
-////        connection.query(sql, (err, result) => {
-////            if (err)
-////                throw err;
-////            console.log('1 record inserted');
-//
-////            connection.end((err) => {
-////                if (err)
-////                    throw err;
-////                console.log('Connection closed.');
-////            });
-////        });
-//    });
-//}
+const mysql = require('mysql');
+
+
+    console.log("connecting to the database");
+
+    const connection = mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'hotel_manager'
+    });
+
+    connection.connect(function (err) {
+        
+        if (err) {
+            
+            console.log("Error in the connection");
+            console.log(err);
+            
+        } else {
+            
+            console.log('database connected')
+            connection.query('SHOW DATABASES',
+            function (err, result) {
+                
+                if (err) 
+                    console.log(`error executing the query - ${err}`)
+                
+                else
+                    console.log('result: ', result)
+                              
+            })            
+        }        
+    });

@@ -9,10 +9,10 @@
 $(document).ready(function () {
 
     $("#myForm").submit(function (event) {
-        
+
         console.log("submitted...");
 
-//        dbConnect();
+//        event.preventDefault();
 
 //        validateForm = validateForm();
 //
