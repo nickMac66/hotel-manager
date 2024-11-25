@@ -1,34 +1,37 @@
+// Load the MySQL module
 const mysql = require('mysql');
 
+// Db credentials
+const connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'hotel_manager'
+});
 
-    console.log("connecting to the database");
+// Connect to the database using db credentials
+connection.connect(function (err) {
 
-    const connection = mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        password: '',
-        database: 'hotel_manager'
-    });
+    // Connection error message
+    if (err) {
+        console.log("Error in the connection");
+        console.log(err);
 
-    connection.connect(function (err) {
+    // Connection success message
+    } else {
+        console.log('database connected');
         
-        if (err) {
-            
-            console.log("Error in the connection");
-            console.log(err);
-            
-        } else {
-            
-            console.log('database connected')
-            connection.query('SHOW DATABASES',
-            function (err, result) {
-                
-                if (err) 
-                    console.log(`error executing the query - ${err}`)
-                
-                else
-                    console.log('result: ', result)
-                              
-            })            
-        }        
-    });
+        // Query the database
+        connection.query('SHOW DATABASES',
+                function (err, result) {
+
+                    // Query error message
+                    if (err)
+                        console.log(`error executing the query - ${err}`);
+
+                    // Display the query results in the console
+                    else
+                        console.log('result: ', result);
+                });
+    }
+});
