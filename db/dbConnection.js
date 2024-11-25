@@ -1,3 +1,10 @@
+/*
+ * Name:        dbConnection.js
+ * Description: Database connection setup
+ * Author:      NicMac
+ * Date:        November 24, 2024
+ */
+
 // Load the MySQL module
 const mysql = require('mysql');
 
