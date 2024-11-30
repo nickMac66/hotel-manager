@@ -18,7 +18,6 @@ function validateForm() {
     let checkin = $("#myForm #checkin").val();
     let checkout = $("#myForm #checkout").val();
 
-
     const fieldsAreEmpty = (fname === "" || lname === "" || phone === "" || email === "" || checkin === "" || checkout === "");
     const radioNotChecked = $('#myForm input[name="roomType"]:checked').length === 0;
 

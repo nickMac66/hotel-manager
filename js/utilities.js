@@ -60,7 +60,7 @@ function buildForm(formFields, formAction) {
     // Add the submit button
     form += '<tr>';
     form += '<td>';
-    form += '<input type="submit" id="submitButton" name="submitButton">';
+    form += '<input type="submit" id="submit" name="submit">';
     form += '</td>';
     form += '</tr>';
 

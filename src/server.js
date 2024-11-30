@@ -8,6 +8,13 @@
 // Load Node.js modules
 const express = require('express'); 
 const path = require('node:path'); 
+const mysql = require('mysql');
+
+module.exports = {
+    express,
+    path,
+    mysql
+};
 
 // Initialize an Express applicaiton
 const app = express(); 
@@ -19,6 +26,7 @@ const PORT = process.env.PORT || 3000;
 const indexHtml = path.resolve('public_html', 'index.html'); 
 const bookingDetailsHtml = path.resolve('public_html', 'bookingDetails.html');
 const dbConnectionJs = path.resolve('db', 'dbConnection.js');
+const formControllerJs = path.resolve('controllers', 'formController.js');
 
 // Configure Express app to serve static files from specified directories
 app.use('/public_html', express.static(path.join(__dirname, '../public_html')));
@@ -36,9 +44,10 @@ app.get('/bookingDetails.html', (req, res) => {
 });
 
 // Route handler for POST requests
+//app.post('/submit-form', addFormDataToDb);
 app.post('/', (req, res) => {
-    const dbConnection = require(dbConnectionJs);
-    res.send("POST Request Called");
+    const dbConnection = require(dbConnectionJs);            
+    res.send("POST Request Called");       
 });
 
 // Set up Express application to listen for incoming requests
