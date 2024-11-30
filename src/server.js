@@ -28,10 +28,8 @@ app.get('/bookingDetails.html', (req, res) => {
 });
 
 app.post('/', (req, res) => {
-
     const dbConnection = require(dbConnectionJs);
-//    const connection = dbConnect();
-//    dbConnection.dbConnect();    
+//    const { addFormDataToDb } = require ('../controllers/formController');
     res.send("POST Request Called");
 });
 

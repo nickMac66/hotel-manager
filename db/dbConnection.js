@@ -1,6 +1,5 @@
 const mysql = require('mysql');
 
-
     console.log("connecting to the database");
 
     const connection = mysql.createConnection({

@@ -8,19 +8,40 @@
 
 $(document).ready(function () {
 
-    $("#myForm").submit(function (event) {
+    $("#myForm").click()(function (event) {
 
         console.log("submitted...");
 
-//        event.preventDefault();
+        validateForm = validateForm();
 
-//        validateForm = validateForm();
-//
-//        if (validateForm) {
-//
-//            // Submit the form
-//            alert("the form is valid");
-//
+        if (validateForm) {
+
+            // Submit the form
+            alert("the form is valid");
+
+            $("#myForm").submit();
+
+        } else {
+
+//         Prevent the default form action
+            event.preventDefault();
+            alert("the form is not valid");
+
+        }
+    });
+});
+
+function addFormDataToDb() {
+
+    console.log("adding form data to db...");
+    
+}
+
+module.exports = {addFormDataToDb};
+
+
+
+
 //            let fname = $('#myForm input[id="fname"]').val();
 //            let lname = $('#myForm input[id="fname"]').val();
 //            let phone = $('#myForm input[id="fname"]').val();
@@ -28,13 +49,3 @@ $(document).ready(function () {
 //            let checkin = $('#myForm input[id="fname"]').val();
 //            let checkout = $('#myForm input[id="fname"]').val();
 //            let roomType = $('#myForm input[id="roomType"]:checked').val();
-//
-//        } else {
-//
-////         Prevent the default form action
-//            event.preventDefault();
-//            alert("the form is not valid");
-//
-//        }
-    });
-});
