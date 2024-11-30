@@ -33,11 +33,37 @@ $(document).ready(function () {
 
 function addFormDataToDb() {
 
-    console.log("adding form data to db...");
-    
+    console.log("adding form data to db");
+
+//    connection.connect(function (err) {
+//
+//        if (err) {
+//
+//            console.log("Error in the connection");
+//            console.log(err);
+//
+//        } else {
+//
+//            const mysql = require('mysql');
+//
+//            console.log('database connected');
+//
+//            connection.query('SHOW DATABASES',
+//                    function (err, result) {
+//
+//                        if (err)
+//                            console.log(`error executing the query - ${err}`);
+//
+//                        else
+//                            console.log('result: ', result);
+//
+//                    });
+//        }
+//    });
 }
 
 module.exports = {addFormDataToDb};
+
 
 
 

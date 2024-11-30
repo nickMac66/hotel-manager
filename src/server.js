@@ -29,7 +29,32 @@ app.get('/bookingDetails.html', (req, res) => {
 
 app.post('/', (req, res) => {
     const dbConnection = require(dbConnectionJs);
-//    const { addFormDataToDb } = require ('../controllers/formController');
+    const {connection} = require('../db/dbConnection');
+    connection.connect(function (err) {
+
+        if (err) {
+
+            console.log("Error in the connection");
+            console.log(err);
+
+        } else {
+
+            const mysql = require('mysql');
+
+            console.log('database connected');
+
+            connection.query('SHOW DATABASES',
+                    function (err, result) {
+
+                        if (err)
+                            console.log(`error executing the query - ${err}`);
+
+                        else
+                            console.log('result: ', result);
+
+                    });
+        }
+    });
     res.send("POST Request Called");
 });
 
