@@ -8,9 +8,9 @@
 
 $(document).ready(function () {
 
-    $("#myForm").click()(function (event) {
+    $("#myForm").on("submit", function (event) {
 
-        console.log("submitted...");
+        event.preventDefault();
 
         validateForm = validateForm();
 
@@ -19,7 +19,7 @@ $(document).ready(function () {
             // Submit the form
             alert("the form is valid");
 
-            $("#myForm").submit();
+            $("#myForm").off("submit").submit();
 
         } else {
 
@@ -62,7 +62,7 @@ function addFormDataToDb() {
 //    });
 }
 
-module.exports = {addFormDataToDb};
+//module.exports = {addFormDataToDb};
 
 
 

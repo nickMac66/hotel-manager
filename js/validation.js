@@ -160,7 +160,6 @@ function validateForm() {
 
         }
     });
-
+    console.log("validated");
     return isValid;
-
 }

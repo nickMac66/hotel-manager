@@ -67,7 +67,7 @@ function buildForm(formFields, formAction) {
     // Close the form
     form += '</table>';
     form += '</form>';
-    console.log(form);
+//    console.log(form);
 
     return form;
 
