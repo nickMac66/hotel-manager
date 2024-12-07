@@ -7,19 +7,20 @@
 
 const express = require('express');
 const path = require('node:path');
-const app = express();
-const PORT = process.env.PORT || 3000;
 const mysql = require('mysql');
 const multer = require('multer');
-const upload = multer(); // Configure multer for parsing multipart/form-data
 
-// Middleware to parse JSON and URL-encoded data
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+const app = express();
+const PORT = process.env.PORT || 3000;
+const upload = multer();
 
 const indexHtml = path.resolve('public_html', 'index.html');
 const bookingDetailsHtml = path.resolve('public_html', 'bookingDetails.html');
 const dbConnectionJs = path.resolve('db', 'dbConnection.js');
+
+// Middleware to parse JSON and URL-encoded data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use('/public_html', express.static(path.join(__dirname, '../public_html')));
 app.use('/js', express.static(path.join(__dirname, '../js')));
