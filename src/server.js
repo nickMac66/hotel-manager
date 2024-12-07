@@ -10,6 +10,12 @@ const path = require('node:path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 const mysql = require('mysql');
+const multer = require('multer');
+const upload = multer(); // Configure multer for parsing multipart/form-data
+
+// Middleware to parse JSON and URL-encoded data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 const indexHtml = path.resolve('public_html', 'index.html');
 const bookingDetailsHtml = path.resolve('public_html', 'bookingDetails.html');
@@ -28,25 +34,32 @@ app.get('/bookingDetails.html', (req, res) => {
     res.sendFile(bookingDetailsHtml);
 });
 
-app.post('/', (req, res) => {
-    
-    console.log("submitted");
-    
+// Route to handle form submission
+app.post('/', upload.none(), (req, res) => {
+    console.log("Form submitted");
+
+    // Log the incoming form data
+    console.log(req.body);
+
+    const { fname, lname, phone, email, checkin, checkout, roomType } = req.body;
+
+    const sql = 'INSERT INTO bookings (fname, lname, phone, email, checkin, checkout, roomType) VALUES (?, ?, ?, ?, ?, ?, ?)';
+
     const { dbConnect } = require('../db/dbConnection');
     const connection = dbConnect();
 
-    connection.query('SHOW DATABASES',
-            function (err, result) {
-                if (err)
-                    console.log(`error executing the query - ${err}`);
+    connection.query(sql, [fname, lname, phone, email, checkin, checkout, roomType], 
+        function (err, result) {
+            if (err) {
+                console.log(`Error executing the query - ${err}`);
+                res.status(500).send("Error inserting data");
+            } else {
+                console.log('Result: ', result);
+                res.send("Data inserted successfully");
+            }
+        });
 
-                else
-                    console.log('result: ', result);
-            });
-
-    res.send("POST Request Called");
-    
-//    connection.end();
+    connection.end();
 });
 
 app.listen(PORT, () => {
@@ -54,3 +67,4 @@ app.listen(PORT, () => {
 });
 
 exports.mysql = mysql;
+

@@ -17,9 +17,30 @@ $(document).ready(function () {
         if (validateForm) {
 
             // Submit the form
-            alert("the form is valid");
+            alert("the form is valid");            
 
-            $("#myForm").off("submit").submit();
+            let myForm = document.getElementById("myForm");
+            let data = new FormData(myForm);
+            
+
+            $.ajax({
+                url: '/',
+                method: 'POST',
+                data: data,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    console.log("form data has been sent successfully");
+                    alert('Your form has been sent successfully.');
+                },
+                error: function (xhr, status, error) {
+                    console.log("!!!!!form data failed to be sent!!!!!");
+                    alert('Your form was not sent successfully.');
+                    console.error(error);
+                }
+            });
+
+//            $("#myForm").off("submit").submit();
 
         } else {
 
