@@ -11,41 +11,37 @@ $(document).ready(function () {
 
         event.preventDefault();
 
+        // Validate the form data
         validateForm = validateForm();
 
-        if (validateForm) {
-
-            // Submit the form
+        // Send the form data to the server if its valid
+        if (validateForm) {            
+            
             alert("the form is valid");            
-
-            let myForm = document.getElementById("myForm");
+            
+            // Select the form and create an object containing form fields and their values
+            let myForm = $("#myForm");
             let data = new FormData(myForm);
             
-
             $.ajax({
                 url: '/',
                 method: 'POST',
                 data: data,
                 processData: false,
                 contentType: false,
-                success: function (response) {
-                    console.log("form data has been sent successfully");
-                    alert('Your form has been sent successfully.');
+                success: function (response) {                    
+                    alert('Form data sent successfully!!!.');
                 },
-                error: function (xhr, status, error) {
-                    console.log("!!!!!form data failed to be sent!!!!!");
-                    alert('Your form was not sent successfully.');
+                error: function (xhr, status, error) {                    
+                    alert('Form data NOT sent');
                     console.error(error);
                 }
             });
 
-
+        // Prevent form submission if the data is invalid
         } else {
-
-//         Prevent the default form action
             event.preventDefault();
             alert("the form is not valid");
-
         }
     });
 });
