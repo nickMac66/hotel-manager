@@ -16,9 +16,8 @@ let group = "";
 function buildForm(formFields, formAction) {
 
     // Start building the form
-//    let form = `<form id="myForm" action="${formAction}" method="post">`;
+//    let form = `<form id="myForm" action = ${ formAction } method="post">`;
     let form = `<form id="myForm" method="post">`;
-//    let form = `<form id="myForm" action="${formAction}">`;
 //let form = `<form id="myForm">`;
     form += '<table>';
     form += '<tr>';
@@ -60,14 +59,14 @@ function buildForm(formFields, formAction) {
     // Add the submit button
     form += '<tr>';
     form += '<td>';
-    form += '<input type="submit" id="submit" name="submit">';
+    form += '<input type="submit" id="submitButton" name="submitButton">';
     form += '</td>';
     form += '</tr>';
 
     // Close the form
     form += '</table>';
     form += '</form>';
-    console.log(form);
+//    console.log(form);
 
     return form;
 
