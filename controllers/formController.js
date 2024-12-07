@@ -30,10 +30,10 @@ $(document).ready(function () {
                 processData: false,
                 contentType: false,
                 success: function (response) {                    
-                    alert('Form data sent successfully!!!.');
+                    alert('.....Form data sent successfully.....');
                 },
                 error: function (xhr, status, error) {                    
-                    alert('Form data NOT sent');
+                    alert('!!!!!Form data was NOT sent!!!!!');
                     console.error(error);
                 }
             });
