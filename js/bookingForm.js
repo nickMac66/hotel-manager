@@ -14,9 +14,9 @@ const formFields = {
     email: {label: "Email", type: "text", id: "email", name: "email"},
     checkin: {label: "Check in", type: "date", id: "checkin", name: "checkin"},
     checkout: {label: "Check out", type: "date", id: "checkout", name: "checkout"},
-    basicRoom: {label: "Basic room", type: "radio", id: "basic", name: "roomType", value: "basic", group: "Room type"},
-    deluxeRoom: {label: "Deluxe room", type: "radio", id: "deluxe", name: "roomType", value: "deluxe", group: "Room type"},
-    luxuryRoom: {label: "Luxury room", type: "radio", id: "luxury", name: "roomType", value: "luxury", group: "Room type"}    
+    basicRoom: {label: "Basic room", type: "radio", id: "basic", name: "roomType", value: "Basic", group: "Room type"},
+    deluxeRoom: {label: "Deluxe room", type: "radio", id: "deluxe", name: "roomType", value: "Deluxe", group: "Room type"},
+    luxuryRoom: {label: "Luxury room", type: "radio", id: "luxury", name: "roomType", value: "Luxury", group: "Room type"}    
 
 };
 
