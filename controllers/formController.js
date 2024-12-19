@@ -7,24 +7,25 @@
 
 $(document).ready(function () {
 
-    // Add dynamic page content
-    let pageContent = $("#home")[0];
-    let formAction = "bookingDetails.html";
-    pageContent.innerHTML = buildForm(formFields, formAction);
+    // Display the form
+    let pageContent = $("#home")[0]; // Select 'home' container on the main page     
+    let formFields = initializeForm(); // Initialize the form fields
+    let formAction = "bookingDetails.html"; // Define the form action        
+    pageContent.innerHTML = buildForm(formFields, formAction); // Dynamically display the booking form on the main page
 
+    // Handle form submission
     $("#myForm").on("submit", function (event) {
 
-        // Prevent form submission
+        // Prevent default form submission behavior
         event.preventDefault();
-
         // Validate form data
         validateForm = validateForm();
-
+        
         // Send form data to the server if its valid
         if (validateForm) {
 
             alert("the form is valid");
-
+            
             // Select form and create an object containing form fields and their values
             let myForm = $("#myForm");
             let data = new FormData(myForm);
@@ -48,7 +49,7 @@ $(document).ready(function () {
             // Prevent form submission if the data is invalid
         } else {
             event.preventDefault();
-            alert("the form is not valid");
+            alert(validateForm);
         }
     });
 });

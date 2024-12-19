@@ -1,14 +1,30 @@
 /*
  * Name: bookingForm.js
- * Description: JavaScript file initializes the booking form
+ * Description: JavaScript file contains functions to initialize the booking form and get user input
  * Author: NicMac
  * Date: October 12, 2024
  */
 
+// Function to get user input from form
+function getUserInput() {
+
+    const userInput = {
+        fname: $("#myForm #fname").val(),
+        lname: $("#myForm #lname").val(),
+        phone: $("#myForm #phone").val(),
+        email: $("#myForm #email").val(),
+        checkin: $("#myForm #checkin").val(),
+        checkout: $("#myForm #checkout").val(),
+        roomType: $('#myForm input[name="roomType"]:checked')
+    };
+        
+    return userInput;
+}
+
 // Function to initialize the booking form
 function initializeForm() {
-    
-    // Object containing form fields
+
+// Object containing form fields
     const formFields = {
         fname: {label: "First name", type: "text", id: "fname", name: "fname"},
         lname: {label: "Last name", type: "text", id: "lname", name: "lname"},
