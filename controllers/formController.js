@@ -7,8 +7,13 @@
 
 $(document).ready(function () {
 
+    // Add dynamic page content
+    let pageContent = $("#home")[0];
+    let formAction = "bookingDetails.html";
+    pageContent.innerHTML = buildForm(formFields, formAction);
+
     $("#myForm").on("submit", function (event) {
-        
+
         // Prevent form submission
         event.preventDefault();
 
