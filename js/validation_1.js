@@ -6,11 +6,11 @@
  */
 
 // Constant checks if a radio selection has been made
-const radioUnchecked = $('#myForm input[name="roomType"]:checked').val() === 0;
+//const radioUnchecked = $('#myForm input[name="roomType"]:checked').length === 0;
 
 // Function validates a form
 function validateForm() {
-
+   
     // Set the form to be valid
     let isValid = true;
 
@@ -19,19 +19,17 @@ function validateForm() {
 
     // Check for empty form fields
     for (let field in userInput) {
-        console.log(field);
 
         const isEmpty = (userInput[field] === "");
+        const radioUnchecked = $('#myForm input[name="roomType"]:checked').length === 0;
 
-        // Check if any fields are left empty
         if (isEmpty) {
             isValid = false;
         }
-
-        // Check if any radio fields are left unchecked
         if (field === "roomType" && radioUnchecked) {
-            console.log("radio not checked");
-            isValid = false;
+            console.log("radio unchecked");
+        } else {
+            console.log($('#myForm input[name="roomType"]:checked').val());
         }
     }
     return isValid;
