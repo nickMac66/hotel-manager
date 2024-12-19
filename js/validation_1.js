@@ -1,13 +1,18 @@
 /**
  * Name: bookingForm.js
- * Description: JavaScript file to validate user input 
+ * Description: JavaScript file to validate user input
  * Author: NicMac
  * Created On: October 24, 2024
  */
 
+// Patterns for validation
+const namePattern = /^[a-zA-Z]{1,50}$/;
+const phonePattern = /^\d{10}$/;
+const emailPattern = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+const radioUnchecked = $('#myForm input[name="roomType"]:checked').length === 0;
+
 // Function validates a form
 function validateForm() {
-
     // Set the form to be valid
     let isValid = true;
 
@@ -16,37 +21,29 @@ function validateForm() {
 
     // Iterate through form elements
     for (let field in userInput) {
+        let isEmpty = (userInput[field] === "");
 
-        const isEmpty = (userInput[field] === "");
-        const radioUnchecked = $('#myForm input[name="roomType"]:checked').length === 0;
-
-        // Check for empty fields
+        // Check for empty text input fields
         if (isEmpty) {
             $(`h5#${field}errorMsg`).html('**Required field').css("color", "red");
             isValid = false;
         }
         
-        // Check if any radio fields are left unchecked
-        if (field === "roomType" && radioUnchecked) {
-            console.log("radio unchecked");
-            $(`h5[name="radioErrorMsg"]`).html('**Required field').css("color", "red");
-        } else {
-            console.log($('#myForm input[name="roomType"]:checked').val());
-        }
+        // Additional field-specific validations can be added here
     }
+
+    // Check if any radio fields are left unchecked    
+    if (radioUnchecked) {
+        $(`h5[name="radioErrorMsg"]`).html('**Required field').css("color", "red");
+        isValid = false;
+    } else {
+        console.log($('#myForm input[name="roomType"]:checked').val());
+    }
+
     return isValid;
 }
 
-//
-//    $("#myForm").find("*").each(function () {
-//
-//        const isEmpty = ($(this).val() === "");
-//
-//        let id = $(this).attr('id');
-//
-//        switch (id) {
-//
-//            case "fname":
+
 //
 //                const fname = $("#myForm #fname").val();
 //                const fnamepattern = /^[a-zA-Z]{1,50}$/;
