@@ -24,7 +24,7 @@ $(document).ready(function () {
         // Send form data to the server if its valid
         if (validateForm) {
 
-            alert("the form is valid");
+            alert("is the form valid? " + validateForm);
             
             // Select form and create an object containing form fields and their values
             let myForm = $("#myForm");
@@ -49,7 +49,7 @@ $(document).ready(function () {
             // Prevent form submission if the data is invalid
         } else {
             event.preventDefault();
-            alert(validateForm);
+            alert("is the form valid? " + validateForm);
         }
     });
 });

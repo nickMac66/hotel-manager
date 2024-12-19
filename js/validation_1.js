@@ -5,20 +5,34 @@
  * Created On: October 24, 2024
  */
 
+// Constant checks if a radio selection has been made
+const radioUnchecked = $('#myForm input[name="roomType"]:checked').val() === 0;
+
+// Function validates a form
 function validateForm() {
 
-    console.log("validating...");
-
+    // Set the form to be valid
     let isValid = true;
 
     // Get user input data from the form
     let userInput = getUserInput();
 
+    // Check for empty form fields
     for (let field in userInput) {
-        if(userInput[field] === "") {
+        console.log(field);
+
+        const isEmpty = (userInput[field] === "");
+
+        // Check if any fields are left empty
+        if (isEmpty) {
             isValid = false;
         }
 
+        // Check if any radio fields are left unchecked
+        if (field === "roomType" && radioUnchecked) {
+            console.log("radio not checked");
+            isValid = false;
+        }
     }
     return isValid;
 }
