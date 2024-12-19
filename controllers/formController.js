@@ -2,7 +2,7 @@
  * Name: formHandler.js
  * Description: JavaScript file for handling form submissions and related functionality. 
  * Author: NicMac
- * Created On: October 16, 2024 
+ * Date: October 16, 2024 
  */
 
 $(document).ready(function () {
