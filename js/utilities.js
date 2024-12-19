@@ -50,7 +50,7 @@ function buildForm(formFields, formAction) {
 
         form += '<tr>';
         form += '<td>';
-        form += '<h5 name="radioNotCheckedMsg"></h5>';
+        form += '<h5 id="radioErrorMsg" name="radioErrorMsg"></h5>';
         form += '</td>';
         form += '</tr>';
 

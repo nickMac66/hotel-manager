@@ -5,29 +5,31 @@
  * Created On: October 24, 2024
  */
 
-// Constant checks if a radio selection has been made
-//const radioUnchecked = $('#myForm input[name="roomType"]:checked').length === 0;
-
 // Function validates a form
 function validateForm() {
-   
+
     // Set the form to be valid
     let isValid = true;
 
     // Get user input data from the form
     let userInput = getUserInput();
 
-    // Check for empty form fields
+    // Iterate through form elements
     for (let field in userInput) {
 
         const isEmpty = (userInput[field] === "");
         const radioUnchecked = $('#myForm input[name="roomType"]:checked').length === 0;
 
+        // Check for empty fields
         if (isEmpty) {
+            $(`h5#${field}errorMsg`).html('**Required field').css("color", "red");
             isValid = false;
         }
+        
+        // Check if any radio fields are left unchecked
         if (field === "roomType" && radioUnchecked) {
             console.log("radio unchecked");
+            $(`h5[name="radioErrorMsg"]`).html('**Required field').css("color", "red");
         } else {
             console.log($('#myForm input[name="roomType"]:checked').val());
         }
@@ -35,16 +37,6 @@ function validateForm() {
     return isValid;
 }
 
-//    const fieldsAreEmpty = (fname === "" || lname === "" || phone === "" || email === "" || checkin === "" || checkout === "");
-//    const radioNotChecked = $('#myForm input[name="roomType"]:checked').length === 0;
-//
-//    if (radioNotChecked) {
-//
-//        $('h5[name="radioNotCheckedMsg"]').html('**Required').css("color", "red");
-//        console.log("radio not checked");
-//        isValid = false;
-//
-//    }
 //
 //    $("#myForm").find("*").each(function () {
 //
