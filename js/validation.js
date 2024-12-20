@@ -12,18 +12,19 @@ const emailPattern = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{
 
 // Function validates a form
 function validateForm() {
+    
     // Set the form to be valid
     let isValid = true;
-
     // Get user input data from the form
     let userInput = getUserInput();
 
-    //**************************************************************************
-    // Check for empty input fields
-    //**************************************************************************
+//******************************************************************************
+// Check for empty input fields
+//******************************************************************************
 
-    // Ensure at least one radio field is checked
+// Ensure at least one radio field is checked
     const radioUnchecked = $('#myForm input[name="roomType"]:checked').length === 0;
+
     if (radioUnchecked) {
         $(`h5[name="radioErrorMsg"]`).html('**Required field').css("color", "red");
         isValid = false;
@@ -31,16 +32,18 @@ function validateForm() {
 
     // Veryify values for the remaining fields
     for (let field in userInput) {
-
+        
         let isEmpty = (userInput[field] === "");
 
         if (isEmpty) {
             $(`h5#${field}errorMsg`).html('**Required field').css("color", "red");
             isValid = false;
         } else {
-            //**********************************************************************
+            
+            //******************************************************************
             // Validate the format of user inputs
-            //**********************************************************************
+            //******************************************************************
+            
             switch (field) {
                 case "fname":
                     if (!namePattern.test(userInput[field])) {
