@@ -1,165 +1,78 @@
 /**
  * Name: bookingForm.js
- * Description: JavaScript file to validate user input 
+ * Description: JavaScript file to validate user input
  * Author: NicMac
  * Created On: October 24, 2024
  */
 
-function validateForm() {   
-    
-    console.log("validating...");
+// Valid patterns for validating user input
+const namePattern = /^[a-zA-Z]{1,50}$/;
+const phonePattern = /^\d{10}$/;
+const emailPattern = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
+// Function validates a form
+function validateForm() {
+    // Set the form to be valid
     let isValid = true;
 
-    let fname = $("#myForm #fname").val();
-    let lname = $("#myForm #lname").val();
-    let phone = $("#myForm #phone").val();
-    let email = $("#myForm #email").val();
-    let checkin = $("#myForm #checkin").val();
-    let checkout = $("#myForm #checkout").val();
+    // Get user input data from the form
+    let userInput = getUserInput();
 
+    //**************************************************************************
+    // Check for empty input fields
+    //**************************************************************************
 
-    const fieldsAreEmpty = (fname === "" || lname === "" || phone === "" || email === "" || checkin === "" || checkout === "");
-    const radioNotChecked = $('#myForm input[name="roomType"]:checked').length === 0;
-
-    if (radioNotChecked) {
-
-        $('h5[name="radioNotCheckedMsg"]').html('**Required').css("color", "red");
-        console.log("radio not checked");
+    // Ensure at least one radio field is checked
+    const radioUnchecked = $('#myForm input[name="roomType"]:checked').length === 0;
+    if (radioUnchecked) {
+        $(`h5[name="radioErrorMsg"]`).html('**Required field').css("color", "red");
         isValid = false;
-
     }
 
-    $("#myForm").find("*").each(function () {
+    // Veryify values for the remaining fields
+    for (let field in userInput) {
 
-        const isEmpty = ($(this).val() === "");
+        let isEmpty = (userInput[field] === "");
 
-        let id = $(this).attr('id');
-
-        switch (id) {
-
-            case "fname":
-
-                const fname = $("#myForm #fname").val();
-                const fnamepattern = /^[a-zA-Z]{1,50}$/;
-                const fnameInvalid = (!fnamepattern.test(fname));
-
-                if (isEmpty) {
-
-                    $(`h5#${id}errorMsg`).html('**Required').css("color", "red");
-                    console.log("first name is empty");
-                    isValid = false;
-
-                } else if (fnameInvalid) {
-
-                    $(`h5#${id}errorMsg`).html('**Invalid').css("color", "red");
-                    console.log("first name is invalid");
-                    isValid = false;
-
-                }
-                                
-                break;
-
-            case "lname":
-
-                const lname = $("#myForm #lname").val();
-                const lnamePattern = /^[a-zA-Z]{1,50}$/;
-                const lnameInvalid = (!lnamePattern.test(lname));
-
-                if (isEmpty) {
-
-                    $(`h5#${id}errorMsg`).html('**Required').css("color", "red");
-                    console.log("last name is empty");
-                    isValid = false;
-
-                } else if (lnameInvalid) {
-
-                    $(`h5#${id}errorMsg`).html('**Invalid').css("color", "red");
-                    console.log("first name is invalid");
-                    isValid = false;
-
-                }
-
-                break;
-
-            case "phone":
-                
-                const phone = $("#myForm #phone").val();
-                const phonePattern = /^\d{10}$/;                
-                const phoneInvalid = (!phonePattern.test(phone));
-
-                if (isEmpty) {
-
-                    $(`h5#${id}errorMsg`).html('**Required').css("color", "red");
-                    console.log("phone is empty");
-                    isValid = false;
-
-                } else if (phoneInvalid) {
-
-                    $(`h5#${id}errorMsg`).html('**Invalid').css("color", "red");
-                    console.log("phone is invalid");
-                    isValid = false;
-
-                }
-
-                break;
-
-            case "email":
-
-                const email = $("#myForm #email").val();
-                const emailPattern = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;                
-                const emailInvalid = (!emailPattern.test(email));
-
-                if (isEmpty) {
-
-                    $(`h5#${id}errorMsg`).html('**Required').css("color", "red");
-                    console.log("email is empty");
-                    isValid = false;
-
-                } else if (emailInvalid) {
-
-                    $(`h5#${id}errorMsg`).html('**Invalid').css("color", "red");
-                    console.log("email is invalid");
-                    isValid = false;
-
-                }
-
-                break;
-
-            case "checkin":
-
-                const checkin = $("#myForm #checkin").val();
-
-                if (isEmpty) {
-
-                    $(`h5#${id}errorMsg`).html('**Required').css("color", "red");
-                    console.log("check in is empty");
-                    isValid = false;
-
-                }
-
-                break;
-
-            case "checkout":
-
-                const checkout = $("#myForm #checkout").val();
-
-                if (isEmpty) {
-
-                    $(`h5#${id}errorMsg`).html('**Required').css("color", "red");
-                    console.log("checkout is empty");
-                    isValid = false;
-
-                }
-
-                break;
-
-            default:
-
-                break;
-
+        if (isEmpty) {
+            $(`h5#${field}errorMsg`).html('**Required field').css("color", "red");
+            isValid = false;
+        } else {
+            //**********************************************************************
+            // Validate the format of user inputs
+            //**********************************************************************
+            switch (field) {
+                case "fname":
+                    if (!namePattern.test(userInput[field])) {
+                        $(`h5#${field}errorMsg`).html('**Invalid').css("color", "red");
+                        isValid = false;
+                        console.log("invalid fname or lname");
+                    }
+                case "lname":
+                    if (!namePattern.test(userInput[field])) {
+                        $(`h5#${field}errorMsg`).html('**Invalid').css("color", "red");
+                        isValid = false;
+                        console.log("invalid fname or lname");
+                    }
+                    break;
+                case "phone":
+                    if (!phonePattern.test(userInput[field])) {
+                        $(`h5#${field}errorMsg`).html('**Invalid').css("color", "red");
+                        isValid = false;
+                        console.log("invalid phone");
+                    }
+                    break;
+                case "email":
+                    if (!emailPattern.test(userInput[field])) {
+                        $(`h5#${field}errorMsg`).html('**Invalid').css("color", "red");
+                        isValid = false;
+                        console.log("invalid email");
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
-    });
-    console.log("validated");
+    }
     return isValid;
 }

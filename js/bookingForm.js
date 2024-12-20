@@ -5,22 +5,6 @@
  * Date: October 12, 2024
  */
 
-// Function to get user input from form
-function getUserInput() {
-
-    const userInput = {
-        fname: $("#myForm #fname").val(),
-        lname: $("#myForm #lname").val(),
-        phone: $("#myForm #phone").val(),
-        email: $("#myForm #email").val(),
-        checkin: $("#myForm #checkin").val(),
-        checkout: $("#myForm #checkout").val(),
-        roomType: $('#myForm input[name="roomType"]:checked')
-    };
-        
-    return userInput;
-}
-
 // Function to initialize the booking form
 function initializeForm() {
 
@@ -37,4 +21,19 @@ function initializeForm() {
         luxuryRoom: {label: "Luxury room", type: "radio", id: "luxury", name: "roomType", value: "luxury"}
     };
     return formFields;
+}
+
+// Function to get user input from form
+function getUserInput() {
+
+    const userInput = {
+        fname: $("#myForm #fname").val(),
+        lname: $("#myForm #lname").val(),
+        phone: $("#myForm #phone").val(),
+        email: $("#myForm #email").val(),
+        checkin: $("#myForm #checkin").val(),
+        checkout: $("#myForm #checkout").val(),
+        roomType: $('#myForm input[name="roomType"]:checked')
+    };
+    return userInput;
 }
