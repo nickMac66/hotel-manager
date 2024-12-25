@@ -9,13 +9,12 @@ $(document).ready(function () {
 
     // Display the form
     let pageContent = $("#home")[0]; // Select 'home' container on the main page     
-    let formFields = initializeForm(); // Initialize the form fields
-    let formAction = "bookingDetails.html"; // Define the form action        
-    pageContent.innerHTML = buildForm(formFields, formAction); // Dynamically display the booking form on the main page
+    let formObject = initializeFormObject(); // Initialize the form object       
+    pageContent.innerHTML = buildForm(formObject); // Build the form with the form object and dynamically display it on the main page
 
     // Handle form submission
     $("#myForm").on("submit", function (event) {
-
+        
         // Prevent default form submission behavior
         event.preventDefault();
         // Validate form data
@@ -23,12 +22,13 @@ $(document).ready(function () {
         
         // Send form data to the server if its valid
         if (validateForm) {
-
+            
             alert("is the form valid? " + validateForm);
             
             // Select form and create an object containing form fields and their values
             let myForm = $("#myForm");
             let data = new FormData(myForm);
+            console.log("form data: " + data);
 
             // Send form data to the server
             $.ajax({

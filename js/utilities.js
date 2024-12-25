@@ -5,126 +5,110 @@
  * Created On: October 13, 2024
  */
 
-// Form field attribute variables
-let label = "";
-let type = "";
-let id = "";
-let name = "";
-let value = "";
-let group = "";
+// Form field attributes
+let label;
+let type;
+let id;
+let name;
+let value;
 
-function buildForm(formFields, formAction) {
+// Function accepts an object containing form fields and builds a form
+function buildForm(formObject) {
 
     // Start building the form
-//    let form = `<form id="myForm" action = ${ formAction } method="post">`;
-    let form = `<form id="myForm" method="post">`;
-//let form = `<form id="myForm">`;
-    form += '<table>';
-    form += '<tr>';
+    let form = `<form id="myForm" method="post"><table>`;
 
+    //**************************************************************************
     // Access the current form field
-    for (let formField in formFields) {
+    //**************************************************************************
+    for (let formField in formObject) {
 
-        // Define the current field as an object
-        let fieldObject = formFields[formField];
+        let fieldObject = formObject[formField]; // Create an object containing the current form field and its attributes                                                     
 
-        // Get the attributes/values from the current field
-        getCurrentFieldAttributes(fieldObject);
+        getCurrentFieldAttributes(fieldObject); // Get the attributes/values from the current field
+        //**********************************************************************
+        // Build the current form field
+        //**********************************************************************
 
-        // Build the current field
-        form += `<th><label for='${id}'>${label}</label></th>`;
-        form += '<td>';
-        form += `<input type="${type}" id="${id}" name="${name}" value="${value}">`;
-        if (type !== "radio") {
-
-            form += `<h5 id="${id}ErrorMsg"></h5>`;
-
-        }
-
-        form += '</td>';
-        form += '</tr>';
-
+        form += `<tr><th><label for='${id}'>${label}</label></th>`;
+        form += `<td><input type="${type}" id="${id}" name="${name}"></td>`;
+        form += `<td><h5 id="${id}ErrMsg"></h5></td></tr>`;
     }
 
-    if (type === "radio") {
-
-        form += '<tr>';
-        form += '<td>';
-        form += '<h5 id="radioErrorMsg" name="radioErrorMsg"></h5>';
-        form += '</td>';
-        form += '</tr>';
-
-    }
-
-    // Add the submit button
-    form += '<tr>';
-    form += '<td>';
-    form += '<input type="submit" id="submitButton" name="submitButton">';
-    form += '</td>';
-    form += '</tr>';
-
-    // Close the form
-    form += '</table>';
-    form += '</form>';
-//    console.log(form);
-
+    //**************************************************************************
+    // Add the submit button and close the form
+    //**************************************************************************
+    form += '<tr><td><input type="submit" id="submitButton" name="submitButton"></td></tr>';
+    form += '</table></form>';
     return form;
-
 }
 
 /*
  * Name: getForm
- * Description: Processes the given form fields to extract and handle their attributes
+ * Description: Processes each form field object to extract and handle their attributes
  * Author: NicMac
  * Created On: November 2, 2024
  */
 
 function getCurrentFieldAttributes(fieldObject) {
 
-    // Access the attributes from the current form field
-    for (let fieldAttribute in fieldObject) {
+    // Access the data from the current field object
+    for (let fieldData in fieldObject) {
 
-        // Get the current attribute value
-        let attributeValue = fieldObject[fieldAttribute];
 
-        // Handle the different attributes
-        switch (fieldAttribute) {
-
-            case "label":
-
-                label = attributeValue;
-                break;
-
-            case "type":
-
-                type = attributeValue;
-                break;
-
-            case "id":
-
-                id = attributeValue;
-                break
-
-            case "name":
-
-                name = attributeValue;
-                break;
-
-            case "value":
-
-                value = attributeValue;
-                break;
-
-            case "group":
-
-                group = attributeValue;
-                break;
-
-            default:
-
-                alert("invalid field attribute");
-                break;
+        //************************************************************************
+        // Check if the current item is an object and get extract the data.
+        // If it's not an object, set the value of the current field attribute.
+        //************************************************************************        
+        if (typeof current === 'object') {
+            console.log("radio field: " + fieldData);
+        } else {
+            console.log("current attribute: " + fieldData);
+            setAttributeValues(fieldObject, fieldData);
 
         }
+
+//        if (typeof current === 'object') {
+//            console.log("radio field: " + fieldData);
+//
+//            // Get attributes from the current field object and set their values
+//            for (let fieldData in current) {
+//                console.log("radio field attributes: " + fieldData);
+//                setAttributeValues(fieldData);
+//            }
+        // Set the current field attribute values
+//        } else {
+//            console.log("current attribute: " + fieldData);
+//            setAttributeValues(fieldData);
+//        }
+    }
+}
+
+function setAttributeValues(fieldObject, fieldData) {
+
+    // Attribute value
+    let current = fieldObject[fieldData];
+    console.log("current attribute value: " + current);
+
+    // Handle the different attributes
+    switch (fieldData) {
+        case "label":
+            label = current;
+            break;
+        case "type":
+            type = current;
+            break;
+        case "id":
+            id = current;
+            break
+        case "name":
+            name = current;
+            break;
+        case "value":
+            value = current;
+            break;
+//        default:
+//            alert("invalid field attribute");
+//            break;
     }
 }

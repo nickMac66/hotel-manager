@@ -12,32 +12,30 @@ const emailPattern = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{
 
 // Function validates a form
 function validateForm() {
-    
-    // Set the form to be valid
-    let isValid = true;
-    // Get user input data from the form
-    let userInput = getUserInput();
+        
+    let isValid = true; // Set the form to be valid    
+    let userInput = getUserInput(); // Get user input data from the form
 
 //******************************************************************************
 // Check for empty input fields
 //******************************************************************************
 
-// Ensure at least one radio field is checked
-    const radioUnchecked = $('#myForm input[name="roomType"]:checked').length === 0;
+    const radioUnchecked = $('#myForm input[name="roomType"]:checked').length === 0; // Ensure at least one radio field is checked
 
-    if (radioUnchecked) {
-        $(`h5[name="radioErrorMsg"]`).html('**Required field').css("color", "red");
-        isValid = false;
-    }
+//    if (radioUnchecked) {
+//        $(`h5[name="roomType"]`).html('**Required field').css("color", "red");
+//        isValid = false;
+//    }
 
     // Veryify values for the remaining fields
     for (let field in userInput) {
         
+        let id = field;
         let isEmpty = (userInput[field] === "");
 
         if (isEmpty) {
-            $(`h5#${field}errorMsg`).html('**Required field').css("color", "red");
-            isValid = false;
+            $(`h5#${id}ErrMsg`).html('**Required field').css("color", "red");
+            isValid = false;            
         } else {
             
             //******************************************************************
