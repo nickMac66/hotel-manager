@@ -18,23 +18,48 @@ function buildForm(formObject) {
     // Start building the form
     let form = `<form id="myForm" method="post"><table>`;
 
-    //**************************************************************************
-    // Access the current form field
-    //**************************************************************************
+    // Access the current form field    
     for (let formField in formObject) {
 
-        let fieldObject = formObject[formField]; // Create an object containing the current form field and its attributes                                                     
+        // Create an object containing the current form field and its attributes
+        let fieldObject = formObject[formField];
 
-        getCurrentFieldAttributes(fieldObject); // Get the attributes/values from the current field
         //**********************************************************************
+        // Check if the current form field object contains nested objects, which
+        // may include radio fields, select elements, etc. If no nested objects
+        // are found, set the field attribute values.
+        //**********************************************************************        
+        for (let fieldObjectItem in fieldObject) {
+
+            // Reference to the current field object item value
+            let fieldObjectValue = fieldObject[fieldObjectItem];
+
+            if (typeof fieldObjectValue === 'object') {
+                console.log("field object value: " + fieldObjectValue);
+
+                // Reference to the current field object
+                nestedObject = fieldObjectValue;
+
+                for (let fieldObjectItem in nestedObject) {
+
+                    // Set attribute values to the current form field
+                    initializeFieldAttributes(nestedObject, fieldObjectItem);
+                }
+                // Build the current form field                    
+                form += `<tr><th><label for='${id}'>${label}</label></th>`;
+                form += `<td><input type="${type}" id="${id}" name="${name}"></td>`;
+                form += `<td><h5 id="${id}ErrMsg"></h5></td></tr>`;
+                
+            } else {
+                // Set attribute values to the current form field
+                initializeFieldAttributes(fieldObject, fieldObjectItem);
+            }
+        }
         // Build the current form field
-        //**********************************************************************
-
         form += `<tr><th><label for='${id}'>${label}</label></th>`;
         form += `<td><input type="${type}" id="${id}" name="${name}"></td>`;
         form += `<td><h5 id="${id}ErrMsg"></h5></td></tr>`;
     }
-
     //**************************************************************************
     // Add the submit button and close the form
     //**************************************************************************
@@ -43,72 +68,30 @@ function buildForm(formObject) {
     return form;
 }
 
-/*
- * Name: getForm
- * Description: Processes each form field object to extract and handle their attributes
- * Author: NicMac
- * Created On: November 2, 2024
- */
-
-function getCurrentFieldAttributes(fieldObject) {
-
-    // Access the data from the current field object
-    for (let fieldData in fieldObject) {
-
-
-        //************************************************************************
-        // Check if the current item is an object and get extract the data.
-        // If it's not an object, set the value of the current field attribute.
-        //************************************************************************        
-        if (typeof current === 'object') {
-            console.log("radio field: " + fieldData);
-        } else {
-            console.log("current attribute: " + fieldData);
-            setAttributeValues(fieldObject, fieldData);
-
-        }
-
-//        if (typeof current === 'object') {
-//            console.log("radio field: " + fieldData);
-//
-//            // Get attributes from the current field object and set their values
-//            for (let fieldData in current) {
-//                console.log("radio field attributes: " + fieldData);
-//                setAttributeValues(fieldData);
-//            }
-        // Set the current field attribute values
-//        } else {
-//            console.log("current attribute: " + fieldData);
-//            setAttributeValues(fieldData);
-//        }
-    }
-}
-
-function setAttributeValues(fieldObject, fieldData) {
+function initializeFieldAttributes(fieldObject, fieldObjectItem) {
 
     // Attribute value
-    let current = fieldObject[fieldData];
-    console.log("current attribute value: " + current);
+    let currentItemValue = fieldObject[fieldObjectItem];
 
     // Handle the different attributes
-    switch (fieldData) {
+    switch (fieldObjectItem) {
         case "label":
-            label = current;
+            label = currentItemValue;
             break;
         case "type":
-            type = current;
+            type = currentItemValue;
             break;
         case "id":
-            id = current;
+            id = currentItemValue;
             break
         case "name":
-            name = current;
+            name = currentItemValue;
             break;
         case "value":
-            value = current;
+            value = currentItemValue;
             break;
-//        default:
-//            alert("invalid field attribute");
-//            break;
+        default:
+            alert("invalid field attribute");
+            break;
     }
 }
