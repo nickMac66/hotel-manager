@@ -5,126 +5,97 @@
  * Created On: October 13, 2024
  */
 
-// Form field attribute variables
-let label = "";
-let type = "";
-let id = "";
-let name = "";
-let value = "";
-let group = "";
+// Form field attributes
+let form;
+let label;
+let type;
+let id;
+let name;
+let value;
 
-function buildForm(formFields, formAction) {
+// Function accepts an object containing form fields and builds a form
+function buildForm(formObject) {
 
     // Start building the form
-//    let form = `<form id="myForm" action = ${ formAction } method="post">`;
-    let form = `<form id="myForm" method="post">`;
-//let form = `<form id="myForm">`;
-    form += '<table>';
-    form += '<tr>';
+    form = `<form id="myForm" method="post"><table>`;
 
-    // Access the current form field
-    for (let formField in formFields) {
+    // Access the current form field    
+    for (let fieldObject in formObject) {
 
-        // Define the current field as an object
-        let fieldObject = formFields[formField];
+        // Create an object for each form field
+        fieldObject = formObject[fieldObject];
 
-        // Get the attributes/values from the current field
-        getCurrentFieldAttributes(fieldObject);
+        fieldObjectLength = Object.keys(fieldObject).length;
 
-        // Build the current field
-        form += `<th><label for='${id}'>${label}</label></th>`;
-        form += '<td>';
-        form += `<input type="${type}" id="${id}" name="${name}" value="${value}">`;
-        if (type !== "radio") {
+        // Initialize the current field
+        initializeFormFields(fieldObject);
 
-            form += `<h5 id="${id}ErrorMsg"></h5>`;
-
-        }
-
-        form += '</td>';
-        form += '</tr>';
-
+        // Build the current form field                    
+        form += `<tr><th><label for='${id}'>${label}</label></th>`;
+        form += `<td><input type="${type}" id="${id}" name="${name}"></td>`;
+        form += `<td><h5 id="${id}ErrMsg"></h5></td></tr>`;
     }
-
-    if (type === "radio") {
-
-        form += '<tr>';
-        form += '<td>';
-        form += '<h5 id="radioErrorMsg" name="radioErrorMsg"></h5>';
-        form += '</td>';
-        form += '</tr>';
-
-    }
-
-    // Add the submit button
-    form += '<tr>';
-    form += '<td>';
-    form += '<input type="submit" id="submitButton" name="submitButton">';
-    form += '</td>';
-    form += '</tr>';
-
-    // Close the form
-    form += '</table>';
-    form += '</form>';
-//    console.log(form);
-
+    //**************************************************************************
+    // Add the submit button and close the form
+    //**************************************************************************
+    form += '<tr><td><input type="submit" id="submitButton" name="submitButton"></td></tr>';
+    form += '</table></form>';
     return form;
-
 }
 
-/*
- * Name: getForm
- * Description: Processes the given form fields to extract and handle their attributes
- * Author: NicMac
- * Created On: November 2, 2024
- */
+function initializeFormFields(fieldObject) {
 
-function getCurrentFieldAttributes(fieldObject) {
+    // Access the current field attributes
+    for (let fieldData in fieldObject) {
 
-    // Access the attributes from the current form field
-    for (let fieldAttribute in fieldObject) {
+        // Check if the current field item contains a nested object with grouped 
+        // form elements like radio buttons, select elements, etc
+        let nestedObject = (typeof fieldObject[fieldData] === 'object');
 
-        // Get the current attribute value
-        let attributeValue = fieldObject[fieldAttribute];
+        if (nestedObject) {
 
-        // Handle the different attributes
-        switch (fieldAttribute) {
+            objectLength = Object.keys(fieldObject).length;
 
-            case "label":
+            let nestedFieldObject = fieldObject[fieldData];
 
-                label = attributeValue;
-                break;
+            for (let fieldAttribute in nestedFieldObject) {
 
-            case "type":
-
-                type = attributeValue;
-                break;
-
-            case "id":
-
-                id = attributeValue;
-                break
-
-            case "name":
-
-                name = attributeValue;
-                break;
-
-            case "value":
-
-                value = attributeValue;
-                break;
-
-            case "group":
-
-                group = attributeValue;
-                break;
-
-            default:
-
-                alert("invalid field attribute");
-                break;
-
+                initializeFieldAttributes(nestedFieldObject, fieldAttribute);
+            }
+            // Build the current form field                    
+            form += `<tr><th><label for='${id}'>${label}</label></th>`;
+            form += `<td><input type="${type}" id="${id}" name="${name}"></td>`;
+            form += `<td><h5 id="${id}ErrMsg"></h5></td></tr>`;
+        } else {
+            let fieldAttribute = fieldData;
+            initializeFieldAttributes(fieldObject, fieldAttribute);
         }
+    }
+}
+
+function initializeFieldAttributes(fieldObject, fieldAttribute) {
+
+    let attributeValue = fieldObject[fieldAttribute];
+
+    // Handle the different attributes
+    switch (fieldAttribute) {
+        case "label":
+            label = attributeValue;
+            break;
+        case "type":
+            type = attributeValue;
+            break;
+        case "id":
+            id = attributeValue;
+            break
+        case "name":
+            name = attributeValue;
+            break;
+        case "value":
+            value = attributeValue;
+            break;
+        default:
+            alert("invalid field attribute");
+            break;
     }
 }

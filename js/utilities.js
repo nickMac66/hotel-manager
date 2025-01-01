@@ -6,92 +6,136 @@
  */
 
 // Form field attributes
-let label;
-let type;
-let id;
-let name;
-let value;
+let form = `<form id="myForm" method="post"><table>`;
+let label, type, id, name, value;
+let counter = 0;
 
-// Function accepts an object containing form fields and builds a form
+/*
+ * Function to accept an object containing form data and build a form.
+ * @param {Object} formObject - The object containing form field data.
+ * @returns {string} - The HTML string representing the form
+ */
 function buildForm(formObject) {
+    // Ensures that an extra form field isn't displayed
+    let count = 1;
 
-    // Start building the form
-    let form = `<form id="myForm" method="post"><table>`;
+    // Access each form field
+    for (let currentField in formObject) {
+        
+        // Get the length of the form object
+        let formObjectLength = Object.keys(formObject).length;
 
-    // Access the current form field    
-    for (let formField in formObject) {
+        // Create an object for each form field
+        let fieldObject = formObject[currentField];
 
-        // Create an object containing the current form field and its attributes
-        let fieldObject = formObject[formField];
+        // Initialize the form fields
+        initializeFormFields(fieldObject);
 
-        //**********************************************************************
-        // Check if the current form field object contains nested objects, which
-        // may include radio fields, select elements, etc. If no nested objects
-        // are found, set the field attribute values.
-        //**********************************************************************        
-        for (let fieldObjectItem in fieldObject) {
-
-            // Reference to the current field object item value
-            let fieldObjectValue = fieldObject[fieldObjectItem];
-
-            if (typeof fieldObjectValue === 'object') {
-                console.log("field object value: " + fieldObjectValue);
-
-                // Reference to the current field object
-                nestedObject = fieldObjectValue;
-
-                for (let fieldObjectItem in nestedObject) {
-
-                    // Set attribute values to the current form field
-                    initializeFieldAttributes(nestedObject, fieldObjectItem);
-                }
-                // Build the current form field                    
-                form += `<tr><th><label for='${id}'>${label}</label></th>`;
-                form += `<td><input type="${type}" id="${id}" name="${name}"></td>`;
-                form += `<td><h5 id="${id}ErrMsg"></h5></td></tr>`;
-                
-            } else {
-                // Set attribute values to the current form field
-                initializeFieldAttributes(fieldObject, fieldObjectItem);
-            }
+        // Prevent an extra field from being displayed
+        if (count < formObjectLength) { 
+            // Build the HTML for the form field
+            form += `<tr><th><label for='${id}'>${label}</label></th>`;
+            form += `<td><input type="${type}" id="${id}" name="${name}"></td>`;
+            form += `<td><span id="${name}+ErrMsg" style="display:none;">**Required field</span></td></tr>`;
+            count++;
         }
-        // Build the current form field
-        form += `<tr><th><label for='${id}'>${label}</label></th>`;
-        form += `<td><input type="${type}" id="${id}" name="${name}"></td>`;
-        form += `<td><h5 id="${id}ErrMsg"></h5></td></tr>`;
     }
-    //**************************************************************************
-    // Add the submit button and close the form
-    //**************************************************************************
+    // Add the submit button and close the form    
     form += '<tr><td><input type="submit" id="submitButton" name="submitButton"></td></tr>';
     form += '</table></form>';
     return form;
 }
 
-function initializeFieldAttributes(fieldObject, fieldObjectItem) {
+/*
+ * Function to initialize form fields
+ * @param {Object} fieldObject - The object containing form field data.
+ */
+function initializeFormFields(fieldObject) {
 
-    // Attribute value
-    let currentItemValue = fieldObject[fieldObjectItem];
+    // Access the field object keys
+    for (let fieldKey in fieldObject) {
+
+        // Retrieve the value associated with the current key
+        let fieldValue = fieldObject[fieldKey];
+
+        // Check if the current field is a group field containing nested elements
+        // such as radio buttons or select dropdowns
+        if (typeof fieldValue === 'object') {
+
+            // Reference to the current group field object
+            let groupFieldObject = fieldValue;
+
+            // Build the group field
+            initializeGroupFields(fieldObject, groupFieldObject);
+
+        } else {
+            // Initialize values for non-nested fields
+            initializeFieldValues(fieldObject, fieldKey);
+        }
+    }
+}
+
+/*
+ * Function to build and initialize form fields for a group field object.
+ * @param {Object} parentObject - The parent object containing the group field objects
+ * @param {Object} groupFieldObject - The nested object containing grouped form fields
+ */
+function initializeGroupFields(parentObject, groupFieldObject) {
+
+    // Increment the counter for each processed group field. 
+    // The counter ensures that an error message is added after the last field
+    counter++;
+
+    // Get the total number of fields in the parent object
+    parentObjectLength = Object.keys(parentObject).length;
+
+    // Access the attributes of the group field object
+    for (let fieldAttribute in groupFieldObject) {
+
+        // Initialize field values for the current attribute
+        initializeFieldValues(groupFieldObject, fieldAttribute);
+    }
+
+    // Build the HTML for the form field
+    form += `<tr><th><label for='${id}'>${label}</label></th>`;
+    form += `<td><input type="${type}" id="${id}" name="${name}"></td>`;
+
+    // Add an error message after the last group field
+    if (counter === parentObjectLength) {
+        form += `<td><span id="${name}+ErrMsg" style="display:none;">**Please make a selection</span></td></tr>`;        
+        counter = 0;
+    }
+}
+
+/*
+ * Function to initialize field values based on their attributes
+ * @param {Object} fieldObject - The object containing the form field data.
+ * @param {string} fieldAttribute
+ */
+function initializeFieldValues(fieldObject, fieldAttribute) {
+
+    // Value of the current field attribute
+    let fieldAttributeValue = fieldObject[fieldAttribute];
 
     // Handle the different attributes
-    switch (fieldObjectItem) {
+    switch (fieldAttribute) {
         case "label":
-            label = currentItemValue;
+            label = fieldAttributeValue;
             break;
         case "type":
-            type = currentItemValue;
+            type = fieldAttributeValue;
             break;
         case "id":
-            id = currentItemValue;
-            break
+            id = fieldAttributeValue;
+            break;
         case "name":
-            name = currentItemValue;
+            name = fieldAttributeValue;
             break;
         case "value":
-            value = currentItemValue;
+            value = fieldAttributeValue;
             break;
         default:
-            alert("invalid field attribute");
+            confirm("invalid field attribute");
             break;
     }
 }

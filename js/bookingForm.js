@@ -8,6 +8,15 @@
 // Function to initialize the booking form object
 function initializeFormObject() {
 
+//    const formObject = {
+//        fname: {label: "First name", type: "text", id: "fname", name: "fname"},
+//        lname: {label: "Last name", type: "text", id: "lname", name: "lname"},
+//        phone: {label: "Phone", type: "text", id: "phone", name: "phone"},
+//        email: {label: "Email", type: "text", id: "email", name: "email"},
+//        checkin: {label: "Check in", type: "date", id: "checkin", name: "checkin"},
+//        checkout: {label: "Check out", type: "date", id: "checkout", name: "checkout"}
+//    };
+
     // Object containing form fields
     const formObject = {
         fname: {label: "First name", type: "text", id: "fname", name: "fname"},
