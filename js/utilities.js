@@ -8,16 +8,15 @@
 // Form field attributes
 let form = `<form id="myForm" method="post"><table>`;
 let label, type, id, name, value;
-let counter = 0;
+let fieldCounter = 1;
+let groupFieldCounter = 0;
 
 /*
  * Function to accept an object containing form data and build a form.
  * @param {Object} formObject - The object containing form field data.
  * @returns {string} - The HTML string representing the form
  */
-function buildForm(formObject) {
-    // Ensures that an extra form field isn't displayed
-    let count = 1;
+function buildForm(formObject) {      
 
     // Access each form field
     for (let currentField in formObject) {
@@ -32,17 +31,18 @@ function buildForm(formObject) {
         initializeFormFields(fieldObject);
 
         // Prevent an extra field from being displayed
-        if (count < formObjectLength) { 
+        if (fieldCounter < formObjectLength) { 
             // Build the HTML for the form field
             form += `<tr><th><label for='${id}'>${label}</label></th>`;
             form += `<td><input type="${type}" id="${id}" name="${name}"></td>`;
             form += `<td><span id="${name}+ErrMsg" style="display:none;">**Required field</span></td></tr>`;
-            count++;
+            fieldCounter++;
         }
     }
     // Add the submit button and close the form    
     form += '<tr><td><input type="submit" id="submitButton" name="submitButton"></td></tr>';
     form += '</table></form>';
+    fieldCounter = 1;
     return form;
 }
 
@@ -84,7 +84,7 @@ function initializeGroupFields(parentObject, groupFieldObject) {
 
     // Increment the counter for each processed group field. 
     // The counter ensures that an error message is added after the last field
-    counter++;
+    groupFieldCounter++;
 
     // Get the total number of fields in the parent object
     parentObjectLength = Object.keys(parentObject).length;
@@ -101,9 +101,9 @@ function initializeGroupFields(parentObject, groupFieldObject) {
     form += `<td><input type="${type}" id="${id}" name="${name}"></td>`;
 
     // Add an error message after the last group field
-    if (counter === parentObjectLength) {
+    if (groupFieldCounter === parentObjectLength) {
         form += `<td><span id="${name}+ErrMsg" style="display:none;">**Please make a selection</span></td></tr>`;        
-        counter = 0;
+        groupFieldCounter = 0;
     }
 }
 
