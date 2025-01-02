@@ -7,36 +7,36 @@
 
 $(document).ready(function () {
 
-    // Display the form
-    let pageContent = $("#home")[0]; // Select 'home' container on the main page     
-    let formObject = initializeFormObject(); // Initialize the form object       
-    pageContent.innerHTML = buildForm(formObject); // Build the form with the form object and dynamically display it on the main page
+    // Display the HTML booking form on the home page
+    let pageContent = $("#home")[0];                // Select 'home' container on the main page     
+    let formObject = initializeFormObject();        // Initialize the form object       
+    pageContent.innerHTML = buildForm(formObject);  // Build the form with the form object and dynamically display it on the main page
 
-    // Handle form submission
+    // Handle the form submission
     $("#myForm").on("submit", function (event) {
         
         // Prevent default form submission behavior
         event.preventDefault();
-        // Validate form data
-        validateForm = validateForm();
         
-        // Send form data to the server if its valid
-        if (validateForm) {
+        // Validate the form data
+        isValidForm = validateForm();
+        
+        // Send the form data to the server if it's valid
+        if (isValidForm) {
             
-            alert("is the form valid? " + validateForm);
+            alert("valid form: " + isValidForm);
             
-            // Select form and create an object containing form fields and their values
+            // Select the form and create an object containing form fields and their values
             let myForm = $("#myForm");
-            let data = new FormData(myForm);
-            console.log("form data: " + data);
+            let formData = new FormData(myForm);            
 
             // Send form data to the server
             $.ajax({
-                url: '/', // URL to which the request is sent
-                method: 'POST', // Method used for the request
-                data: data, // Data being sent to the server
-                processData: false, // Prevent jQuery from converting form data into a query string
-                contentType: false, // Ensure the correct content type is set by the browser
+                url: '/',                       // URL to which the request is sent
+                method: 'POST',                 // Method used for the request
+                data: formData,                 // Data being sent to the server
+                processData: false,             // Prevent jQuery from converting form data into a query string
+                contentType: false,             // Ensure the correct content type is set by the browser
                 success: function (response) {
                     alert('.....Form data sent successfully.....');
                 },
@@ -45,11 +45,11 @@ $(document).ready(function () {
                     console.error(error);
                 }
             });
-
-            // Prevent form submission if the data is invalid
+            
         } else {
+            // Prevent form submission if the data is invalid
             event.preventDefault();
-            alert("is the form valid? " + validateForm);
+            alert("is the form valid? " + isValidForm);
         }
     });
 });

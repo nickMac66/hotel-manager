@@ -83,7 +83,7 @@ function initializeFormFields(fieldObject) {
 function initializeGroupFields(parentObject, groupFieldObject) {
 
     // Increment the counter for each processed group field. 
-    // The counter ensures that an error message is added after the last field
+    // The counter ensures that an error message is added after the last group field
     groupFieldCounter++;
 
     // Get the total number of fields in the parent object
