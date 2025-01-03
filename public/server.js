@@ -12,6 +12,7 @@ const port = 3000;
 
 // Serving static files (HTML, CSS, JS)
 app.use(express.static('public'));
+
 // Defining a route for handling client communication
 app.get('/', (req, res) => {
     console.log("hello from the server");

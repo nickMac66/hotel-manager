@@ -10,9 +10,9 @@
     ],
     "author": "nejma",
     "contributors": [],
-    "main": "public_html/index.html",
+    "main": "public/index.html",
     "scripts": {
-        "start": "node src/server.js"
+        "start": "node public/server.js"
     },
     "license": "ISC",
     "description": "",

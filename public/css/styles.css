@@ -3,8 +3,10 @@ body {
     background-color: background
 }
 
-label {
-    color: orange;
+h1 {
     font-family: monospace;
+    color: orange;
 }
+
+
 
