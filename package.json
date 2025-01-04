@@ -12,7 +12,7 @@
     "contributors": [],
     "main": "public/index.html",
     "scripts": {
-        "start": "node public/server.js"
+        "start": "node server/server.js"
     },
     "license": "ISC",
     "description": "",
