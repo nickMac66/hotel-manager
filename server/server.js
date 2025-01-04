@@ -7,17 +7,19 @@
 
 // server.js
 const express = require('express');
+const path = require('path');
 const app = express();
 const port = 3000;
-
-// Serving static files (HTML, CSS, JS)
-app.use(express.static('public'));
+const index = path.resolve(__dirname, '../public/index.html');
 
 // Defining a route for handling client communication
 app.get('/', (req, res) => {
     console.log("hello from the server");
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(index);
 });
+
+// Serving static files (HTML, CSS, JS)
+app.use(express.static('public'));
 
 // Starting the server
 app.listen(port, () => {

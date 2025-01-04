@@ -10,7 +10,7 @@
     ],
     "author": "nejma",
     "contributors": [],
-    "main": "public/index.html",
+    "main": "server/server.js",
     "scripts": {
         "start": "node server/server.js"
     },
