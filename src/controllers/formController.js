@@ -5,9 +5,7 @@
  * Date: October 16, 2024 
  */
 
-$(document).ready(function () {
-    
-    console.log("hello from formController.js");
+//$(document).ready(function () {    
 
 //    // Display the HTML booking form on the home page
 //    let pageContent = $("#home")[0];                // Select 'home' container on the main page     
@@ -54,4 +52,4 @@ $(document).ready(function () {
 //            alert("is the form valid? " + isValidForm);
 //        }
 //    });
-});
+//});

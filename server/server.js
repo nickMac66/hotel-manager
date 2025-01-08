@@ -10,13 +10,20 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const port = 3000;
-const index = path.resolve(__dirname, '../public/index.html');
+const index = path.resolve(__dirname, '../views/index.ejs');
+//const formController = path.resolve(__dirname, '../src/controllers/formController.js');
+
+// Set EJS as templating engine
+app.set('view engine', 'ejs');
 
 // Defining a route for handling client communication
-app.get('/', (req, res) => {
-    console.log("hello from the server");
-    res.sendFile(index);
+app.get('/', (req, res) => {   
+    console.log("hello from the server");     
+    const {buildForm} = require('../public/models/bookingForm');
+    let html = buildForm();       
+    res.render("index", { html });   
 });
+
 
 // Serving static files (HTML, CSS, JS)
 app.use(express.static('public'));
