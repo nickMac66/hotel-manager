@@ -5,12 +5,14 @@
  * Created On: October 24, 2024
  */
 
-// Valid patterns for validating user input
+// Valid patterns for user input
 const namePattern = /^[a-zA-Z]{1,50}$/;
 const phonePattern = /^\d{10}$/;
 const emailPattern = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
-// Function validates a form
+/*
+ * Function: 
+ */
 function validateForm() {
         
     let isValid = true; // Set the form to be valid    
@@ -38,9 +40,9 @@ function validateForm() {
             isValid = false;            
         } else {
             
-            //******************************************************************
-            // Validate the format of user inputs
-            //******************************************************************
+//******************************************************************************
+// Validate the format of user inputs
+//******************************************************************************
             
             switch (field) {
                 case "fname":

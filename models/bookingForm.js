@@ -27,8 +27,7 @@ let fieldCounter = 1;
 let groupFieldCounter = 0;
 
 /*
- * Function to accept an object containing form data and build a form.
- * @param {Object} formObject - The object containing form field data.
+ * Function to build a form 
  * @returns {string} - The HTML string representing the form
  */
 function buildForm() {
@@ -155,7 +154,14 @@ function initializeFieldValues(fieldObject, fieldAttribute) {
     }
 }
 
-// Function to get user input from form
+/**
+ * Function:    getUserInput
+ * Description: Retrieves user input data from the form fields and returns it as an object
+ * Author:      NicMac
+ * Created on:  October 24, 2024
+ * 
+ * @returns {Object} - An object containing the user input data 
+ */
 function getUserInput() {
 
     // Object containing user input
