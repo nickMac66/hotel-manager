@@ -16,12 +16,17 @@ const index = path.resolve(__dirname, '../views/index.ejs');
 // Set EJS as templating engine
 app.set('view engine', 'ejs');
 
-// Defining a route for handling client communication
-app.get('/', (req, res) => {   
-    console.log("hello from the server");     
-    const {buildForm} = require('../public/models/bookingForm');
-    let html = buildForm();       
-    res.render("index", { html });   
+// Define a route handler for the root URL of the application
+app.get('/', (req, res) => {            
+    
+    // Import the buildForm function 
+    const {buildForm} = require('../models/bookingForm');
+    
+    // Build the HTML form by calling the buildForm function
+    let html = buildForm();         
+    
+    // Render the 'index' view and pass the generated HTML form to it
+    res.render("index", { html });       
 });
 
 
