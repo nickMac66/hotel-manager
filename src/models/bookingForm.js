@@ -27,8 +27,7 @@ let fieldCounter = 1;
 let groupFieldCounter = 0;
 
 /*
- * Function to accept an object containing form data and build a form.
- * @param {Object} formObject - The object containing form field data.
+ * Function to build a form 
  * @returns {string} - The HTML string representing the form
  */
 function buildForm() {
@@ -153,22 +152,6 @@ function initializeFieldValues(fieldObject, fieldAttribute) {
             confirm("invalid field attribute");
             break;
     }
-}
-
-// Function to get user input from form
-function getUserInput() {
-
-    // Object containing user input
-    const userInput = {
-        fname: $("#myForm #fname").val(),
-        lname: $("#myForm #lname").val(),
-        phone: $("#myForm #phone").val(),
-        email: $("#myForm #email").val(),
-        checkin: $("#myForm #checkin").val(),
-        checkout: $("#myForm #checkout").val(),
-        roomType: $('#myForm input[name="roomType"]:checked')
-    };
-    return userInput;
 }
 
 module.exports = {

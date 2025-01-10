@@ -10,9 +10,9 @@
     ],
     "author": "nejma",
     "contributors": [],
-    "main": "server/server.js",
+    "main": "app/app.js",
     "scripts": {
-        "start": "node server/server.js"
+        "start": "node app/app.js"
     },
     "license": "ISC",
     "description": "",

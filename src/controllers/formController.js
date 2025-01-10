@@ -5,6 +5,20 @@
  * Date: October 16, 2024 
  */
 
+const {validateForm} = require('../validation/auth');
+
+/**
+ * Function:    getUserInput
+ * Description: Retrieves user input data from the form fields and returns it as an object
+ * Author:      NicMac
+ * Created on:  October 24, 2024
+ * 
+ * @returns {Object} - An object containing the user input data 
+ */
+function validateFormData() {
+
+    let isValid = true;
+
 //$(document).ready(function () {    
 
 //    // Display the HTML booking form on the home page
@@ -53,3 +67,7 @@
 //        }
 //    });
 //});
+}
+module.exports = {
+    validateFormData    
+};
