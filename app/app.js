@@ -7,6 +7,7 @@
 
 // server.js
 const express = require('express');
+const mysql = require('mysql');
 const path = require('path');
 const bodyParser = require('body-parser');
 const app = express();
@@ -34,23 +35,37 @@ app.post('/', (req, res) => {
     
     // Import the form validation function
     const {validateForm} = require('../src/validation/auth');
+    
+    const fname = req.body.fname;
+    const lname = req.body.lname;
+    const phone = req.body.phone;
+    const email = req.body.email;
+    const checkin = req.body.checkin;
+    const checkout = req.body.checkout;
+    const roomType = req.body.roomType;
 
     // Add the user input data to an array
     let userInput = {
-        fname: req.body.fname,
-        lname: req.body.lname,
-        phone: req.body.phone,
-        email: req.body.email,
-        checkin: req.body.checkin,
-        checkout: req.body.checkout,
-        roomType: req.body.roomType
+        fname: fname,
+        lname: lname,
+        phone: phone,
+        email: email,
+        checkin: checkin,
+        checkout: checkout,
+        roomType: roomType
     };
 
     // Validat user input data
     let validForm = validateForm(userInput);
 
-    if (validForm) {
+    // Add form input to the database
+    if (validForm) {        
         console.log("...valid data...");
+        
+        // Connect to the database
+        const {dbConnect} = require('../src/models/db/dbConnection');
+        const connection = dbConnect();
+        
     } else {
         console.log("!!!invalid data!!!");
     }

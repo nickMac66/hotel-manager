@@ -6,7 +6,7 @@
  */
 
 // Import the mysql module from the server
-const {mysql} = require('../src/server');
+const mysql = require('mysql');
 
 // Function establishes a connection to the database
 function dbConnect() {
@@ -17,7 +17,7 @@ function dbConnect() {
         user: 'root',
         password: '',
         database: 'hotel_manager'
-    });
+    });        
 
     // Connect to the database
     connection.connect(function (err) {
