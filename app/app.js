@@ -34,23 +34,16 @@ app.post('/', (req, res) => {
     
     // Import the form validation function
     const {validateForm} = require('../src/validation/auth');
-    
-    // Get user input data from the form
-    const fname = req.body.fname;
-    const lname = req.body.lname;
-    const phone = req.body.phone;
-    const email = req.body.email;
-    const checkin = req.body.checkin;
-    const checkout = req.body.checkout;
 
     // Add the user input data to an array
     let userInput = {
-        fname: fname,
-        lname: lname,
-        phone: phone,
-        email: email,
-        checkin: checkin,
-        checkout: checkout
+        fname: req.body.fname,
+        lname: req.body.lname,
+        phone: req.body.phone,
+        email: req.body.email,
+        checkin: req.body.checkin,
+        checkout: req.body.checkout,
+        roomType: req.body.roomType
     };
 
     // Validat user input data
@@ -62,8 +55,6 @@ app.post('/', (req, res) => {
         console.log("!!!invalid data!!!");
     }
 });
-
-
 
 // Serving static files (HTML, CSS, JS)
 app.use(express.static('public'));

@@ -153,29 +153,6 @@ function initializeFieldValues(fieldObject, fieldAttribute) {
             break;
     }
 }
-
-/**
- * Function:    getUserInput
- * Description: Retrieves user input data from the form fields and returns it as an object
- * Author:      NicMac
- * Created on:  October 24, 2024
- * 
- * @returns {Object} - An object containing the user input data 
- */
-function getUserInput() {
-
-    // Object containing user input
-    const userInput = {
-        fname: $("#myForm #fname").val(),
-        lname: $("#myForm #lname").val(),
-        phone: $("#myForm #phone").val(),
-        email: $("#myForm #email").val(),
-        checkin: $("#myForm #checkin").val(),
-        checkout: $("#myForm #checkout").val(),
-        roomType: $('#myForm input[name="roomType"]:checked')
-    };
-    return userInput;
-}
 module.exports = {
     buildForm
 };
