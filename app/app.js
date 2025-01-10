@@ -42,8 +42,6 @@ app.post('/', (req, res) => {
     const email = req.body.email;
     const checkin = req.body.checkin;
     const checkout = req.body.checkout;
-//    const roomType = req.body.roomType;
-//    console.log("room type: " + roomType);
 
     // Add the user input data to an array
     let userInput = {

@@ -154,6 +154,8 @@ function initializeFieldValues(fieldObject, fieldAttribute) {
     }
 }
 
+<<<<<<<< HEAD:src/models/bookingForm.js
+========
 /**
  * Function:    getUserInput
  * Description: Retrieves user input data from the form fields and returns it as an object
@@ -176,6 +178,8 @@ function getUserInput() {
     };
     return userInput;
 }
+
+>>>>>>>> 139763433d775be63111b16b57c818699742c350:models/bookingForm.js
 module.exports = {
     buildForm
 };
