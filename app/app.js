@@ -5,10 +5,9 @@
  * Date:        November 23, 2024
  */
 
-// Import express module and create Express server
+// Importing express module and create Express server
 const express = require('express');
 const app = express();
-const bodyParser = require('body-parser');
 
 // Importing routes
 const formRoute = require('../src/routes/forms');

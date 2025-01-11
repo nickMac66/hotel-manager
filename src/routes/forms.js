@@ -15,9 +15,8 @@ const {buildForm} = require('../models/bookingForm');
 // Creating an instance of an Express router
 const router = express.Router();
 
-// Middleware to parse JSON-encoded bodies
+// Middleware to parse JSON & URL-encoded bodies
 router.use(bodyParser.json());
-// Middleware to parse URL-encoded bodies
 router.use(bodyParser.urlencoded({extended: true}));
 
 // Route to display the booking form
