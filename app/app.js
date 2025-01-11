@@ -5,24 +5,21 @@
  * Date:        November 23, 2024
  */
 
-// Import express module and create instance of an Express application
+// Import express module and create Express server
 const express = require('express');
+const app = express();
 
-// Importing the routes
+// Importing routes
 const formRoute = require('../src/routes/forms');
 const authRoute = require('../src/routes/auth');
-
 
 // Define the port number on which the server will listen
 const port = 3000;
 
-// Creating express server
-const app = express();
-
 // Set EJS as templating engine
 app.set('view engine', 'ejs');
 
-// Handling routes request
+// Handling route requests
 app.use('/', formRoute);
 app.use('/', authRoute);
 
