@@ -8,10 +8,10 @@
 // Import express module and create Express server
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
 
 // Importing routes
 const formRoute = require('../src/routes/forms');
-const authRoute = require('../src/routes/auth');
 
 // Define the port number on which the server will listen
 const port = 3000;
@@ -21,7 +21,6 @@ app.set('view engine', 'ejs');
 
 // Handling route requests
 app.use('/', formRoute);
-app.use('/', authRoute);
 
 // Serving static files (HTML, CSS, JS)
 app.use(express.static('public'));
