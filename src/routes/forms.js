@@ -32,16 +32,16 @@ router.post('/', (req, res) => {
     // Get user input data from the form
     const {fname, lname, phone, email, checkin, checkout, roomType} = req.body;
 
-    // Add the user input data to an array
-    const userInput = [
-        fname,
-        lname,
-        phone,
-        email,
-        checkin,
-        checkout,
-        roomType
-    ];
+    // Create a user input object
+    let userInput = {
+        fname: fname,
+        lname: lname,
+        phone: phone,
+        email: email,
+        checkin: checkin,
+        checkout: checkout,
+        roomType: roomType
+    };
 
     // Import function to validate user input
     const {validateForm} = require('../validation/auth');
