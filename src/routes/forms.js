@@ -50,7 +50,7 @@ router.post('/', (req, res) => {
     let isValid = validateForm(userInput);
 
     if (isValid) {
-        res.send('...valid...');
+
     } else {
         res.send('!!!invalid!!!');
     }
