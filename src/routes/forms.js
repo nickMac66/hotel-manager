@@ -27,17 +27,42 @@ router.get('/', (req, res) => {
 });
 
 // Route to handle form submission
-router.post('/', (req, res) => {    
+router.post('/', (req, res) => {
+
     // Get user input data from the form
     const {fname, lname, phone, email, checkin, checkout, roomType} = req.body;
-    console.log("first name:", fname);
-    console.log("last name:", lname);
-    console.log("phone:", phone);
-    console.log("email:", email);
-    console.log("checkin:", checkin);
-    console.log("checkout:", checkout);
-    console.log("room type:", roomType);
-    res.send('Form submitted successfully');
+
+    // Add the user input data to an array
+    const userInput = [
+        fname,
+        lname,
+        phone,
+        email,
+        checkin,
+        checkout,
+        roomType
+    ];
+
+    // Import function to validate user input
+    const {validateForm} = require('../validation/auth');
+
+    // Validate user input
+    let isValid = validateForm(userInput);
+
+    if (isValid) {
+        res.send('...valid...');
+    } else {
+        res.send('!!!invalid!!!');
+    }
+
+    res.send(
+            'first name: ' + fname + '<br>' +
+            'last name: ' + lname + '<br>' +
+            'phone: ' + phone + '<br>' +
+            'email: ' + email + '<br>' +
+            'check in: ' + checkin + '<br>' +
+            'check out: ' + checkout + '<br>' +
+            'room type: ' + roomType);
 });
 
 // Exporting the router module so it can be used in other files

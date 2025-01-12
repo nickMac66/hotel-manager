@@ -43,7 +43,7 @@ app.post('/', (req, res) => {
     const checkout = req.body.checkout;
     const roomType = req.body.roomType;
 
-    // Add the user input data to an array
+    // Add the user input data to an object
     let userInput = {
         fname: fname,
         lname: lname,
