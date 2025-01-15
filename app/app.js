@@ -5,11 +5,11 @@
  * Date:        November 23, 2024
  */
 
-// Importing express module and create Express server
+// Import express module and create Express server
 const express = require('express');
 const app = express();
 
-// Importing routes
+// Import routes
 const formRoute = require('../src/routes/forms');
 
 // Define the port number on which the server will listen
@@ -18,13 +18,13 @@ const port = 3000;
 // Set EJS as templating engine
 app.set('view engine', 'ejs');
 
-// Handling route requests
+// Handle route requests
 app.use('/', formRoute);
 
-// Serving static files (HTML, CSS, JS)
+// Serve static files (HTML, CSS, JS)
 app.use(express.static('public'));
 
-// Starting the server
+// Start the server
 app.listen(port, () => {
     console.log(`Server is listening at http://localhost:${port}`);
 });

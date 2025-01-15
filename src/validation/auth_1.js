@@ -5,69 +5,39 @@
  * Created On: October 24, 2024
  */
 
-// Valid patterns for validating user input
-const namePattern = /^[a-zA-Z]{1,50}$/;
-const phonePattern = /^\d{10}$/;
-const emailPattern = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-
 function validateForm(userInput) {
 
     let isValid = true;
+    console.log("hello from validation");
 
-//******************************************************************************
-// Check for empty input fields
-//******************************************************************************   
-    const noRadioSelection = (userInput.roomType === undefined);
-
-    if (noRadioSelection) {
-        isValid = false;
-    }
-
-    for (let field in userInput) {
-
-        let id = field;
-        let isEmpty = (userInput[field] === "");
-
-        if (isEmpty) {
-//            $(`h5#${id}ErrMsg`).html('**Required field').css("color", "red");
-            isValid = false;
-        } else {
-//******************************************************************************
-// Validate the format of user inputs
-//******************************************************************************
-            switch (field) {
-                case "fname":
-                    if (!namePattern.test(userInput[field])) {
-//                        $(`h5#${field}errorMsg`).html('**Invalid').css("color", "red");
-                        isValid = false;
-                        console.log("invalid fname or lname");
-                    }
-                case "lname":
-                    if (!namePattern.test(userInput[field])) {
-//                        $(`h5#${field}errorMsg`).html('**Invalid').css("color", "red");
-                        isValid = false;
-                        console.log("invalid fname or lname");
-                    }
-                    break;
-                case "phone":
-                    if (!phonePattern.test(userInput[field])) {
-//                        $(`h5#${field}errorMsg`).html('**Invalid').css("color", "red");
-                        isValid = false;
-                        console.log("invalid phone");
-                    }
-                    break;
-                case "email":
-                    if (!emailPattern.test(userInput[field])) {
-//                        $(`h5#${field}errorMsg`).html('**Invalid').css("color", "red");
-                        isValid = false;
-                        console.log("invalid email");
-                    }
-                    break;
-                default:
-                    break;
-            }
+    for (let key in userInput) {
+        switch (key) {
+            case "fname":
+                console.log("current field: " + key);
+                break;
+            case "lname":
+                console.log("current field: " + key);
+                break;
+            case "phone":
+                console.log("current field: " + key);
+                break;
+            case "email":
+                console.log("current field: " + key);
+                break;
+            case "checkin":
+                console.log("current field: " + key);
+                break;
+            case "checkout":
+                console.log("current field: " + key);
+                break;
+            case "roomType":
+                console.log("current field: " + key);
+                break;
+            default :
+                console.log("default");
+                break;
         }
-    }
+    }    
     return isValid;
 }
 module.exports = {
