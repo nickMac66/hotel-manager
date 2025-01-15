@@ -28,17 +28,21 @@ router.get('/', (req, res) => {
 });
 
 // Route to handle form submission
-router.post('/', body('*').notEmpty(), (req, res) => {
-    
+router.post('/',
+        body('*').notEmpty(),   
+        body('phone').isMobilePhone(),
+        body('email').isEmail(),
+        (req, res) => {
+
     const errors = validationResult(req);
-    
-    if(!errors.isEmpty()) {
-        return res.status(400).json({errors: errors.array() });
+
+    if (!errors.isEmpty()) {
+        return res.status(400).json({errors: errors.array()});
     }
-    
+
     console.log(req.body.fname);
-    
-    
+
+
 
 //    // Import function to validate user input
 //    const {validateForm} = require('../validation/auth');
