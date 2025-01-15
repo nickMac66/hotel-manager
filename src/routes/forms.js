@@ -8,6 +8,7 @@
 // Importing Express modules
 const express = require('express');
 const bodyParser = require('body-parser');
+const {body, validationResult} = require('express-validator');
 
 // Importing the buildForm function from the bookingForm module
 const {buildForm} = require('../models/bookingForm');
@@ -27,18 +28,28 @@ router.get('/', (req, res) => {
 });
 
 // Route to handle form submission
-router.post('/', (req, res) => {        
+router.post('/', body('*').notEmpty(), (req, res) => {
     
-    // Import function to validate user input
-    const {validateForm} = require('../validation/auth');
+    const errors = validationResult(req);
     
-    let isValid = validateForm(req);
-    
-    if(isValid) {
-        console.log("...valid...");        
-    } else {
-        console.log("!!!not valid!!!");
+    if(!errors.isEmpty()) {
+        return res.status(400).json({errors: errors.array() });
     }
+    
+    console.log(req.body.fname);
+    
+    
+
+//    // Import function to validate user input
+//    const {validateForm} = require('../validation/auth');
+//    
+//    let isValid = validateForm(req);
+//    
+//    if(isValid) {
+//        console.log("...valid...");        
+//    } else {
+//        console.log("!!!not valid!!!");
+//    }
 });
 // Exporting the router module so it can be used in other files
 module.exports = router;
