@@ -4,48 +4,30 @@
  * Author: NicMac
  * Created On: October 24, 2024
  */
-const express = require('express');
-const {query, matchedData, validationResult} = require('express-validator');
-const bodyParser = require('body-parser');
-const multer = require('multer');
-const upload = multer();
-const app = express();
+const {body, validationResult} = require('express-validator');
+const userValidationRules = () => {
+    return [
+        body('*').notEmpty(),
+        body('phone').isMobilePhone(),
+        // username must be an email
+        body('email').isEmail()
+    ];
+};
 
-// Middleware for parsing application/json
-app.use(bodyParser.json());
-
-// Middleware for parsing application/xwww-
-app.use(bodyParser.urlencoded({extended: true}));
-
-// for parsing multipart/form-data
-app.use(upload.array());
-
-// Middleware to parse incoming request bodies that are in JSON format
-app.use(express.json());
-
-function validateForm(userInput) {
-
-    const formData = Object.entries(userInput.body);
-
-    for (const[key, value] of formData) {
-        console.log(`${key}: ${value}`);
-        if (value === "") {
-            console.log(key + " is empty");
-        }
+const validate = (req, res, next) => {
+    const errors = validationResult(req);
+    if (errors.isEmpty()) {
+        return next();
     }
+    const extractedErrors = [];
+    errors.array().map(err => extractedErrors.push({[err.param]: err.msg}));
 
-    const {fname, lname, phone, email, checkin, checkout, roomType} = userInput.body;
+    return res.status(422).json({
+        errors: extractedErrors
+    });
+};
 
-
-
-    let isValid = true;
-    console.log("hello from validation");
-
-
-
-
-    return isValid;
-}
 module.exports = {
-    validateForm
+    userValidationRules,
+    validate
 };
