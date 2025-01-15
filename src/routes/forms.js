@@ -5,15 +5,16 @@
  * Date:        January 11, 2025
  */
 
-// Importing Express modules
+// Import Express modules
 const express = require('express');
 const bodyParser = require('body-parser');
 const {body, validationResult} = require('express-validator');
 
-// Importing the buildForm function from the bookingForm module
+// Import functions
 const {buildForm} = require('../models/bookingForm');
+const {userValidationRules, validate} = require('../validation/auth');
 
-// Creating an instance of an Express router
+// Create express router
 const router = express.Router();
 
 // Middleware to parse JSON & URL-encoded bodies
@@ -27,41 +28,9 @@ router.get('/', (req, res) => {
     res.render("index", {html});
 });
 
-const {userValidationRules, validate} = require('../validation/auth');
 router.post('/', userValidationRules(), validate, (req, res) => {
     // Get user input data from the form 
     const {fname, lname, phone, email, checkin, checkout} = req.body;
 });
 
-//// Route to handle form submission
-//router.post('/',
-//        [
-//            body('*').notEmpty().withMessage('**required field'),
-//            body('phone').isMobilePhone(),
-//            body('email').isEmail()
-//        ],
-//        (req, res) => {
-//
-//    const errors = validationResult(req);
-//
-//    if (!errors.isEmpty()) {
-//        return res.status(400).json({errors: errors.array()});
-//    }
-//
-//    console.log(req.body.fname);
-//
-//
-//
-////    // Import function to validate user input
-////    const {validateForm} = require('../validation/auth');
-////    
-////    let isValid = validateForm(req);
-////    
-////    if(isValid) {
-////        console.log("...valid...");        
-////    } else {
-////        console.log("!!!not valid!!!");
-////    }
-//});
-// Exporting the router module so it can be used in other files
 module.exports = router;
