@@ -28,6 +28,7 @@ router.get('/', (req, res) => {
     res.render("index", {html});
 });
 
+// Route for booking form submission
 router.post('/booking', formValidationRules(), validate, (req, res) => {        
     // Get user input data from the form 
     const {fname, lname, phone, email, checkin, checkout, roomType} = req.body;        
