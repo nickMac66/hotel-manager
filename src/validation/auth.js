@@ -4,25 +4,46 @@
  * Author: NicMac
  * Created On: October 24, 2024
  */
-const {body, validationResult} = require('express-validator');
-const userValidationRules = () => {
+const {body, matchedData, validationResult} = require('express-validator');
+
+const formValidationRules = () => {
     return [
-        body('*').notEmpty().withMessage('**required field'),
-        body('phone').if(body('phone').notEmpty()).isMobilePhone().withMessage('invalid phone number'),
-        body('email').if(body('email').notEmpty()).isEmail().withMessage('**invalid email')
+        body('*')
+                .trim()
+                .escape()
+                .notEmpty()
+                .withMessage('required field'),
+        body('fname')
+                .isLength({max: 20})
+                .withMessage('max 30 characters'),
+        body('lname')
+                .isLength({max: 20})
+                .withMessage('max 30 characters'),
+        body('phone')
+                .isMobilePhone()
+                .withMessage('not a valid phone number'),
+        body('email')
+                .isEmail()
+                .normalizeEmail()
+                .withMessage('not a valid e-mail address'),
+        body('roomType')
+                .custom(async value => {
+                    if (!value) {
+                        throw new Error('Room type not selected');
+                    }
+                    return true;
+                })
     ];
 };
 
 const validate = (req, res, next) => {
-
     const errors = validationResult(req);
-
     if (!errors.isEmpty()) {
         return res.status(400).json({errors: errors.array()});
     }
 };
 
 module.exports = {
-    userValidationRules,
+    formValidationRules,
     validate
 };

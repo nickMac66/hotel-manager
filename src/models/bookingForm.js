@@ -21,7 +21,7 @@ const formObject = {
 };
 
 // Form field attributes
-let form = `<form id="myForm" action="/" method="post"><table>`;
+let form = `<form id="myForm" action="/booking" method="post"><table>`;
 //let form = `<form id="myForm" method="post"><table>`;
 let label, type, id, name, value;
 let fieldCounter = 1;

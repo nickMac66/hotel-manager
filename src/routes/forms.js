@@ -12,7 +12,7 @@ const {body, validationResult} = require('express-validator');
 
 // Import functions
 const {buildForm} = require('../models/bookingForm');
-const {userValidationRules, validate} = require('../validation/auth');
+const {formValidationRules, validate} = require('../validation/auth');
 
 // Create express router
 const router = express.Router();
@@ -28,9 +28,9 @@ router.get('/', (req, res) => {
     res.render("index", {html});
 });
 
-router.post('/', userValidationRules(), validate, (req, res) => {
+router.post('/booking', formValidationRules(), validate, (req, res) => {        
     // Get user input data from the form 
-    const {fname, lname, phone, email, checkin, checkout} = req.body;
+    const {fname, lname, phone, email, checkin, checkout, roomType} = req.body;        
 });
 
 module.exports = router;
