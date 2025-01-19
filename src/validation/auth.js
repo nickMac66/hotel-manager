@@ -20,16 +20,18 @@ const formValidationRules = () => {
                 .isLength({max: 20})
                 .withMessage('max 30 characters'),
         body('phone')
+                .if((value, {req}) => req.body.phone.trim() !== '')
                 .isMobilePhone()
                 .withMessage('not a valid phone number'),
-        body('email')
+        body('email')     
+                .if((value, {req}) => req.body.email.trim() !== '')
                 .isEmail()
                 .normalizeEmail()
                 .withMessage('not a valid e-mail address'),
         body('roomType')
                 .custom(async value => {
                     if (!value) {
-                        throw new Error('Room type not selected');
+                        throw new Error('required field');
                     }
                     return true;
                 })
