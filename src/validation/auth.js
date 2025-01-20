@@ -66,8 +66,6 @@ const validate = (req, res, next) => {
     }
     next();
 };
-
-
 module.exports = {
     formValidationRules,
     validate

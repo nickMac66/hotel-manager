@@ -11,8 +11,8 @@ const formObject = {
     lname: {label: "Last name", type: "text", id: "lname", name: "lname"},
     phone: {label: "Phone", type: "text", id: "phone", name: "phone"},
     email: {label: "Email", type: "text", id: "email", name: "email"},
-    checkin: {label: "Check in", type: "date", id: "checkin", name: "checkin"},
-    checkout: {label: "Check out", type: "date", id: "checkout", name: "checkout"},
+    checkin: {label: "Check in", type: "date", id: "checkin", name: "checkin", value: "2025-01-01"},
+    checkout: {label: "Check out", type: "date", id: "checkout", name: "checkout", value: "2025-01-02"},
     roomType: {
         basicRoom: {label: "Basic room", type: "radio", id: "basic", name: "roomType", value: "basic"},
         deluxeRoom: {label: "Deluxe room", type: "radio", id: "deluxe", name: "roomType", value: "deluxe"},
@@ -27,7 +27,7 @@ let label, type, id, name, value;
 let fieldCounter = 1;
 let groupFieldCounter = 0;
 
-/*
+/**
  * Function to build a form 
  * @returns {string} - The HTML string representing the form
  */
@@ -49,7 +49,12 @@ function buildForm() {
         if (fieldCounter < formObjectLength) {
             // Build the HTML for the form field
             form += `<tr><th><label for='${id}'>${label}</label></th>`;
-            form += `<td><input type="${type}" id="${id}" name="${name}"></td>`;
+            if (currentField === 'checkin' || currentField === 'checkout') {
+                form += `<td><input type="${type}" id="${id}" name="${name}" value="${value}"></td>`;
+            } else {
+                form += `<td><input type="${type}" id="${id}" name="${name}"></td>`;
+            }
+
             form += `<td><span id="${name}+ErrMsg" style="display:none;">**Required field</span></td></tr>`;
             fieldCounter++;
         }
@@ -61,7 +66,7 @@ function buildForm() {
     return form;
 }
 
-/*
+/**
  * Function to initialize form fields
  * @param {Object} fieldObject - The object containing form field data.
  */
@@ -90,7 +95,7 @@ function initializeFormFields(fieldObject) {
     }
 }
 
-/*
+/**
  * Function to build and initialize form fields for a group field object.
  * @param {Object} parentObject - The parent object containing the group field objects
  * @param {Object} groupFieldObject - The nested object containing grouped form fields
@@ -113,7 +118,7 @@ function initializeGroupFields(parentObject, groupFieldObject) {
 
     // Build the HTML for the form field
     form += `<tr><th><label for='${id}'>${label}</label></th>`;
-    form += `<td><input type="${type}" id="${id}" name="${name}"></td>`;
+    form += `<td><input type="${type}" id="${id}" name="${name}" value="${value}"></td>`;
 
     // Add an error message after the last group field
     if (groupFieldCounter === parentObjectLength) {
@@ -122,7 +127,7 @@ function initializeGroupFields(parentObject, groupFieldObject) {
     }
 }
 
-/*
+/**
  * Function to initialize field values based on their attributes
  * @param {Object} fieldObject - The object containing the form field data.
  * @param {string} fieldAttribute
