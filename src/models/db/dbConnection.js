@@ -8,7 +8,10 @@
 // Import the mysql module from the server
 const mysql = require('mysql');
 
-// Function establishes a connection to the database
+/**
+ * Function to establish a connection to the database.
+ * @returns {Object} connection - Database connection object
+ */
 function dbConnect() {
 
     // Create a database connection object
@@ -28,8 +31,7 @@ function dbConnect() {
             console.log('.....database connected.....');
         }
     });
+    
     return connection;
 }
-
-// Export the dbConnect function so it can be used in other parts of the application
 module.exports = {dbConnect};

@@ -1,6 +1,6 @@
 /*
  * Name:        server.js
- * Description: Express server setup for serving static files and handling routes
+ * Description: Express server 
  * Author:      NicMac
  * Date:        November 23, 2024
  */
@@ -12,7 +12,7 @@ const app = express();
 // Import routes
 const formRoute = require('../src/routes/forms');
 
-// Define the port number on which the server will listen
+// Port number for the server to listen
 const port = 3000;
 
 // Set EJS as templating engine
@@ -21,7 +21,7 @@ app.set('view engine', 'ejs');
 // Handle route requests
 app.use('/', formRoute);
 
-// Serve static files (HTML, CSS, JS)
+// Serve static files 
 app.use(express.static('public'));
 
 // Start the server

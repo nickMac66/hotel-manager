@@ -1,6 +1,6 @@
 /*
  * Name: bookingForm.js
- * Description: JavaScript file contains functions to initialize the booking form and get user input
+ * Description: JavaScript file contains functions to initialize the booking form
  * Author: NicMac
  * Date: October 12, 2024
  */
@@ -22,7 +22,6 @@ const formObject = {
 
 // Form field attributes
 let form = `<form id="myForm" action="/booking" method="post"><table>`;
-//let form = `<form id="myForm" method="post"><table>`;
 let label, type, id, name, value;
 let fieldCounter = 1;
 let groupFieldCounter = 0;
@@ -47,6 +46,7 @@ function buildForm() {
 
         // Prevent an extra field from being displayed
         if (fieldCounter < formObjectLength) {
+            
             // Build the HTML for the form field
             form += `<tr><th><label for='${id}'>${label}</label></th>`;
             form += `<td><input type="${type}" id="${id}" name="${name}"></td>`;
@@ -91,7 +91,7 @@ function initializeFormFields(fieldObject) {
 }
 
 /**
- * Function to build and initialize form fields for a group field object.
+ * Function to build and initialize form fields for a group field object (radio, select elements, etc).
  * @param {Object} parentObject - The parent object containing the group field objects
  * @param {Object} groupFieldObject - The nested object containing grouped form fields
  */

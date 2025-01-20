@@ -1,6 +1,6 @@
 /*
  * Name:        forms.js
- * Description: Route handlers for displaying and submitting booking forms
+ * Description: Route handlers for displaying and submitting booking form
  * Author:      NicMac
  * Date:        January 11, 2025
  */
@@ -23,26 +23,29 @@ router.use(bodyParser.urlencoded({extended: true}));
 
 // Route to display the booking form
 router.get('/', (req, res) => {
-    console.log("hello from the form route");
-    let html = buildForm();    
+    let html = buildForm();
     res.render("index", {html});
 });
 
 // Route for booking form submission
 router.post('/booking', formValidationRules(), validate, (req, res) => {
-// Get user input data from the form 
-    const {fname, lname, phone, email, checkin, checkout, roomType} = req.body;    
-            
 
+    // Import function to connect to the database
+    const {dbConnect} = require('../models/db/dbConnection');
 
-    console.log(
-            "first name: " + fname + "\n" +
-            "last name: " + lname + "\n" +
-            "phone: " + phone + "\n" +
-            "email: " + email + "\n" +
-            "check in: " + checkin + "\n" +
-            "check out: " + checkout + "\n" +
-            "room type: " + roomType
-            );
+    // User input
+    const {fname, lname, phone, email, checkin, checkout, roomType} = req.body;
+
+    // Db connection object
+    const connection = dbConnect();
+
+    // SQL query to insert form data
+    const sql = `INSERT INTO bookings VALUES ('${fname}', '${lname}', '${phone}', '${email}', '${checkin}', '${checkout}', '${roomType}')`;
+
+    connection.query(sql, function (err, result) {
+        if (err)
+            throw err;
+        console.log("1 record inserted");
+    });
 });
 module.exports = router;
