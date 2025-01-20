@@ -49,12 +49,7 @@ function buildForm() {
         if (fieldCounter < formObjectLength) {
             // Build the HTML for the form field
             form += `<tr><th><label for='${id}'>${label}</label></th>`;
-            if (currentField === 'checkin' || currentField === 'checkout') {
-                form += `<td><input type="${type}" id="${id}" name="${name}" value="${value}"></td>`;
-            } else {
-                form += `<td><input type="${type}" id="${id}" name="${name}"></td>`;
-            }
-
+            form += `<td><input type="${type}" id="${id}" name="${name}"></td>`;
             form += `<td><span id="${name}+ErrMsg" style="display:none;">**Required field</span></td></tr>`;
             fieldCounter++;
         }
