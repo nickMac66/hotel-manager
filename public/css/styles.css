@@ -1,6 +1,11 @@
+.container {
+    margin: auto;
+    width: 50%;    
+    border: 3px solid green;
+}
+
 body {
-    background-color: #28282b;
-    align-content: center;
+    background-color: #28282b;    
 }
 
 h1 {
@@ -11,4 +16,10 @@ h1 {
 label {
     color: white;
     font-family: monospace;
+    float: left;
 }
+
+
+
+
+
