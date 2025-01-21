@@ -21,11 +21,16 @@ const router = express.Router();
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended: true}));
 
+// Reference to the booking form
+const bookingForm = buildForm();
+
 // Route to display the booking form
 router.get('/', (req, res) => {
-    let html = buildForm();
-    res.render("index", {html});
+    res.render("index", {bookingForm});
 });
+//router.get('/', (req, res) => {    
+//    res.render("index", {html});
+//});
 
 // Route for booking form submission
 router.post('/booking', formValidationRules(), validate, (req, res) => {

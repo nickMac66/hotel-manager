@@ -155,5 +155,6 @@ function initializeFieldValues(fieldObject, fieldAttribute) {
     }
 }
 module.exports = {
-    buildForm
+    buildForm,
+    form
 };
