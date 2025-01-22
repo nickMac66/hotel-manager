@@ -10,7 +10,7 @@ const express = require('express');
 const app = express();
 
 // Import routes
-const formRoute = require('../src/routes/forms');
+const bookingRoutes = require('../src/routes/bookingRoutes');
 
 // Port number for the server to listen
 const port = 3000;
@@ -19,7 +19,7 @@ const port = 3000;
 app.set('view engine', 'ejs');
 
 // Handle route requests
-app.use('/', formRoute);
+app.use('/', bookingRoutes);
 
 // Serve static files 
 app.use(express.static('public'));

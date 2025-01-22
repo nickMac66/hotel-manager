@@ -22,18 +22,20 @@ router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended: true}));
 
 // Reference to the booking form
-const bookingForm = buildForm();
+const html = buildForm();
 
 // Route to display the booking form
 router.get('/', (req, res) => {
-    res.render("index", {bookingForm});
+    res.render("index", {html});
 });
-//router.get('/', (req, res) => {    
-//    res.render("index", {html});
-//});
+
+// Route to display booking details
+router.get('/bookingDetails', (req, res) => {
+    res.render("index", {html});
+});
 
 // Route for booking form submission
-router.post('/booking', formValidationRules(), validate, (req, res) => {
+router.post('/bookingDetails', formValidationRules(), validate, (req, res) => {
 
     // Import function to connect to the database
     const {dbConnect} = require('../models/db/dbConnection');
@@ -47,6 +49,7 @@ router.post('/booking', formValidationRules(), validate, (req, res) => {
     // SQL query to insert form data
     const sql = `INSERT INTO bookings VALUES ('${fname}', '${lname}', '${phone}', '${email}', '${checkin}', '${checkout}', '${roomType}')`;
 
+    // Query the database
     connection.query(sql, function (err, result) {
         if (err)
             throw err;
