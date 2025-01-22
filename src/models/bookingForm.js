@@ -55,7 +55,7 @@ function buildForm() {
         }
     }
     // Add the submit button and close the form    
-    form += '<tr><td><input type="submit" id="submitButton" name="submitButton"></td></tr>';
+    form += '<tr><td colspan="3"><input type="submit" id="submitButton" name="submitButton"></td></tr>';
     form += '</table></form>';
     fieldCounter = 1;
     return form;

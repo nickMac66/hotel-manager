@@ -1,24 +1,22 @@
-.container {
-    margin: auto;
-    width: 50%;
-    border: 3px solid green;
-    padding: 10px;
-}
-
-table {
-    /*margin: auto;*/
-    width: 50%;
-    border: 3px solid purple;
-    padding: 10px;
-}
-
 body {
     background-color: #28282b;
 }
 
+.container {
+    margin: auto;
+    width: 50%;    
+    padding: 10px;
+}
+
+form td[colspan="3"] {
+    text-align: right;
+}
+
 h1 {
-    font-family: monospace;
     color: orange;
+    font-family: monospace;    
+    padding: 10px;
+    padding-bottom: 0px;
 }
 
 label {
@@ -27,17 +25,27 @@ label {
     float: left;
 }
 
-input[type=text],
 input[type=date] {
+    width: 50%;
+    margin: 10px 0;
+}
+
+input[type=text] {
     width: 100%;
-    margin: 10px 0;    
+    margin: 10px 0;
 }
 
 input[type=radio] {
     margin: 10px 0;    
 }
 
+input[type=submit] {    
+    padding: 5px;
+    margin-right: 5px;
+}
 
-
-
-
+table {
+    /*margin: auto;*/
+    width: 50%;
+    padding: 10px;
+}
