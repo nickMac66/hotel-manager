@@ -49,7 +49,7 @@ router.post('/booking', formValidationRules(), validate, (req, res) => {
     // User input
     const {fname, lname, phone, email, checkin, checkout, roomType} = req.body;    
     const formData = {
-        firstname: fname,
+        fname: fname,
         lname: lname,
         phone: phone,
         email: email,
