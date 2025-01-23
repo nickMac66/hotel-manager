@@ -55,3 +55,10 @@ table {
     width: 50%;
     padding: 10px;    
 }
+
+table[id='bookingDetailsTable'] {
+    color: #F5F5DC;
+    font-family: monospace;
+    text-align: left;
+    
+}
