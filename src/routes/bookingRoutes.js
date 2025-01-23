@@ -22,38 +22,62 @@ router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended: true}));
 
 // Reference to the booking form
-const html = buildForm();
+const bookingForm = buildForm();
 
 // Route to display the booking form
 router.get('/', (req, res) => {
-    res.render("index", {html});
+    const pageTitle = '<h1>hotel booking form</h1>';
+    res.render("index", {html: bookingForm, pageTitle: pageTitle});
 });
+
 
 // Route to display booking details
-router.get('/bookingDetails', (req, res) => {
-    res.render("index", {html});
-});
+//router.get('/booking', (req, res) => {
+//    let pageTitle = '<h1>Booking details</h1>';
+//    res.render("index", {pageTitle});
+//});
 
 // Route for booking form submission
-router.post('/bookingDetails', formValidationRules(), validate, (req, res) => {
+router.post('/booking', formValidationRules(), validate, (req, res) => {
 
     // Import function to connect to the database
     const {dbConnect} = require('../models/db/dbConnection');
 
+    // Import function to display booking details
+    const {displayBooking} = require('../../public/bookingDetails');
+
     // User input
-    const {fname, lname, phone, email, checkin, checkout, roomType} = req.body;
+    const {fname, lname, phone, email, checkin, checkout, roomType} = req.body;    
+    const formData = {
+        firstname: fname,
+        lname: lname,
+        phone: phone,
+        email: email,
+        checkin: checkin,
+        checkout: checkout,
+        roomType: roomType
+    };
 
     // Db connection object
-    const connection = dbConnect();
+//    const connection = dbConnect();
 
     // SQL query to insert form data
     const sql = `INSERT INTO bookings VALUES ('${fname}', '${lname}', '${phone}', '${email}', '${checkin}', '${checkout}', '${roomType}')`;
 
+//    const html = displayBooking();
+//    res.render("index", {html});
+
+
     // Query the database
-    connection.query(sql, function (err, result) {
-        if (err)
-            throw err;
-        console.log("1 record inserted");
-    });
+//    connection.query(sql, function (err, result) {
+//        if (err)
+//            throw err;
+//        console.log("1 record inserted");
+//    });
+
+    const bookingDetails = displayBooking(formData);
+
+    const pageTitle = '<h1>booking details</h1>';
+    res.render("index", {pageTitle: pageTitle, html: bookingDetails});
 });
 module.exports = router;
