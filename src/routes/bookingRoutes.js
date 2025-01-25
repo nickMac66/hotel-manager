@@ -26,7 +26,7 @@ const bookingForm = buildForm();
 
 // Route to display the booking form
 router.get('/', (req, res) => {
-    const pageTitle = '<h1>hotel booking form</h1>';
+    const pageTitle = '<div class="header-container"><h1>Hotel Booking Form</h1><button class="btn"><i class="fa fa-bars"></i></button></div>';    
     res.render("index", {html: bookingForm, pageTitle: pageTitle});
 });
 
