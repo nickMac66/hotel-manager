@@ -36,6 +36,7 @@ displayBooking = (formData) => {
                 break;
         }
     }
+    bookingDetails += '<tr><th><a href="http://localhost:3000"><button id="backButton">Back</button></a></th></tr>';
     bookingDetails += '</table>';
     
     return bookingDetails;
