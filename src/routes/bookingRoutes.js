@@ -26,7 +26,15 @@ const bookingForm = buildForm();
 
 // Route to display the booking form
 router.get('/', (req, res) => {
-    const pageTitle = '<div class="header-container"><h1>Hotel Booking Form</h1><button class="btn"><i class="fa fa-bars"></i></button></div>';    
+    const pageTitle = '\
+                        <div class="header-container">\n\
+                           \n\<h1>Hotel Booking Form</h1>\n\
+                        <div class="dropdown">\n\
+                            <button id="menuButton" class="dropbtn"><i class="fa fa-bars"></i></button>\n\
+                        <div id="myDropdown" class="dropdown-content">\n\
+                            <a href="#">Link 1</a>\n\
+                        </div></div>';
+    
     res.render("index", {html: bookingForm, pageTitle: pageTitle});
 });
 
@@ -47,7 +55,7 @@ router.post('/booking', formValidationRules(), validate, (req, res) => {
     const {displayBooking} = require('../../public/bookingDetails');
 
     // User input
-    const {fname, lname, phone, email, checkin, checkout, roomType} = req.body;    
+    const {fname, lname, phone, email, checkin, checkout, roomType} = req.body;
     const formData = {
         fname: fname,
         lname: lname,
