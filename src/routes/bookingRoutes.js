@@ -34,20 +34,12 @@ const bookingForm = buildForm();
  * It constrcuts the HTML content for the page.
  */
 router.get('/', (req, res) => {
-    const menu = `
-    <div class="header-container">
-        <h1>Hotel Booking Form</h1>
-        <div class="dropdown">
-            <button id="menuButton" class="dropbtn"><i class="fa fa-bars"></i></button>
-            <div id="myDropdown" class="dropdown-content">
-                <a href="#">Link 1</a>
-            </div>
-        </div>
-    </div>
-`;
+
+    // Define the page header
+    const header = "Hotel Booking Form";
 
     // Populate the home page
-    res.render("index", {html: bookingForm, menu});
+    res.render("index", {html: bookingForm, header});
 });
 
 /**
@@ -96,17 +88,9 @@ router.post('/booking', formValidationRules(), validate, (req, res) => {
     // Generate an HTML table displaying booking details
     const bookingDetails = displayBooking(formData);
 
-    const menu = `
-    <div class="header-container">
-        <h1>Booking Details</h1>
-        <div class="dropdown">
-            <button id="menuButton" class="dropbtn"><i class="fa fa-bars"></i></button>
-            <div id="myDropdown" class="dropdown-content">
-                <a href="#">Link 1</a>
-            </div>
-        </div>
-    </div>
-`;
-    res.render("index", {menu, html: bookingDetails});
+    // Define the page header
+    const header = "Hotel Booking Form";
+
+    res.render("index", {header, html: bookingDetails});
 });
 module.exports = router;

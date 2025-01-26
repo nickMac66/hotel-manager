@@ -11,7 +11,16 @@
     <body>
         <div class="container">
 
-            <%- menu %>                     
+            <div class="header-container">
+                <h1><%- header %></h1>
+                <div class="dropdown">
+                    <button id="menuButton" class="dropbtn"><i class="fa fa-bars"></i></button>
+                    <div id="myDropdown" class="dropdown-content">
+                        <a href="#">Link 1</a>
+                    </div>
+                </div>
+            </div>
+
             <%- html %>             
 
         </div>
