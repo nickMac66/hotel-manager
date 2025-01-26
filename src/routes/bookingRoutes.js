@@ -49,25 +49,18 @@ router.get('/', (req, res) => {
  *  and inserts it into the database.
  */
 router.post('/booking', formValidationRules(), validate, (req, res) => {
-    
+
     // Import function to insert form data to the db
     const {insertBooking} = require('../../src/models/db/queries');
+
     // Import function to display booking details
-    const {displayBooking} = require('../../public/bookingDetails');   
+    const {displayBooking} = require('../../public/bookingDetails');
 
     // User input values
-    const { fname, lname, phone, email, checkin, checkout, roomType } = req.body;
-    const formData = {
-        fname: fname,
-        lname: lname,
-        phone: phone,
-        email: email,
-        checkin: checkin,
-        checkout: checkout,
-        roomType: roomType
-    };
-    
-    // Query the db to insert the hotel booking
+    const {fname, lname, phone, email, checkin, checkout, roomType} = req.body;
+    const formData = {fname, lname, phone, email, checkin, checkout, roomType};
+
+    // Query the db to insert the booking details
     insertBooking(formData);
 
     // Generate an HTML table displaying booking details
@@ -76,6 +69,7 @@ router.post('/booking', formValidationRules(), validate, (req, res) => {
     // Define the page header
     const header = "Hotel Booking Form";
 
+    // Render HTML for the booking details page
     res.render("index", {header, html: bookingDetails});
 });
 module.exports = router;
