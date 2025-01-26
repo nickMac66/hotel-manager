@@ -1,3 +1,6 @@
+// Import function to connect to the database
+const {dbConnect} = require('./dbConnection');
+
 /**
  *  Insert booking data
  *  This function handles the insertion of booking form data into the database. 
@@ -5,9 +8,6 @@
  *  and executes the query to insert the data into the bookings table.
  */
 insertBooking = (formData) => {
-
-    // Import function to connect to the database
-    const {dbConnect} = require('./dbConnection');
 
     // Db connection object
     const connection = dbConnect();
