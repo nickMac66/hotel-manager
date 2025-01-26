@@ -24,21 +24,38 @@ router.use(bodyParser.urlencoded({extended: true}));
 // Reference to the booking form
 const bookingForm = buildForm();
 
-// Route to display the booking form
+//******************************************************************************
+// Routes
+//******************************************************************************
+
+/**
+ * Main page
+ * This route handles rendering the main page of the application.
+ * It constrcuts the HTML content for the page.
+ */
 router.get('/', (req, res) => {
-        const pageTitle = '\
-                        <div class="header-container">\n\
-                            <h1>Hotel Booking Form</h1>\n\
-                        <div class="dropdown">\n\
-                            <button id="menuButton" class="dropbtn"><i class="fa fa-bars"></i></button>\n\
-                        <div id="myDropdown" class="dropdown-content">\n\
-                            <a href="#">Link 1</a>\n\
-                        </div></div></div>';
-    
-    res.render("index", {html: bookingForm, pageTitle: pageTitle});
+    const menu = `
+    <div class="header-container">
+        <h1>Hotel Booking Form</h1>
+        <div class="dropdown">
+            <button id="menuButton" class="dropbtn"><i class="fa fa-bars"></i></button>
+            <div id="myDropdown" class="dropdown-content">
+                <a href="#">Link 1</a>
+            </div>
+        </div>
+    </div>
+`;
+
+    // Populate the home page
+    res.render("index", {html: bookingForm, menu});
 });
 
-// Route for booking form submission
+/**
+ *  Booking form submission
+ *  This route handles the submission of the hotel booking form. 
+ *  It collects user inputs from the form fields, processes the data,
+ *  and inserts it into the database.
+ */
 router.post('/booking', formValidationRules(), validate, (req, res) => {
 
     // Import function to connect to the database
@@ -76,9 +93,20 @@ router.post('/booking', formValidationRules(), validate, (req, res) => {
 //        console.log("1 record inserted");
 //    });
 
+    // Generate an HTML table displaying booking details
     const bookingDetails = displayBooking(formData);
 
-    const pageTitle = '<h1>booking details</h1>';
-    res.render("index", {pageTitle: pageTitle, html: bookingDetails});
+    const menu = `
+    <div class="header-container">
+        <h1>Booking Details</h1>
+        <div class="dropdown">
+            <button id="menuButton" class="dropbtn"><i class="fa fa-bars"></i></button>
+            <div id="myDropdown" class="dropdown-content">
+                <a href="#">Link 1</a>
+            </div>
+        </div>
+    </div>
+`;
+    res.render("index", {menu, html: bookingDetails});
 });
 module.exports = router;
