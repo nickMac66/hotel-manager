@@ -30,7 +30,7 @@ let groupFieldCounter = 0;
  * Function to build a form 
  * @returns {string} - The HTML string representing the form
  */
-function buildForm() {
+buildForm = () => {
 
     // Access each form field
     for (let currentField in formObject) {
@@ -65,7 +65,7 @@ function buildForm() {
  * Function to initialize form fields
  * @param {Object} fieldObject - The object containing form field data.
  */
-function initializeFormFields(fieldObject) {
+initializeFormFields = (fieldObject) => {
 
     // Access the field object keys
     for (let fieldKey in fieldObject) {
@@ -95,7 +95,7 @@ function initializeFormFields(fieldObject) {
  * @param {Object} parentObject - The parent object containing the group field objects
  * @param {Object} groupFieldObject - The nested object containing grouped form fields
  */
-function initializeGroupFields(parentObject, groupFieldObject) {
+initializeGroupFields = (parentObject, groupFieldObject) => {
 
     // Increment the counter for each processed group field. 
     // The counter ensures that an error message is added after the last group field
@@ -127,7 +127,7 @@ function initializeGroupFields(parentObject, groupFieldObject) {
  * @param {Object} fieldObject - The object containing the form field data.
  * @param {string} fieldAttribute
  */
-function initializeFieldValues(fieldObject, fieldAttribute) {
+initializeFieldValues = (fieldObject, fieldAttribute) => {
 
     // Value of the current field attribute
     let fieldAttributeValue = fieldObject[fieldAttribute];

@@ -1,6 +1,11 @@
+/**
+ *  Handle dropdown menu interactions
+ *  This script manages the behavior of the dropdown menu in the header.
+ *  It toggles the visibility of the menu when the button is clicked,
+ *  and closes the menu if the user clicks outside of it.
+ */
 $(document).ready(function () {
     $("#menuButton").click(function () {
-//        alert("menu clicked");
         document.getElementById("myDropdown").classList.toggle("show");
     });
 

@@ -12,7 +12,7 @@ const mysql = require('mysql');
  * Function to establish a connection to the database.
  * @returns {Object} connection - Database connection object
  */
-function dbConnect() {
+dbConnect = () => {
 
     // Create a database connection object
     const connection = mysql.createConnection({

@@ -1,3 +1,8 @@
+/**
+ *  Display booking details
+ *  This function generates an HTML table displaying the booking details 
+ *  and returns the complete HTML table as a string.
+ */
 displayBooking = (formData) => {
     
     // Table to display booking details
@@ -31,7 +36,7 @@ displayBooking = (formData) => {
             case "roomType":
                 bookingDetails += '<tr><th>Room type: ' + userInput + '</th></tr>';
                 break;
-            default :
+            default:
                 bookingDetails = "<tr><th>Invalid</th></tr>";
                 break;
         }
