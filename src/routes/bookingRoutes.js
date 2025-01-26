@@ -17,15 +17,15 @@ const {formValidationRules, validate} = require('../validation/auth');
 // Create express router
 const router = express.Router();
 
+// Reference to the booking form
+const bookingForm = buildForm();
+
 // Middleware to parse JSON & URL-encoded bodies
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended: true}));
 
-// Reference to the booking form
-const bookingForm = buildForm();
-
 //******************************************************************************
-// Routes
+// Route handlers
 //******************************************************************************
 
 /**
@@ -49,15 +49,14 @@ router.get('/', (req, res) => {
  *  and inserts it into the database.
  */
 router.post('/booking', formValidationRules(), validate, (req, res) => {
-
-    // Import function to connect to the database
-    const {dbConnect} = require('../models/db/dbConnection');
-
+    
+    // Import function to insert form data to the db
+    const {insertBooking} = require('../../src/models/db/queries');
     // Import function to display booking details
-    const {displayBooking} = require('../../public/bookingDetails');
+    const {displayBooking} = require('../../public/bookingDetails');   
 
-    // User input
-    const {fname, lname, phone, email, checkin, checkout, roomType} = req.body;
+    // User input values
+    const { fname, lname, phone, email, checkin, checkout, roomType } = req.body;
     const formData = {
         fname: fname,
         lname: lname,
@@ -67,23 +66,9 @@ router.post('/booking', formValidationRules(), validate, (req, res) => {
         checkout: checkout,
         roomType: roomType
     };
-
-    // Db connection object
-//    const connection = dbConnect();
-
-    // SQL query to insert form data
-    const sql = `INSERT INTO bookings VALUES ('${fname}', '${lname}', '${phone}', '${email}', '${checkin}', '${checkout}', '${roomType}')`;
-
-//    const html = displayBooking();
-//    res.render("index", {html});
-
-
-    // Query the database
-//    connection.query(sql, function (err, result) {
-//        if (err)
-//            throw err;
-//        console.log("1 record inserted");
-//    });
+    
+    // Query the db to insert the hotel booking
+    insertBooking(formData);
 
     // Generate an HTML table displaying booking details
     const bookingDetails = displayBooking(formData);
