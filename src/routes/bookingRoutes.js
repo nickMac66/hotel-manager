@@ -26,24 +26,17 @@ const bookingForm = buildForm();
 
 // Route to display the booking form
 router.get('/', (req, res) => {
-    const pageTitle = '\
+        const pageTitle = '\
                         <div class="header-container">\n\
-                           \n\<h1>Hotel Booking Form</h1>\n\
+                            <h1>Hotel Booking Form</h1>\n\
                         <div class="dropdown">\n\
                             <button id="menuButton" class="dropbtn"><i class="fa fa-bars"></i></button>\n\
                         <div id="myDropdown" class="dropdown-content">\n\
                             <a href="#">Link 1</a>\n\
-                        </div></div>';
+                        </div></div></div>';
     
     res.render("index", {html: bookingForm, pageTitle: pageTitle});
 });
-
-
-// Route to display booking details
-//router.get('/booking', (req, res) => {
-//    let pageTitle = '<h1>Booking details</h1>';
-//    res.render("index", {pageTitle});
-//});
 
 // Route for booking form submission
 router.post('/booking', formValidationRules(), validate, (req, res) => {
