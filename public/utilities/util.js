@@ -1,5 +1,5 @@
 /**
- *  Handle dropdown menu interactions
+ *  Dropdown menu functionality
  *  This script manages the behavior of the dropdown menu in the header.
  *  It toggles the visibility of the menu when the button is clicked,
  *  and closes the menu if the user clicks outside of it.

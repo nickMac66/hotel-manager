@@ -5,7 +5,7 @@
  * Date: October 18, 2024 
  */
 
-// Import the mysql module from the server
+// Import the mysql module 
 const mysql = require('mysql');
 
 /**

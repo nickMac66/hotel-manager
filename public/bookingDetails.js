@@ -8,9 +8,10 @@ displayBooking = (formData) => {
     // Table to display booking details
     let bookingDetails = '<table id="bookingDetailsTable">';
 
+    // Access user input values from the form fields
     for (let formField in formData) {
 
-        // User input values
+        // User input values 
         userInput = formData[formField];
         
         // Build the table to display booking details
@@ -41,6 +42,7 @@ displayBooking = (formData) => {
                 break;
         }
     }
+    // Include a 'back' button and close the table
     bookingDetails += '<tr><th><a href="http://localhost:3000"><button id="backButton">Back</button></a></th></tr>';
     bookingDetails += '</table>';
     

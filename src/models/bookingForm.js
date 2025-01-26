@@ -150,10 +150,10 @@ initializeFieldValues = (fieldObject, fieldAttribute) => {
             value = fieldAttributeValue;
             break;
         default:
-            confirm("invalid field attribute");
+            console.warn("invalid field attribute");
             break;
     }
-}
+};
 module.exports = {
     buildForm,
     form

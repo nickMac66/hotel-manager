@@ -31,7 +31,6 @@ router.use(bodyParser.urlencoded({extended: true}));
 /**
  * Main page
  * This route handles rendering the main page of the application.
- * It constrcuts the HTML content for the page.
  */
 router.get('/', (req, res) => {
 
