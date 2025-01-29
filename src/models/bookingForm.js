@@ -36,7 +36,7 @@ buildForm = () => {
             switch (key) {
                 case "label":
                     const label = fieldObject[key];
-                    form += `<tr><th><label for='${fieldObject.id}'></label></th>`;
+                    form += `<tr><th><label for='${fieldObject.id}'>${label}</label></th>`;
                     break;
                 case "input":
                     form += `<td><input type='${fieldObject.input}' id='${fieldObject.id}' name='${fieldObject.name}'</td>`;
