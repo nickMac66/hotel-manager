@@ -10,14 +10,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const {body, validationResult} = require('express-validator');
 
-// Import booking class
-const Booking = require('../models/booking');
-
-// Import validation
+// Import functions
+const {buildForm} = require('../models/bookingForm');
 const {formValidationRules, validate} = require('../validation/auth');
 
 // Create express router
 const router = express.Router();
+
+// Reference to the booking form
+const bookingForm = buildForm();
 
 // Middleware to parse JSON & URL-encoded bodies
 router.use(bodyParser.json());
@@ -32,11 +33,11 @@ router.use(bodyParser.urlencoded({extended: true}));
  * This route handles rendering the main page of the application.
  */
 router.get('/', (req, res) => {
-    const {buildForm} = require('../models/bookingForm');
-    // Define the HTML page header
-    const header = "hotel booking form";
-    // Display the HTML hotel booking form
-    const bookingForm = buildForm();
+
+    // Define the page header
+    const header = "Hotel Booking Form";
+
+    // Populate the home page
     res.render("index", {html: bookingForm, header});
 });
 
