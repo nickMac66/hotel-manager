@@ -43,13 +43,13 @@ const formValidationRules = () => {
                 .withMessage('not a valid e-mail address'),
 
         // Ensure a room type is selected
-        body('roomType')
-                .custom(async value => {
-                    if (!value) {
-                        throw new Error('required field');
-                    }
-                    return true;
-                })
+        // body('roomType')
+        //         .custom(async value => {
+        //             if (!value) {
+        //                 throw new Error('required field');
+        //             }
+        //             return true;
+        //         })
     ];
 };
 

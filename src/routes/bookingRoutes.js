@@ -31,13 +31,16 @@ router.use(bodyParser.urlencoded({extended: true}));
  * Main page
  * This route handles rendering the main page of the application.
  */
-router.get('/', (req, res) => {
-    const {buildForm} = require('../models/bookingForm');
-    // Define the HTML page header
-    const header = "hotel booking form";
-    // Display the HTML hotel booking form
-    const bookingForm = buildForm();
-    res.render("index", {html: bookingForm, header});
+router.get('/', (req, res) => {    
+    const {mongoConnect} = require('../models/db/mongoDB');
+    mongoConnect();
+
+    // const {buildForm} = require('../models/bookingForm');
+    // // Define the HTML page header
+    // const header = "hotel booking form";
+    // // Display the HTML hotel booking form
+    // const bookingForm = buildForm();
+    // res.render("index", {html: bookingForm, header});
 });
 
 /**

@@ -31,7 +31,13 @@ buildForm = () => {
         
         // Initialize attributes for the current form field
         for (let key in fieldObject) {
-            console.log("attribute: " + key);
+            // console.log("attribute: " + key);
+            // console.log("attribute value: " + fieldObject[key]);
+            
+            
+            if(typeof fieldObject[key] === 'object') {
+                // console.log("radio value: " + fieldObject[key]);
+            }
 
             switch (key) {
                 case "label":
@@ -41,7 +47,7 @@ buildForm = () => {
                 case "input":
                     form += `<td><input type='${fieldObject.input}' id='${fieldObject.id}' name='${fieldObject.name}'</td>`;
                     form += `<td><span id='${fieldObject.id}+ErrMsg' style='display:none;'>**Required field</span></td></tr>`;
-                    break;
+                    break;                                
                 default:
                     "invalid attribute";
             }
