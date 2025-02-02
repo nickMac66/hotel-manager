@@ -35,6 +35,7 @@ router.get('/', (req, res) => {
     const {mongoConnect} = require('../models/db/dbConnection');
     mongoConnect();
 
+
     // const {buildForm} = require('../models/bookingForm');
     // // Define the HTML page header
     // const header = "hotel booking form";
