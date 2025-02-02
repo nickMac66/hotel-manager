@@ -1,5 +1,5 @@
 // Import function to connect to the database
-const {dbConnect} = require('./dbConnection');
+const { mongoConnect } = require('./dbConnection');
 
 /**
  *  Insert booking data
@@ -7,21 +7,22 @@ const {dbConnect} = require('./dbConnection');
  *  It collects user inputs from the form fields, constructs an SQL query,
  *  and executes the query to insert the data into the bookings table.
  */
-insertBooking = (formData) => {
 
-    // Db connection object
-    const connection = dbConnect();
+// Connect to the database
+const client = mongoConnect();
 
-    const {fname, lname, phone, email, checkin, checkout, roomType} = formData;
+insertBooking = (req) => {
+       
+    // User input values
+    const { fname, lname, phone, email, checkin, checkout, roomType } = req.body;
 
-    // SQL query to insert form data
-    const sql = `INSERT INTO bookings VALUES ('${fname}', '${lname}', '${phone}', '${email}', '${checkin}', '${checkout}', '${roomType}')`;
-
-    // Query the database
-    connection.query(sql, function (err, result) {
-        if (err)
-            throw err;
-        console.log("1 record inserted");
+    client.db('nickemacdonald').collection('bookings').insertOne({
+        fname: fname,
+        lname: lname,
+        phone: phone,
+        email: email, 
+        checkin: checkin,
+        checkout: checkout
     });
 };
 

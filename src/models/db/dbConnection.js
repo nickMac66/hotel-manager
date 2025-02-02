@@ -27,13 +27,7 @@ mongoConnect = () => {
             await client.connect();
             // Send a ping to confirm a successful connection
             await client.db("admin").command({ ping: 1 });
-            console.log("Pinged your deployment. You successfully connected to MongoDB!");            
-            await client.db('nickemacdonald').collection('bookings').insertOne({
-                fname: "Rowdy",
-                lname: "Roddy Piper",
-                phone: "555-555-5555",
-                email: "rod@yahoo.com"
-            });
+            console.log("Pinged your deployment. You successfully connected to MongoDB!");                        
         } finally {
             // Ensures that the client will close when you finish/error
             await client.close();
