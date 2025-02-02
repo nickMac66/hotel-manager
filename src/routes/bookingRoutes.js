@@ -32,7 +32,7 @@ router.use(bodyParser.urlencoded({extended: true}));
  * This route handles rendering the main page of the application.
  */
 router.get('/', (req, res) => {    
-    const {mongoConnect} = require('../models/db/mongoDB');
+    const {mongoConnect} = require('../models/db/dbConnection');
     mongoConnect();
 
     // const {buildForm} = require('../models/bookingForm');
