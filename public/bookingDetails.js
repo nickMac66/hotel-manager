@@ -11,6 +11,7 @@ displayBooking = (req) => {
     // Form field key values
     let formData = req.body;    
 
+    // Build a table to display the booking details
     for (let key in formData) {
         
         let value = formData[key];

@@ -12,29 +12,28 @@ const client = mongoConnect();
  *  and executes the query to insert the data into the bookings table.
  */
 
-insertBooking = (req) => {
+const insertBooking = async (req) => {
 
-    // User input values
-    const { fname, lname, phone, email, checkin, checkout, roomType } = req.body;
+    // Create an object to store the booking data
+    const bookingData = {};
+    
+    // Add each form field to the booking data object
+    for(let key in req.body) {
+        bookingData[key] = req.body[key];        
+    }
 
-    client.db('nickemacdonald').collection('bookings').insertOne({
-        fname: fname,
-        lname: lname,
-        phone: phone,
-        email: email,
-        checkin: checkin,
-        checkout: checkout
-    });
+    // Insert the booking data into the database
+    await client.db('nickemacdonald').collection('bookings').insertOne(bookingData);    
 
     // Close the client connection
     client.close();
     console.log("db connection closed");
 };
 
-const getBookings = async () => {    
+const getBookings = async () => {
 
-    const bookings = await client.db('nickemacdonald').collection('bookings').find().toArray();    
-        
+    const bookings = await client.db('nickemacdonald').collection('bookings').find().toArray();
+
     return bookings;
 };
 

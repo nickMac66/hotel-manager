@@ -2,8 +2,10 @@ const { getBookings } = require('../src/models/db/queries');
 
 const listBookings = async (req) => {
     
+    // Create a table to display booking details
     let bookingList = "<table>";
 
+    // Get all bookings from the database
     let bookings = await getBookings();
 
     // Build a table to display the bookings
