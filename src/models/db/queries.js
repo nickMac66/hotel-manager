@@ -1,4 +1,5 @@
 // Import function to connect to the database
+const { MongoClient } = require('mongodb');
 const { mongoConnect } = require('./dbConnection');
 
 /**
@@ -12,20 +13,24 @@ const { mongoConnect } = require('./dbConnection');
 const client = mongoConnect();
 
 insertBooking = (req) => {
-       
-    // User input values
-    const { fname, lname, phone, email, checkin, checkout, roomType } = req.body;
 
-    client.db('nickemacdonald').collection('bookings').insertOne({
-        fname: fname,
-        lname: lname,
-        phone: phone,
-        email: email, 
-        checkin: checkin,
-        checkout: checkout
-    });
+    // User input values
+    // const { fname, lname, phone, email, checkin, checkout, roomType } = req.body;
+
+    // client.db('nickemacdonald').collection('bookings').insertOne({
+    //     fname: fname,
+    //     lname: lname,
+    //     phone: phone,
+    //     email: email,
+    //     checkin: checkin,
+    //     checkout: checkout
+    // });
+
+    // Close the client connection
+    client.close();
+    console.log("db connection closed");
 };
 
 module.exports = {
-    insertBooking
+    insertBooking    
 };

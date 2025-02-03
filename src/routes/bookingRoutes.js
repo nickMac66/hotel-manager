@@ -32,12 +32,13 @@ router.use(bodyParser.urlencoded({ extended: true }));
  * This route handles rendering the main page of the application.
  */
 router.get('/', (req, res) => {
+    
     const { buildForm } = require('../models/bookingForm');
-    // Define the HTML page header
+    // Define the HTML page header    
     const header = "hotel booking form";
     // Display the HTML hotel booking form
     const bookingForm = buildForm();
-    res.render("index", { html: bookingForm, header });
+    res.render("index", { header, html: bookingForm});
 });
 
 /**
@@ -46,7 +47,7 @@ router.get('/', (req, res) => {
  *  It collects user inputs from the form fields, processes the data,
  *  and inserts it into the database.
  */
-router.post('/booking', formValidationRules(), validate, (req, res) => {    
+router.post('/booking', formValidationRules(), validate, (req, res) => {  
 
     // Import function to insert form data to the db
     const { insertBooking } = require('../../src/models/db/queries');
@@ -54,20 +55,16 @@ router.post('/booking', formValidationRules(), validate, (req, res) => {
     // Import function to display booking details
     const { displayBooking } = require('../../public/bookingDetails');    
 
-    // User input values
-    // const { fname, lname, phone, email, checkin, checkout, roomType } = req.body;
-    // const formData = { fname, lname, phone, email, checkin, checkout, roomType };
-
     // Query the db to insert the booking details
     insertBooking(req);
 
-    // Generate an HTML table displaying booking details
-    // const bookingDetails = displayBooking(formData);
+    // Generate an HTML table displaying booking details    
+    const bookingDetails = displayBooking(req);
 
     // Define the page header
-    // const header = "Hotel Booking Form";
+    const header = "booking details";
 
     // Render HTML for the booking details page
-    // res.render("index", { header, html: bookingDetails });
+    res.render("index", { header: header, html: bookingDetails });
 });
 module.exports = router;

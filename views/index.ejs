@@ -1,31 +1,34 @@
 <html>
-    <head>
-        <title></title>
-        <link rel="stylesheet" type="text/css" href="/css/styles.css"> 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>     
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div class="container">
 
-            <div class="header-container">
-                <h1><%- header %></h1>
-                <div class="dropdown">
-                    <button id="menuButton" class="dropbtn"><i class="fa fa-bars"></i></button>
-                    <div id="myDropdown" class="dropdown-content">
-                        <a href="#">List all bookings</a>
-                        <a href="#">Update booking</a>
-                        <a href="#">Cancel booking</a>
-                    </div>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="header-container">
+            <h1><%- header %></h1>
+            <div class="dropdown">
+                <button id="menuButton" class="dropbtn"><i class="fa fa-bars"></i></button>
+                <div id="myDropdown" class="dropdown-content">
+                    <a href="#">List all bookings</a>
+                    <a href="#">Update booking</a>
+                    <a href="#">Cancel booking</a>
                 </div>
             </div>
-
-            <%- html %>             
-
         </div>
-        <script src='/utilities/util.js'></script>        
-    </body>
+
+        <%- html %>
+
+    </div>
+    <script src='/utilities/util.js'></script>    
+</body>
+
 </html>

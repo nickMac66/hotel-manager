@@ -28,8 +28,6 @@ form td[colspan="3"] {
 }
 
 label {
-    color: #F5F5DC;
-    font-family: monospace;
     float: left;
 }
 
@@ -43,9 +41,9 @@ input[type=text] {
     margin: 10px 0;
 }
 
-input[type=radio] {
+/* input[type=radio] {
     margin: 10px 0;
-}
+} */
 
 input[type=submit] {
     font-family: monospace;
@@ -59,6 +57,8 @@ button[id=backButton] {
 }
 
 table {
+    color: #F5F5DC;
+    font-family: monospace;
     border: 3px solid #F5F5DC;
     font-size: 14px;
     margin: auto;
@@ -84,7 +84,8 @@ table[id='bookingDetailsTable'] {
 }
 
 /* Dropdown button on hover & focus */
-.dropbtn:hover, .dropbtn:focus {
+.dropbtn:hover,
+.dropbtn:focus {
     background-color: #2980B9;
 }
 
@@ -100,7 +101,7 @@ table[id='bookingDetailsTable'] {
     position: absolute;
     background-color: #f1f1f1;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
 
@@ -119,5 +120,5 @@ table[id='bookingDetailsTable'] {
 
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {
-    display:block;
+    display: block;
 }
