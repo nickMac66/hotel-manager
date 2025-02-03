@@ -2,7 +2,7 @@
  * Name: dbConnection.js
  * Description: Establishes a connection to the MongoDB database
  * Author: NicMac
- * Date: October 18, 2024 
+ * Date: February 1, 2025
  */
 
 const Booking = require('../booking');

@@ -30,15 +30,36 @@ router.use(bodyParser.urlencoded({ extended: true }));
 /**
  * Main page
  * This route handles rendering the main page of the application.
+ * It displays the hotel booking form.
  */
 router.get('/', (req, res) => {
-    
+
     const { buildForm } = require('../models/bookingForm');
     // Define the HTML page header    
     const header = "hotel booking form";
     // Display the HTML hotel booking form
     const bookingForm = buildForm();
-    res.render("index", { header, html: bookingForm});
+    res.render("index", { header, html: bookingForm });
+});
+
+/**
+ * Booking list
+ * This route handles rendering the booking list page of the application.
+ * It displays a list of all bookings in the database.
+ */
+router.get('/bookingList', async (req, res) => {
+
+    // Import function to get all hotel bookings
+    const { listBookings } = require('../../public/bookingList');
+    
+    // Define the HTML page header    
+    const header = "all hotel bookings";
+
+    // Display the HTML hotel booking form
+    let bookingList = await listBookings();    
+
+    // Render the booking list page
+    res.render("index", { header, html: bookingList });
 });
 
 /**
@@ -47,13 +68,13 @@ router.get('/', (req, res) => {
  *  It collects user inputs from the form fields, processes the data,
  *  and inserts it into the database.
  */
-router.post('/booking', formValidationRules(), validate, (req, res) => {  
+router.post('/booking', formValidationRules(), validate, (req, res) => {
 
     // Import function to insert form data to the db
     const { insertBooking } = require('../../src/models/db/queries');
 
     // Import function to display booking details
-    const { displayBooking } = require('../../public/bookingDetails');    
+    const { displayBooking } = require('../../public/bookingDetails');
 
     // Query the db to insert the booking details
     insertBooking(req);
