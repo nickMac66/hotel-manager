@@ -8,7 +8,6 @@
 // Import Express modules
 const express = require('express');
 const bodyParser = require('body-parser');
-const { body, validationResult } = require('express-validator');
 
 // Import booking class
 const Booking = require('../models/booking');
@@ -34,6 +33,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
  */
 router.get('/', (req, res) => {
 
+    // Import the buildForm function
     const { buildForm } = require('../models/bookingForm');
 
     // Define the HTML page header    
@@ -71,7 +71,7 @@ router.post('/booking', formValidationRules(), validate, async (req, res) => {
     const booking = new Booking();
 
     // Insert the booking data into the database
-    booking.insert(req);
+    await booking.insert(req);
 
     // Define the page header & get booking details
     const { header, bookingDetails } = await booking.getDetails(req);

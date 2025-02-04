@@ -6,66 +6,62 @@
  */
 
 // Import express-validator functions
-const {body, matchedData, validationResult} = require('express-validator');
+const { body, matchedData, validationResult } = require('express-validator');
 
 /**
- * Function to define validation rules for the form.
- * @returns {Array} Array of validation chain middleware for form fields 
+ * Validation rules for the booking form.
+ * @returns {Array} - An array of validation rules.
  */
 const formValidationRules = () => {
     return [
         // Sanitize and ensure all fields are not empty
         body('*')
-                .trim()
-                .escape()
-                .notEmpty()
-                .withMessage('required field'),
+            .trim()
+            .escape()
+            .notEmpty()
+            .withMessage('required field'),
 
         body('fname')
-                .isLength({max: 20})
-                .withMessage('max 30 characters'),
+            .isLength({ max: 20 })
+            .withMessage('max 20 characters'),
 
         body('lname')
-                .isLength({max: 20})
-                .withMessage('max 30 characters'),
+            .isLength({ max: 20 })
+            .withMessage('max 20 characters'),
 
         // Only validate if phone is not empty
         body('phone')
-                .if((value, {req}) => req.body.phone.trim() !== '')
-                .isMobilePhone()
-                .withMessage('not a valid phone number'),
+            .if((value, { req }) => req.body.phone !== '')
+            .isMobilePhone()
+            .withMessage('not a valid phone number'),
 
         // Only validate if email is not empty
         body('email')
-                .if((value, {req}) => req.body.email.trim() !== '')
-                .isEmail()
-                .normalizeEmail()
-                .withMessage('not a valid e-mail address'),
-
-        // Ensure a room type is selected
-        // body('roomType')
-        //         .custom(async value => {
-        //             if (!value) {
-        //                 throw new Error('required field');
-        //             }
-        //             return true;
-        //         })
+            .if((value, { req }) => req.body.email !== '')
+            .isEmail()
+            .normalizeEmail()
+            .withMessage('not a valid e-mail address'),
     ];
 };
 
 /**
- * Function to handle validation result.
+ * Handles validation result.
  * @param {Object} req - Express request object
  * @param {Object} res - Express response object
  * @param {Function} next - Express middleware function to pass control to the next handler
  */
 const validate = (req, res, next) => {
+
+    // Extract validation errors from the request
     const errors = validationResult(req);
+    
+    // If there are validation errors, return a 400 response
     if (!errors.isEmpty()) {
-        return res.status(400).json({errors: errors.array()});
+        return res.status(400).json({ errors: errors.array() });
     }
     next();
 };
+
 module.exports = {
     formValidationRules,
     validate

@@ -62,8 +62,7 @@ class Booking {
         }
         bookingDetails += '<tr><td colspan="3"><a href="http://localhost:3000"><button id="backButton">Back</button></a></td></tr>';
         bookingDetails += "</table>";
-
-        // return {header, bookingDetails};
+        
         return { header, bookingDetails };
     }
 
