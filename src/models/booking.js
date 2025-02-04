@@ -9,7 +9,7 @@ class Booking {
     }
 
     async insert(req) {
-        
+
         const bookingData = {};
 
         for (let key in req.body) {
@@ -23,8 +23,8 @@ class Booking {
     async getDetails(req) {
 
         // Create page header
-        const header = "booking details";
-        
+        const header = "thank you for your booking";
+
         // Create a table to display booking details
         let bookingDetails = "<table>";
 
@@ -45,7 +45,32 @@ class Booking {
         bookingDetails += "</table>";
 
         // return {header, bookingDetails};
-        return bookingDetails;
+        return { header, bookingDetails };
+    }
+
+    async getList(req) {
+
+        // Create page header
+        const header = "booking list";
+
+        // Create a table to display booking details
+        let bookingList = "<table>";
+
+        // Get all bookings from the database    
+        const bookings = await client.db('nickemacdonald').collection('bookings').find().toArray();
+
+        // Build a table to display the bookings
+        bookings.forEach((booking, index) => {
+
+            for (let key in booking) {
+                bookingList += "<tr><td>" + key + "</td><td>" + booking[key] + "</td></tr>";
+            }
+        });
+        // Add a back button to return to the main page and close the table
+        bookingList += '<tr><td colspan="3"><a href="http://localhost:3000"><button id="backButton">Back</button></a></td></tr>';
+        bookingList += "</table>";
+
+        return { header, bookingList };
     }
 }
 
@@ -55,30 +80,30 @@ class Booking {
  *  List all bookings
  *  This function retrieves all bookings from the database and returns an HTML table
  */
-const getList = async (req) => {
+// const getList = async (req) => {
 
-    // Create page header
-    const header = "all hotel bookings";
+//     // Create page header
+//     const header = "all hotel bookings";
 
-    // Create a table to display booking details
-    let bookingList = "<table>";
+//     // Create a table to display booking details
+//     let bookingList = "<table>";
 
-    // Get all bookings from the database    
-    const bookings = await client.db('nickemacdonald').collection('bookings').find().toArray();
+//     // Get all bookings from the database    
+//     const bookings = await client.db('nickemacdonald').collection('bookings').find().toArray();
 
-    // Build a table to display the bookings
-    bookings.forEach((booking, index) => {
+//     // Build a table to display the bookings
+//     bookings.forEach((booking, index) => {
 
-        for (let key in booking) {
-            bookingList += "<tr><td>" + key + "</td><td>" + booking[key] + "</td></tr>";
-        }
-    });
-    // Add a back button to return to the main page and close the table
-    bookingList += '<tr><td colspan="3"><a href="http://localhost:3000"><button id="backButton">Back</button></a></td></tr>';
-    bookingList += "</table>";
+//         for (let key in booking) {
+//             bookingList += "<tr><td>" + key + "</td><td>" + booking[key] + "</td></tr>";
+//         }
+//     });
+//     // Add a back button to return to the main page and close the table
+//     bookingList += '<tr><td colspan="3"><a href="http://localhost:3000"><button id="backButton">Back</button></a></td></tr>';
+//     bookingList += "</table>";
 
-    return { header, bookingList };
-};
+//     return { header, bookingList };
+// };
 
 /**
  *  Display booking details

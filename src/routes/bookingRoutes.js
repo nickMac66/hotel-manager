@@ -51,16 +51,12 @@ router.get('/', (req, res) => {
  */
 router.get('/bookingList', async (req, res) => {
 
-    // Import function to get all hotel bookings
-    const { listBookings } = require('../../public/bookingList');
+    const booking = new Booking();
+    
+    // Define the page header & get booking list
+    const {header, bookingList} = await booking.getList(req);
 
-    // Define the HTML page header    
-    const header = "all hotel bookings";
-
-    // Display the HTML hotel booking form
-    let bookingList = await listBookings();
-
-    // Render the booking list page
+    // Render HTML for the booking list page
     res.render("index", { header, html: bookingList });
 });
 
@@ -71,44 +67,13 @@ router.get('/bookingList', async (req, res) => {
  *  and inserts it into the database.
  */
 router.post('/booking', formValidationRules(), validate, async (req, res) => {
-
-    const booking = new Booking();
     
-    // Insert the booking data into the database
-    // booking.insert(req);    
+    const booking = new Booking();
 
     // Define the page header & get booking details
-    // const {header, bookingDetails} = booking.getDetails(req);
-    const bookingDetails =  await booking.getDetails(req);
-    const header = "thank you for your booking";
-    
+    const { header, bookingDetails } = await booking.getDetails(req);
 
     // Render HTML for the booking details page
     res.render("index", { header: header, html: bookingDetails });    
-
-    // Define the page header 
-    // const header = "booking details";
-
-    // Define the page header & get booking details
-    // const [header, bookingDetails] = booking.getDetails(req);
-
-    // Render HTML for the booking details page
-    // res.render("index", { header: header, html: bookingDetails });
-
-
-    // // Import function to insert form data to the db
-    // const { insertBooking } = require('../../src/models/db/queries');
-
-    // // Import function to display booking details
-    // const { displayBooking } = require('../../public/bookingDetails');
-
-    // // Query the db to insert the booking details
-    // insertBooking(req);
-
-    // // Generate an HTML table displaying booking details    
-    // const bookingDetails = displayBooking(req);
-
-    // // Define the page header
-    // const header = "booking details";    
 });
 module.exports = router;
