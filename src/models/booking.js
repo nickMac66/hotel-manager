@@ -88,12 +88,17 @@ class Booking {
                 if(key === "submitButton") {
                     continue;
                 }
-                
-                bookingList += "<tr><td>" + key + "</td><td>" + booking[key] + "</td></tr>";
+
+                bookingList += "<tr><td>" + key + "</td><td>" + booking[key] + "</td></tr>";                
             }
+            // Add an update and cancel button to each booking
+            bookingList += '<tr><td colspan="3"><a href="http://localhost:3000/bookingUpdate"><button id="updateButton">Update</button></a></td></tr>';
+            bookingList += '<tr><td colspan="3"><a href="http://localhost:3000/bookingCancel"><button id="cancelButton">Cancel</button></a></td></tr>';
+            
             // Add a horizontal rule between bookings
             bookingList += "<tr><td colspan='3'><hr></td></tr>";
-        });        
+        });       
+         
         // Add a back button to return to the main page and close the table
         bookingList += '<tr><td colspan="3"><a href="http://localhost:3000"><button id="backButton">Back</button></a></td></tr>';
         bookingList += "</table>";

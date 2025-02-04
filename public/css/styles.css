@@ -51,9 +51,10 @@ input[type=submit] {
     margin-right: 5px;
 }
 
-button[id=backButton] {
+button {
     float: right;
     padding: 5px;
+    font-family: monospace;
 }
 
 table {
@@ -121,4 +122,10 @@ table[id='bookingDetailsTable'] {
 /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {
     display: block;
+}
+
+button[id=updateButton],
+button[id=cancelButton] {
+    float: right;
+    padding: 5px;
 }
