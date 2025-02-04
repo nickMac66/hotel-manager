@@ -70,6 +70,9 @@ router.post('/booking', formValidationRules(), validate, async (req, res) => {
     
     const booking = new Booking();
 
+    // Insert the booking data into the database
+    booking.insert(req);
+
     // Define the page header & get booking details
     const { header, bookingDetails } = await booking.getDetails(req);
 

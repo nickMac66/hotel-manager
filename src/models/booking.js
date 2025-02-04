@@ -1,25 +1,44 @@
-console.log("booking class!!!!");
+/*
+ * Name: booking.js
+ * Description: Handles booking-related operations such as inserting and retrieving booking details.
+ * Author: NicMac
+ * Date: February 4, 2025
+ */
+
 const { mongoConnect } = require('./db/dbConnection');
 
 let client;
 
 class Booking {
+
     constructor() {
+        // Initialize the MongoDB client connection
         client = mongoConnect();
     }
 
+    /**
+     * Insert booking data into the database
+     * @param {Object} req - Express request object containing booking data
+     */
     async insert(req) {
 
         const bookingData = {};
 
+        // Populate bookingData with values from req.body
         for (let key in req.body) {
             bookingData[key] = req.body[key];
         }
 
+        // Insert the booking data into the database
         await client.db('nickemacdonald').collection('bookings').insertOne(bookingData);
         console.log("Booking inserted");
     }
 
+    /**
+     * Get booking details and format them into an HTML table
+     * @param {Object} req - Express request object containing booking data
+     * @returns {Object} - An object containing the header and booking details
+     */
     async getDetails(req) {
 
         // Create page header
@@ -48,6 +67,11 @@ class Booking {
         return { header, bookingDetails };
     }
 
+    /**
+     * Get a list of all bookings
+     * @param {Object} req - Express request object
+     * @returns {Object} - An object containing the header and booking list
+     */
     async getList(req) {
 
         // Create page header
@@ -67,7 +91,7 @@ class Booking {
             }
             // Add a horizontal rule between bookings
             bookingList += "<tr><td colspan='3'><hr></td></tr>";
-        });
+        });        
         // Add a back button to return to the main page and close the table
         bookingList += '<tr><td colspan="3"><a href="http://localhost:3000"><button id="backButton">Back</button></a></td></tr>';
         bookingList += "</table>";
