@@ -44,6 +44,24 @@ router.get('/', (req, res) => {
 });
 
 /**
+ * Booking update
+ * This route handles rendering the booking update page of the application.
+ * It displays the hotel booking form with the existing booking data.
+ */
+router.get('/bookingUpdate', (req, res) => {
+
+    // Import the buildForm function
+    const { buildForm } = require('../models/bookingForm');
+
+    // Define the HTML page header    
+    const header = "hotel booking form";
+
+    // Display the HTML hotel booking form
+    const bookingForm = buildForm();
+    res.render("index", { header, html: bookingForm });
+});
+
+/**
  * Booking list
  * This route handles rendering the booking list page of the application.
  * It displays a list of all bookings in the database.

@@ -85,6 +85,10 @@ class Booking {
         bookings.forEach((booking, index) => {
 
             for (let key in booking) {
+                if(key === "submitButton") {
+                    continue;
+                }
+                
                 bookingList += "<tr><td>" + key + "</td><td>" + booking[key] + "</td></tr>";
             }
             // Add a horizontal rule between bookings
