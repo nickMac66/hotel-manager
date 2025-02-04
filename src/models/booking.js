@@ -1,8 +1,7 @@
 /*
  * Name: booking.js
  * Description: Handles booking-related operations such as inserting and retrieving booking details.
- * Author: NicMac
- * Date: February 4, 2025
+ * Author: NicMac 
  */
 
 const { mongoConnect } = require('./db/dbConnection');

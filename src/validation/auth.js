@@ -1,8 +1,7 @@
 /**
- * Name: bookingForm.js
+ * Name: auth.js
  * Description: JavaScript file to validate user input
  * Author: NicMac
- * Created On: October 24, 2024
  */
 
 // Import express-validator functions
@@ -13,6 +12,7 @@ const { body, matchedData, validationResult } = require('express-validator');
  * @returns {Array} - An array of validation rules.
  */
 const formValidationRules = () => {
+
     return [
         // Sanitize and ensure all fields are not empty
         body('*')
@@ -57,6 +57,7 @@ const validate = (req, res, next) => {
     
     // If there are validation errors, return a 400 response
     if (!errors.isEmpty()) {
+        
         return res.status(400).json({ errors: errors.array() });
     }
     next();

@@ -1,8 +1,7 @@
 /*
- * Name:        forms.js
+ * Name:        bookingRoutes.js
  * Description: Route handlers for displaying and submitting booking form
- * Author:      NicMac
- * Date:        January 11, 2025
+ * Author:      NicMac 
  */
 
 // Import Express modules
@@ -63,8 +62,7 @@ router.get('/bookingList', async (req, res) => {
 /**
  *  Booking form submission
  *  This route handles the submission of the hotel booking form. 
- *  It collects user inputs from the form fields, processes the data,
- *  and inserts it into the database.
+ *  It collects user inputs from the form fields and inserts it into the database.
  */
 router.post('/booking', formValidationRules(), validate, async (req, res) => {
     
@@ -79,4 +77,5 @@ router.post('/booking', formValidationRules(), validate, async (req, res) => {
     // Render HTML for the booking details page
     res.render("index", { header: header, html: bookingDetails });    
 });
+
 module.exports = router;
