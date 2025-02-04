@@ -35,8 +35,10 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.get('/', (req, res) => {
 
     const { buildForm } = require('../models/bookingForm');
+
     // Define the HTML page header    
     const header = "hotel booking form";
+
     // Display the HTML hotel booking form
     const bookingForm = buildForm();
     res.render("index", { header, html: bookingForm });
@@ -51,12 +53,12 @@ router.get('/bookingList', async (req, res) => {
 
     // Import function to get all hotel bookings
     const { listBookings } = require('../../public/bookingList');
-    
+
     // Define the HTML page header    
     const header = "all hotel bookings";
 
     // Display the HTML hotel booking form
-    let bookingList = await listBookings();    
+    let bookingList = await listBookings();
 
     // Render the booking list page
     res.render("index", { header, html: bookingList });
@@ -68,24 +70,45 @@ router.get('/bookingList', async (req, res) => {
  *  It collects user inputs from the form fields, processes the data,
  *  and inserts it into the database.
  */
-router.post('/booking', formValidationRules(), validate, (req, res) => {
+router.post('/booking', formValidationRules(), validate, async (req, res) => {
 
-    // Import function to insert form data to the db
-    const { insertBooking } = require('../../src/models/db/queries');
+    const booking = new Booking();
+    
+    // Insert the booking data into the database
+    // booking.insert(req);    
 
-    // Import function to display booking details
-    const { displayBooking } = require('../../public/bookingDetails');
-
-    // Query the db to insert the booking details
-    insertBooking(req);
-
-    // Generate an HTML table displaying booking details    
-    const bookingDetails = displayBooking(req);
-
-    // Define the page header
-    const header = "booking details";
+    // Define the page header & get booking details
+    // const {header, bookingDetails} = booking.getDetails(req);
+    const bookingDetails =  await booking.getDetails(req);
+    const header = "thank you for your booking";
+    
 
     // Render HTML for the booking details page
-    res.render("index", { header: header, html: bookingDetails });
+    res.render("index", { header: header, html: bookingDetails });    
+
+    // Define the page header 
+    // const header = "booking details";
+
+    // Define the page header & get booking details
+    // const [header, bookingDetails] = booking.getDetails(req);
+
+    // Render HTML for the booking details page
+    // res.render("index", { header: header, html: bookingDetails });
+
+
+    // // Import function to insert form data to the db
+    // const { insertBooking } = require('../../src/models/db/queries');
+
+    // // Import function to display booking details
+    // const { displayBooking } = require('../../public/bookingDetails');
+
+    // // Query the db to insert the booking details
+    // insertBooking(req);
+
+    // // Generate an HTML table displaying booking details    
+    // const bookingDetails = displayBooking(req);
+
+    // // Define the page header
+    // const header = "booking details";    
 });
 module.exports = router;

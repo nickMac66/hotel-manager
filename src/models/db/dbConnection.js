@@ -2,15 +2,14 @@
  * Name: dbConnection.js
  * Description: Establishes a connection to the MongoDB database
  * Author: NicMac
- * Date: February 1, 2025
+ * Date: February 18, 2025
  */
 
-const Booking = require('../booking');
+// const Booking = require('../booking');
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb+srv://nickemacdonald:hotelmanager@hotelmanager.occa5.mongodb.net/?retryWrites=true&w=majority&appName=HotelManager";
 
-mongoConnect = () => {
-
-    const { MongoClient, ServerApiVersion } = require('mongodb');
-    const uri = "mongodb+srv://nickemacdonald:hotelmanager@hotelmanager.occa5.mongodb.net/?retryWrites=true&w=majority&appName=HotelManager";
+const mongoConnect = () => {
 
     // Create a MongoClient with a MongoClientOptions object to set the Stable API version
     const client = new MongoClient(uri, {
@@ -27,7 +26,7 @@ mongoConnect = () => {
             await client.connect();
             // Send a ping to confirm a successful connection
             await client.db("admin").command({ ping: 1 });
-            console.log("Pinged your deployment. You successfully connected to MongoDB!");                        
+            console.log("Pinged your deployment. You successfully connected to MongoDB!");
         } finally {
             // Ensures that the client will close when you finish/error
             await client.close();
