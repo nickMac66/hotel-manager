@@ -48,7 +48,7 @@ router.get('/', (req, res) => {
  * This route handles rendering the booking update page of the application.
  * It displays the hotel booking form with the existing booking data.
  */
-router.get('/bookingUpdate', (req, res) => {
+router.get('/update', (req, res) => {
 
     // Import the buildForm function
     const { buildForm } = require('../models/bookingForm');

@@ -7,7 +7,6 @@ body {
 }
 
 .container {
-    /*border: 3px solid #30d5c8;*/
     margin: auto;
     width: 50%;
     padding: 10px;
@@ -31,30 +30,28 @@ label {
     float: left;
 }
 
-input[type=date] {
-    width: 50%;
-    margin: 10px 0;
-}
-
+input[type=date],
 input[type=text] {
     width: 100%;
     margin: 10px 0;
 }
 
-/* input[type=radio] {
-    margin: 10px 0;
-} */
+input[type=date] {
+    width: 50%;
+}
 
-input[type=submit] {
+input[type=submit],
+button {
     font-family: monospace;
     padding: 5px;
+}
+
+input[type=submit] {
     margin-right: 5px;
 }
 
 button {
     float: right;
-    padding: 5px;
-    font-family: monospace;
 }
 
 table {
@@ -68,13 +65,10 @@ table {
 }
 
 table[id='bookingDetailsTable'] {
-    color: #F5F5DC;
-    font-family: monospace;
     padding: 10px;
     text-align: left;
 }
 
-/* Dropdown Button */
 .dropbtn {
     background-color: #3498DB;
     color: white;
@@ -84,19 +78,16 @@ table[id='bookingDetailsTable'] {
     cursor: pointer;
 }
 
-/* Dropdown button on hover & focus */
 .dropbtn:hover,
 .dropbtn:focus {
     background-color: #2980B9;
 }
 
-/* The container <div> - needed to position the dropdown content */
 .dropdown {
     position: relative;
     display: inline-block;
 }
 
-/* Dropdown Content (Hidden by Default) */
 .dropdown-content {
     display: none;
     position: absolute;
@@ -106,7 +97,6 @@ table[id='bookingDetailsTable'] {
     z-index: 1;
 }
 
-/* Links inside the dropdown */
 .dropdown-content a {
     color: black;
     padding: 12px 16px;
@@ -114,18 +104,16 @@ table[id='bookingDetailsTable'] {
     display: block;
 }
 
-/* Change color of dropdown links on hover */
 .dropdown-content a:hover {
     background-color: #ddd;
 }
 
-/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
 .show {
     display: block;
 }
 
 button[id=updateButton],
-button[id=cancelButton] {
+button[id=deleteButton] {
     float: right;
     padding: 5px;
 }
