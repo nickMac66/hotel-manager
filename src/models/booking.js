@@ -39,20 +39,22 @@ class Booking {
      * @param {Object} req - Express request object containing booking data
      * @param {string} id - The ID of the booking to update
      */
-    async update(req) {        
+    async update(req) {
 
         const bookingData = {};
+        const id = req.body.bookingId;
 
         // Populate bookingData with values from req.body
         for (let key in req.body) {
             console.log(key);
+
             bookingData[key] = req.body[key];
-        }   
-        
-        const id = bookingData.bookingId;
+
+
+        }
 
         console.log("booking id: ", id);
-        
+
         console.log("bookingData: ", bookingData);
 
         // Update the booking data in the database
@@ -101,8 +103,8 @@ class Booking {
      * @param {Object} id - Express request object containing booking data
      * @returns {Object} - An object containing the header and booking details
      */
-    async getDetailsById(id) {        
-        
+    async getDetailsById(id) {
+
         const bookingDetails = await client.db('nickemacdonald').collection('bookings').findOne({ "_id": new ObjectId(id) });
 
         return { booking: bookingDetails };
