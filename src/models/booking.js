@@ -47,15 +47,19 @@ class Booking {
         for (let key in req.body) {
             console.log(key);
             bookingData[key] = req.body[key];
-        }       
+        }   
+        
+        const id = bookingData.bookingId;
+
+        console.log("booking id: ", id);
         
         console.log("bookingData: ", bookingData);
 
         // Update the booking data in the database
-        // await client.db('nickemacdonald').collection('bookings').updateOne(
-        //     { "_id": new ObjectId(id) },
-        //     { $set: bookingData }
-        // );
+        await client.db('nickemacdonald').collection('bookings').updateOne(
+            { "_id": new ObjectId(id) },
+            { $set: bookingData }
+        );
 
         console.log("Booking updated");
     }
