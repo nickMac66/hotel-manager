@@ -42,9 +42,13 @@ const buildForm = (fieldValues = '') => {
                     form += `<tr><th><label for='${fieldObject.id}'>${label}</label></th>`;
                     break;
                 case "input":
-                    form += `<td><input type='${fieldObject.input}' id='${fieldObject.id}' name='${fieldObject.name}' value='${fieldValues[counter]}'</td>`;
-                    form += `<td><span id='${fieldObject.id}+ErrMsg' style='display:none;'>**Required field</span></td></tr>`;
-                    counter++;
+                    if (fieldValues !== '') {
+                        form += `<td><input type='${fieldObject.input}' id='${fieldObject.id}' name='${fieldObject.name}' value='${fieldValues[counter]}'</td>`;
+                        counter++;
+                    } else {
+                        form += `<td><input type='${fieldObject.input}' id='${fieldObject.id}' name='${fieldObject.name}'</td>`;
+                        form += `<td><span id='${fieldObject.id}+ErrMsg' style='display:none;'>**Required field</span></td></tr>`;
+                    }
                     break;
                 default:
                     "invalid attribute";
