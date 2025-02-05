@@ -5,6 +5,7 @@
  */
 
 const { mongoConnect } = require('./db/dbConnection');
+const { ObjectId } = require('mongodb');
 
 let client;
 
@@ -31,6 +32,32 @@ class Booking {
         // Insert the booking data into the database
         await client.db('nickemacdonald').collection('bookings').insertOne(bookingData);
         console.log("Booking inserted");
+    }
+
+    /**
+     * Update a booking
+     * @param {Object} req - Express request object containing booking data
+     * @param {string} id - The ID of the booking to update
+     */
+    async update(req) {        
+
+        const bookingData = {};
+
+        // Populate bookingData with values from req.body
+        for (let key in req.body) {
+            console.log(key);
+            bookingData[key] = req.body[key];
+        }       
+        
+        console.log("bookingData: ", bookingData);
+
+        // Update the booking data in the database
+        // await client.db('nickemacdonald').collection('bookings').updateOne(
+        //     { "_id": new ObjectId(id) },
+        //     { $set: bookingData }
+        // );
+
+        console.log("Booking updated");
     }
 
     /**
@@ -70,11 +97,8 @@ class Booking {
      * @param {Object} id - Express request object containing booking data
      * @returns {Object} - An object containing the header and booking details
      */
-    async getDetailsById(id) {
-
-        const { ObjectId } = require('mongodb');
-
-        // const bookingDetails = await client.db('nickemacdonald').collection('bookings').findOne({ "_id": new ObjectId(id) });
+    async getDetailsById(id) {        
+        
         const bookingDetails = await client.db('nickemacdonald').collection('bookings').findOne({ "_id": new ObjectId(id) });
 
         return { booking: bookingDetails };

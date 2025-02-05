@@ -4,29 +4,29 @@
  * Author: NicMac
  */
 
+let action;
+
 // Object containing form fields
 const formObject = {
-    form: { id: "bookingForm", action: "/booking", method: "post" },
-    fname: { label: "First name", input: "text", id: "fname", name: "fname" },
-    lname: { label: "Last name", input: "text", id: "lname", name: "lname" },
-    phone: { label: "Phone", input: "text", id: "phone", name: "phone" },
-    email: { label: "Email", input: "text", id: "email", name: "email" },
-    checkin: { label: "Check in", input: "date", id: "checkin", name: "checkin" },
-    checkout: { label: "Check out", input: "date", id: "checkout", name: "checkout" },
-    roomType: {
-        basicRoom: { label: "Basic room", input: "radio", id: "basic", name: "roomType", value: "basic" },
-        deluxeRoom: { label: "Deluxe room", input: "radio", id: "deluxe", name: "roomType", value: "deluxe" },
-        luxuryRoom: { label: "Luxury room", input: "radio", id: "luxury", name: "roomType", value: "luxury" }
-    }
+    fname: { label: "First name", input: "text", id: "fname", name: "fname", value: "" },
+    lname: { label: "Last name", input: "text", id: "lname", name: "lname", value: "" },
+    phone: { label: "Phone", input: "text", id: "phone", name: "phone", value: "" },
+    email: { label: "Email", input: "text", id: "email", name: "email", value: "" },
+    checkin: { label: "Check in", input: "date", id: "checkin", name: "checkin", value: "" },
+    checkout: { label: "Check out", input: "date", id: "checkout", name: "checkout", value: "" },
 };
 
-const buildForm = (fieldValues = '') => {
-
-    // Current field counter to display
-    let counter = 0;
+const buildForm = (bookingDetails = '', formAction) => {
+    console.log("booking details: ", bookingDetails);
 
     // Initialize the form
-    let form = `<form id="${formObject.form.id}" action="${formObject.form.action}" method="${formObject.form.method}"><table>`;
+    let form = `<form id="bookingForm" action="${formAction}" method="post"><table>`;
+    if (formAction === 'update') {        
+        form += `<tr><th><label for='bookingId'>Booking number</label></th>`;
+        form += `<td><input type='text' id='bookingId' name='bookingId' value='${bookingDetails.booking._id}' readonly></td>`;
+        // form += `<td name='id'>${bookingDetails.booking._id}</td></tr>`;
+
+    }
 
     // Initialize an object representing each form field with its attributes
     for (let key in formObject) {
@@ -42,27 +42,33 @@ const buildForm = (fieldValues = '') => {
                     form += `<tr><th><label for='${fieldObject.id}'>${label}</label></th>`;
                     break;
                 case "input":
-                    if (fieldValues !== '') {
-                        form += `<td><input type='${fieldObject.input}' id='${fieldObject.id}' name='${fieldObject.name}' value='${fieldValues[counter]}'</td>`;
-                        counter++;
+
+                    // Populate the form fields with booking details if updating an existing booking
+                    if (formAction === 'update') {
+
+                        let fieldId = fieldObject.id;
+                        let fieldValue = bookingDetails.booking[fieldId];
+
+                        form += `<td><input type='${fieldObject.input}' id='${fieldObject.id}' name='${fieldObject.name}' value='${fieldValue}'</td>`;
+
                     } else {
+                        // No value attribute needed for new booking
                         form += `<td><input type='${fieldObject.input}' id='${fieldObject.id}' name='${fieldObject.name}'</td>`;
                         form += `<td><span id='${fieldObject.id}+ErrMsg' style='display:none;'>**Required field</span></td></tr>`;
                     }
-                    break;
                 default:
                     "invalid attribute";
             }
         }
-
     }
-    // Add the submit button and close the form    
-    form += '<tr><td colspan="3"><input type="submit" action="/bookingDetails" id="submitButton" name="submitButton"></td></tr>';
+    // Add the submit button and close the form
+    form += `<tr><td colspan="3"><input type="submit" action="/${action}" id="submitButton" name="submitButton"></td></tr>`;
 
     return form;
 };
 
 module.exports = {
     buildForm,
-    formObject
+    formObject,
+    action
 };
