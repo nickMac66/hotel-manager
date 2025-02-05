@@ -20,8 +20,11 @@ const formObject = {
     }
 };
 
-buildForm = () => {
-    
+const buildForm = (fieldValues = '') => {
+
+    // Current field counter to display
+    let counter = 0;
+
     // Initialize the form
     let form = `<form id="${formObject.form.id}" action="${formObject.form.action}" method="${formObject.form.method}"><table>`;
 
@@ -39,19 +42,23 @@ buildForm = () => {
                     form += `<tr><th><label for='${fieldObject.id}'>${label}</label></th>`;
                     break;
                 case "input":
-                    form += `<td><input type='${fieldObject.input}' id='${fieldObject.id}' name='${fieldObject.name}'</td>`;
+                    form += `<td><input type='${fieldObject.input}' id='${fieldObject.id}' name='${fieldObject.name}' value='${fieldValues[counter]}'</td>`;
                     form += `<td><span id='${fieldObject.id}+ErrMsg' style='display:none;'>**Required field</span></td></tr>`;
+                    counter++;
                     break;
                 default:
                     "invalid attribute";
             }
         }
+
     }
     // Add the submit button and close the form    
     form += '<tr><td colspan="3"><input type="submit" action="/bookingDetails" id="submitButton" name="submitButton"></td></tr>';
+
     return form;
 };
 
 module.exports = {
-    buildForm
+    buildForm,
+    formObject
 };

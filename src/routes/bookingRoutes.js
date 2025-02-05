@@ -21,6 +21,9 @@ const router = express.Router();
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
 
+// Base URL
+const baseURL = "http://localhost:3000";
+
 //******************************************************************************
 // Route handlers
 //******************************************************************************
@@ -48,17 +51,42 @@ router.get('/', (req, res) => {
  * This route handles rendering the booking update page of the application.
  * It displays the hotel booking form with the existing booking data.
  */
-router.get('/update', (req, res) => {
-
+router.get('/update', async (req, res) => {    
+    
+    // Import the URL module
+    const {URL} = require('url');
+    
     // Import the buildForm function
     const { buildForm } = require('../models/bookingForm');
+     
+    const formObject = require('../models/bookingForm');
 
     // Define the HTML page header    
-    const header = "hotel booking form";
+    const header = "update booking";
+    
+    // Get the booking ID from the URL
+    const url = baseURL + req.url;            
+    let urlObject = new URL(url);
+    let id = urlObject.searchParams.get('id');          
+
+    // Get the booking details by ID
+    const booking = new Booking();
+    const bookingDetails = await booking.getDetailsById(id);    
+    
+    const fieldValues = [
+        bookingDetails.booking.fname,
+        bookingDetails.booking.lname,
+        bookingDetails.booking.phone,
+        bookingDetails.booking.email,
+        bookingDetails.booking.checkin,
+        bookingDetails.booking.checkout
+    ];        
 
     // Display the HTML hotel booking form
-    const bookingForm = buildForm();
+    const bookingForm = buildForm(fieldValues);               
+
     res.render("index", { header, html: bookingForm });
+    // res.render("index", { header, html: bookingForm });
 });
 
 /**

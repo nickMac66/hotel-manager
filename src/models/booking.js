@@ -61,9 +61,25 @@ class Booking {
         }
         bookingDetails += '<tr><td colspan="3"><a href="http://localhost:3000"><button id="backButton">Back</button></a></td></tr>';
         bookingDetails += "</table>";
-        
+
         return { header, bookingDetails };
     }
+
+    /**
+     * Get booking details by 'booking id'
+     * @param {Object} id - Express request object containing booking data
+     * @returns {Object} - An object containing the header and booking details
+     */
+    async getDetailsById(id) {
+
+        const { ObjectId } = require('mongodb');
+
+        // const bookingDetails = await client.db('nickemacdonald').collection('bookings').findOne({ "_id": new ObjectId(id) });
+        const bookingDetails = await client.db('nickemacdonald').collection('bookings').findOne({ "_id": new ObjectId(id) });
+
+        return { booking: bookingDetails };
+    }
+
 
     /**
      * Get a list of all bookings
@@ -79,25 +95,25 @@ class Booking {
         let bookingList = "<table>";
 
         // Get all bookings from the database    
-        const bookings = await client.db('nickemacdonald').collection('bookings').find().toArray();        
+        const bookings = await client.db('nickemacdonald').collection('bookings').find().toArray();
 
         // Build a table to display the bookings
-        bookings.forEach((booking) => {            
+        bookings.forEach((booking) => {
 
             for (let key in booking) {
-                if(key === "submitButton") {
+                if (key === "submitButton") {
                     continue;
                 }
 
-                bookingList += "<tr><td>" + key + "</td><td>" + booking[key] + "</td></tr>";                
-            }            
+                bookingList += "<tr><td>" + key + "</td><td>" + booking[key] + "</td></tr>";
+            }
             // Add an update and delete button to each booking
-            bookingList += `<tr><td colspan="3"><a href="http://localhost:3000/update"><button id="${booking._id}">Update</button></a></td></tr>`;              
-            bookingList += `<tr><td colspan="3"><a href="http://localhost:3000/delete"><button id="${booking._id}">Delete</button></a></td></tr>`;
-            
+            bookingList += `<tr><td colspan="3"><a href="http://localhost:3000/update?id=${booking._id}"><button id="updateButton">Update</button></a></td></tr>`;
+            bookingList += `<tr><td colspan="3"><a href="http://localhost:3000/delete?id=${booking._id}"><button id="deleteButton">Delete</button></a></td></tr>`;
+
             // Add a horizontal rule between bookings
             bookingList += "<tr><td colspan='3'><hr></td></tr>";
-        });       
+        });
 
         // Add a back button to return to the main page and close the table
         bookingList += '<tr><td colspan="3"><a href="http://localhost:3000"><button id="backButton">Back</button></a></td></tr>';
