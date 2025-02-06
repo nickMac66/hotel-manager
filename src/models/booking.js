@@ -101,7 +101,7 @@ class Booking {
             }
             // Add an update and delete button to each booking
             bookingList += `<tr><td colspan="3"><a href="http://localhost:3000/update?id=${booking._id}"><button id="updateButton">Update</button></a></td></tr>`;
-            bookingList += `<tr><td colspan="3"><a href="http://localhost:3000/delete?id=${booking._id}"><button id="deleteButton">Delete</button></a></td></tr>`;
+            // bookingList += `<tr><td colspan="3"><a href="http://localhost:3000/delete?id=${booking._id}"><button id="deleteButton">Delete</button></a></td></tr>`;
 
             // Add a horizontal rule between bookings
             bookingList += "<tr><td colspan='3'><hr></td></tr>";
