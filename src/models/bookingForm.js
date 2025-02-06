@@ -26,7 +26,7 @@ const buildForm = (bookingDetails = {}, formAction) => {
     if (Object.keys(bookingDetails).length > 0) {
         console.log(bookingDetails.book);
         form += `<tr><th><label for='bookingId'>Booking Id</label></th>`;
-        form += `<td><input type='text' id='bookingId' name='bookingId' value='${bookingDetails.booking._id}' readonly></td>`;
+        form += `<td><input type='text' id='bookingId' name='bookingId' value='${bookingDetails.booking._id}'></td>`;
     }
 
     for (let key in formObject) {
