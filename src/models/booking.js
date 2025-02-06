@@ -7,30 +7,18 @@
 const { mongoConnect } = require('./db/dbConnection');
 const { ObjectId } = require('mongodb');
 
-let client;
-
 class Booking {
 
-    constructor() {
-        // Initialize the MongoDB client connection
-        client = mongoConnect();
+    constructor() {        
+        this.client = mongoConnect(); // Initialize the MongoDB client connection
     }
 
     /**
      * Insert booking data into the database
      * @param {Object} req - Express request object containing booking data
      */
-    async insert(req) {
-
-        const bookingData = {};
-
-        // Populate bookingData with values from req.body
-        for (let key in req.body) {
-            bookingData[key] = req.body[key];
-        }
-
-        // Insert the booking data into the database
-        await client.db('nickemacdonald').collection('bookings').insertOne(bookingData);
+    insert(bookingObject) {        
+        this.client.db('nickemacdonald').collection('bookings').insertOne(bookingObject);
         console.log("Booking inserted");
     }
 
@@ -58,7 +46,7 @@ class Booking {
         console.log("bookingData: ", bookingData);
 
         // Update the booking data in the database
-        await client.db('nickemacdonald').collection('bookings').updateOne(
+        await this.client.db('nickemacdonald').collection('bookings').updateOne(
             { "_id": new ObjectId(id) },
             { $set: bookingData }
         );
@@ -105,7 +93,7 @@ class Booking {
      */
     async getDetailsById(id) {
 
-        const bookingDetails = await client.db('nickemacdonald').collection('bookings').findOne({ "_id": new ObjectId(id) });
+        const bookingDetails = await this.client.db('nickemacdonald').collection('bookings').findOne({ "_id": new ObjectId(id) });
 
         return { booking: bookingDetails };
     }
@@ -125,7 +113,7 @@ class Booking {
         let bookingList = "<table>";
 
         // Get all bookings from the database    
-        const bookings = await client.db('nickemacdonald').collection('bookings').find().toArray();
+        const bookings = await this.client.db('nickemacdonald').collection('bookings').find().toArray();
 
         // Build a table to display the bookings
         bookings.forEach((booking) => {
