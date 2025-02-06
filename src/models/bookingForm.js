@@ -16,12 +16,16 @@ const formObject = {
     checkout: { label: "Check out", input: "date", id: "checkout", name: "checkout", value: "" },
 };
 
-const buildForm = (bookingDetails = '', formAction) => {
-    console.log("booking details: ", bookingDetails);
-
-    // Initialize the form
+/**
+ * Builds the booking form HTML
+ * @param {Object} bookingDetails - Existing booking details to pre-fill the form
+ * @param {String} formAction - The form action URL
+ * @returns {String} - The HTML string for the booking form
+ */
+const buildForm = (bookingDetails = {}, formAction) => {    
     let form = `<form id="bookingForm" action="${formAction}" method="post"><table>`;
-    if (formAction === 'update') {        
+    
+    if (formAction === 'update') {
         form += `<tr><th><label for='bookingId'>Booking number</label></th>`;
         form += `<td><input type='text' id='bookingId' name='bookingId' value='${bookingDetails.booking._id}' readonly></td>`;
         // form += `<td name='id'>${bookingDetails.booking._id}</td></tr>`;

@@ -12,6 +12,7 @@ const { buildForm } = require('../models/bookingForm');
 const { formValidationRules, validate } = require('../validation/auth');
 
 const router = express.Router();
+const baseURL = "http://localhost:3000";
 
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({ extended: true }));
@@ -24,7 +25,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
  */
 router.get('/', (req, res) => {
     const header = "hotel booking form";
-    const bookingForm = buildForm("", '/booking');
+    const bookingForm = buildForm({}, '/booking');
     res.render("index", { header, html: bookingForm });
 });
 
