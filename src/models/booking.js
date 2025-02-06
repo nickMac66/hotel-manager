@@ -43,15 +43,15 @@ class Booking {
      * @param {Object} req - Express request object containing booking data
      * @returns {Object} - An object containing the header and booking details
      */
-    async getDetails(bookingObject) {
-        console.log(bookingObject);
-
+    async getDetails(bookingObject) {                
         // Create page header
         const header = "thank you for your booking";
 
         // Create a table to display booking details
         let bookingDetails = "<table>";
-        for (const [key, value] of Object.entries(bookingObject)) {
+
+        const entries = Object.entries(bookingObject);
+        for (const [key, value] of entries) {
             bookingDetails += "<tr><td>" + key + "</td><td>" + value + "</td></tr>";
         }
 
