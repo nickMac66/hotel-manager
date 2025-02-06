@@ -38,9 +38,11 @@ router.get('/', (req, res) => {
 router.post('/booking', formValidationRules(), validate, async (req, res) => {
     const booking = new Booking();
     const { submitButton, ...bookingObject } = req.body;
+
     booking.insert(bookingObject);
-    const { header, bookingDetails } = await booking.getDetails(req);
-    res.render("index", { header: header, html: bookingDetails });
+    
+    const { header, bookingDetails } = await booking.getDetails(bookingObject);
+    await res.render("index", { header: header, html: bookingDetails });
 });
 
 /**
