@@ -54,7 +54,7 @@ router.get('/update', async (req, res) => {
     let urlObject = new URL(url);
     let id = urlObject.searchParams.get('id');
     const booking = new Booking();
-    const bookingDetails = await booking.getDetailsById(id);
+    const bookingDetails = await booking.getDetailsById(id);      
     const updateForm = buildForm(bookingDetails, "update");
     res.render("index", { header, html: updateForm });
 });
