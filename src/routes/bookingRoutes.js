@@ -36,8 +36,8 @@ router.get('/', (req, res) => {
  * @param {Object} res - Express response object
  */
 router.post('/booking', formValidationRules(), validate, async (req, res) => {
-    const booking = new Booking();       
-    const  bookingObject = {...req.body};
+    const booking = new Booking();
+    const { submitButton, ...bookingObject } = req.body;
     booking.insert(bookingObject);
     const { header, bookingDetails } = await booking.getDetails(req);
     res.render("index", { header: header, html: bookingDetails });
@@ -51,13 +51,11 @@ router.post('/booking', formValidationRules(), validate, async (req, res) => {
  */
 router.get('/update', async (req, res) => {
     const header = "update booking";
+    const id = req.query.id;
 
-    const url = baseURL + req.url;
-    let urlObject = new URL(url);
-    let id = urlObject.searchParams.get('id');
+    const booking = new Booking();
+    const bookingDetails = await booking.getDetailsById(id);
 
-    const booking = new Booking();        
-    const bookingDetails = await booking.getDetailsById(id);      
     const updateForm = buildForm(bookingDetails, "update");
     res.render("index", { header, html: updateForm });
 });
@@ -70,8 +68,11 @@ router.get('/update', async (req, res) => {
  */
 router.post('/update', formValidationRules(), validate, async (req, res) => {
     const booking = new Booking();
-    await booking.update(req);
-    const { header, bookingDetails } = await booking.getDetails(req);
+    
+    const {submitButton, ...bookingObject} = req.body;        
+    await booking.update(bookingObject);
+
+    const { header, bookingDetails } = await booking.getDetails(bookingObject);
     res.render("index", { header: header, html: bookingDetails });
 });
 

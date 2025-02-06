@@ -118,7 +118,7 @@ button[id=deleteButton] {
     padding: 5px;
 }
 
-#bookingId {
+#_id {
     pointer-events: none;
     background-color: #e9ecef;
     color: #6c757d;

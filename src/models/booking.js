@@ -8,8 +8,7 @@ const { mongoConnect } = require('./db/dbConnection');
 const { ObjectId } = require('mongodb');
 
 class Booking {
-
-    constructor() {        
+    constructor() {
         this.client = mongoConnect(); // Initialize the MongoDB client connection
     }
 
@@ -17,7 +16,7 @@ class Booking {
      * Insert booking data into the database
      * @param {Object} req - Express request object containing booking data
      */
-    insert(bookingObject) {        
+    insert(bookingObject) {
         this.client.db('nickemacdonald').collection('bookings').insertOne(bookingObject);
         console.log("Booking inserted");
     }
@@ -27,28 +26,13 @@ class Booking {
      * @param {Object} req - Express request object containing booking data
      * @param {string} id - The ID of the booking to update
      */
-    async update(req) {
-
-        const bookingData = {};
-        const id = req.body.bookingId;
-
-        // Populate bookingData with values from req.body
-        for (let key in req.body) {
-            console.log(key);
-
-            bookingData[key] = req.body[key];
-
-
-        }
-
-        console.log("booking id: ", id);
-
-        console.log("bookingData: ", bookingData);
+    async update(bookingObject) {
+        const { id, ...booking } = bookingObject;        
 
         // Update the booking data in the database
         await this.client.db('nickemacdonald').collection('bookings').updateOne(
             { "_id": new ObjectId(id) },
-            { $set: bookingData }
+            { $set: bookingObject }
         );
 
         console.log("Booking updated");
