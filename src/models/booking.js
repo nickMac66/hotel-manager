@@ -27,12 +27,13 @@ class Booking {
      * @param {string} id - The ID of the booking to update
      */
     async update(bookingObject) {
-        const { id, ...booking } = bookingObject;        
+        const { id, submitButton, ...filteredBookingObject } = bookingObject;
+        console.log(filteredBookingObject);
 
         // Update the booking data in the database
         await this.client.db('nickemacdonald').collection('bookings').updateOne(
             { "_id": new ObjectId(id) },
-            { $set: bookingObject }
+            { $set: filteredBookingObject }
         );
 
         console.log("Booking updated");
