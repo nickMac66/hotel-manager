@@ -2,7 +2,7 @@
 
 ## Project Description
 
-Hotel Manager is a web application designed to manage hotel bookings. It allows users to create, update, and view booking.
+Hotel Manager is a web application designed to manage hotel bookings. It allows users to create, read update, and delete booking.
 
 ## Features
 
