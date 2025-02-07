@@ -40,7 +40,7 @@ router.post('/booking', formValidationRules(), validate, async (req, res) => {
     const { submitButton, ...bookingObject } = req.body;
 
     booking.insert(bookingObject);
-    
+
     const { header, bookingDetails } = await booking.getDetails(bookingObject);
     await res.render("index", { header: header, html: bookingDetails });
 });
@@ -70,8 +70,8 @@ router.get('/update', async (req, res) => {
  */
 router.post('/update', formValidationRules(), validate, async (req, res) => {
     const booking = new Booking();
-    
-    const {submitButton, ...bookingObject} = req.body;        
+
+    const { submitButton, ...bookingObject } = req.body;
     await booking.update(bookingObject);
 
     const { header, bookingDetails } = await booking.getDetails(bookingObject);
@@ -97,11 +97,16 @@ router.get('/bookingList', async (req, res) => {
  * @param {Object} res - Express response object
  */
 router.get('/delete', async (req, res) => {
-    const id = req.query.id;
-    console.log(id);
-    const booking = new Booking();
-    await booking.delete(id);
-    res.redirect('/bookingList');
+    try {
+        const id = req.query.id;
+        const booking = new Booking();
+        await booking.delete(id);        
+        res.status(200).json({ message: 'Booking deleted successfully...' });                  
+                
+    } catch (error) {
+        console.error("Error deleting booking:", error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
 });
 
 module.exports = router;

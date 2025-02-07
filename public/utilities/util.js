@@ -21,4 +21,22 @@ $(document).ready(function () {
             }
         }
     };
+
+    $("#deleteButton").click(async function () {        
+        try {
+            const response = await fetch(`/delete`, {
+                method: 'GET',
+            });
+            const result = await response.json();
+            if (response.ok) {
+                alert(result.message);                
+                location.reload(); // Reload the page to reflect the changes
+            } else {
+                alert(result.message);
+            }
+        } catch (error) {
+            console.error('Error deleting booking:', error);
+            alert('Error deleting booking');
+        }
+    });
 });
