@@ -39,6 +39,21 @@ class Booking {
     }
 
     /**
+     * Delete a booking 
+     * @param {string} id - The ID of the booking to delete
+     */
+    async delete(bookingObject) {
+        const { id, submitButton, ...filteredBookingObject } = bookingObject;
+
+        // Update the booking data in the database
+        await this.client.db('nickemacdonald').collection('bookings').deleteOne(
+            { "_id": new ObjectId(id) }
+        );
+
+        console.log("booking deleted");
+    }
+
+    /**
      * Get booking details and format them into an HTML table
      * @param {Object} req - Express request object containing booking data
      * @returns {Object} - An object containing the header and booking details
@@ -95,12 +110,8 @@ class Booking {
                 bookingList += "<tr><td>" + key + "</td><td>" + booking[key] + "</td></tr>";
             }
 
-            // Add an update and delete button to each booking
-            // bookingList += `<tr><td colspan="3"><a href="http://localhost:3000/update?id=${booking._id}"><button id="updateButton">Update</button></a></td></tr>`;
-            // bookingList += `<tr><td colspan="3"><a href="http://localhost:3000/delete?id=${booking._id}"><button id="deleteButton">Delete</button></a></td></tr>`;
-
             bookingList += `<tr><td colspan="2"><a href="http://localhost:3000/update?id=${booking._id}"><button id="updateButton">Update</button></a></td>`;
-            bookingList += `<td><a href="http://localhost:3000/delete?id=${booking._id}"><button id="deleteButton">Delete</button></a></td></tr>`;
+            bookingList += `<tr><td colspan="2"><a href="http://localhost:3000/delete?id=${booking._id}"><button id="deleteButton">Delete</button></a></td>`;
 
             // Add a horizontal rule between bookings
             bookingList += "<tr><td colspan='3'><hr></td></tr>";
@@ -111,6 +122,15 @@ class Booking {
         bookingList += "</table>";
 
         return { header, bookingList };
+    }
+    
+    /**
+    * Delete a booking 
+    * @param {String} id - The booking ID
+    */
+    async delete(id) {
+        await this.client.db('nickemacdonald').collection('bookings').deleteOne({ "_id": new ObjectId(id) });
+        console.log("Booking deleted");
     }
 }
 

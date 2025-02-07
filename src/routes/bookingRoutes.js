@@ -90,4 +90,20 @@ router.get('/bookingList', async (req, res) => {
     res.render("index", { header, html: bookingList });
 });
 
+/**
+ * GET /delete
+ * Handles the deletion of a booking from the database
+ */
+router.get('/delete', async (req, res) => {
+    const booking = new Booking();
+    const id = req.params.id;
+
+    try {
+        await booking.delete(id);
+        res.status(200).send({ message: 'Booking deleted successfully' });
+    } catch (error) {
+        res.status(500).send({ message: 'Error deleting booking', error });
+    }
+});
+
 module.exports = router;
