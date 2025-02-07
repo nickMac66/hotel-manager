@@ -93,17 +93,15 @@ router.get('/bookingList', async (req, res) => {
 /**
  * GET /delete
  * Handles the deletion of a booking from the database
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
  */
 router.get('/delete', async (req, res) => {
+    const id = req.query.id;
+    console.log(id);
     const booking = new Booking();
-    const id = req.params.id;
-
-    try {
-        await booking.delete(id);
-        res.status(200).send({ message: 'Booking deleted successfully' });
-    } catch (error) {
-        res.status(500).send({ message: 'Error deleting booking', error });
-    }
+    await booking.delete(id);
+    res.redirect('/bookingList');
 });
 
 module.exports = router;

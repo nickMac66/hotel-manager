@@ -43,14 +43,15 @@ class Booking {
      * @param {string} id - The ID of the booking to delete
      */
     async delete(bookingObject) {
-        const { id, submitButton, ...filteredBookingObject } = bookingObject;
+        const { id } = bookingObject;
+        console.log("...deleting");
 
-        // Update the booking data in the database
+        // Delete the booking data from the database
         await this.client.db('nickemacdonald').collection('bookings').deleteOne(
             { "_id": new ObjectId(id) }
         );
 
-        console.log("booking deleted");
+        console.log("Booking deleted");
     }
 
     /**
