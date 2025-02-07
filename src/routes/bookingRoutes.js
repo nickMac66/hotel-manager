@@ -26,8 +26,10 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.get('/', (req, res) => {
     try {
         const header = "hotel booking form";
+
         const bookingForm = buildForm({}, '/booking');
         res.render("index", { header, html: bookingForm });
+
     } catch (error) {
         console.error("error rendering main page:", error);
         res.status(500).json({ message: 'internal server error' });
@@ -49,6 +51,7 @@ router.post('/booking', formValidationRules(), validate, async (req, res) => {
 
         const { header, bookingDetails } = await booking.getDetails(bookingObject);
         await res.render("index", { header: header, html: bookingDetails });
+
     } catch (error) {
         console.error("error creating booking:", error);
         res.status(500).json({ message: 'internal server error' });
@@ -71,6 +74,7 @@ router.get('/update', async (req, res) => {
 
         const updateForm = buildForm(bookingDetails, "update");
         res.render("index", { header, html: updateForm });
+
     } catch (error) {
         console.error("error fetching booking details:", error);
         res.status(500).json({ message: 'internal server error' });
@@ -92,6 +96,7 @@ router.post('/update', formValidationRules(), validate, async (req, res) => {
 
         const { header, bookingDetails } = await booking.getDetails(bookingObject);
         res.render("index", { header: header, html: bookingDetails });
+
     } catch (error) {
         console.error("error updating booking:", error);
         res.status(500).json({ message: 'internal server error' });
@@ -107,8 +112,10 @@ router.post('/update', formValidationRules(), validate, async (req, res) => {
 router.get('/bookingList', async (req, res) => {
     try {
         const booking = new Booking();
+        
         const { header, bookingList } = await booking.getList();
         res.render("index", { header, html: bookingList });
+
     } catch (error) {
         console.error("error fetching booking list:", error);
         res.status(500).json({ message: 'internal server error' });
@@ -124,7 +131,9 @@ router.get('/bookingList', async (req, res) => {
 router.get('/delete', async (req, res) => {
     try {
         const id = req.query.id;
+
         const booking = new Booking();
+        
         await booking.delete(id);
         res.status(200).json({ message: 'booking deleted successfully' });
 
