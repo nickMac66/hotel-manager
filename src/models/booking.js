@@ -39,11 +39,27 @@ class Booking {
     }
 
     /**
+     * Delete a booking 
+     * @param {string} id - The ID of the booking to delete
+     */
+    async delete(bookingObject) {
+        const { id } = bookingObject;
+        console.log("...deleting");
+
+        // Delete the booking data from the database
+        await this.client.db('nickemacdonald').collection('bookings').deleteOne(
+            { "_id": new ObjectId(id) }
+        );
+
+        console.log("Booking deleted");
+    }
+
+    /**
      * Get booking details and format them into an HTML table
      * @param {Object} req - Express request object containing booking data
      * @returns {Object} - An object containing the header and booking details
      */
-    async getDetails(bookingObject) {                
+    async getDetails(bookingObject) {
         // Create page header
         const header = "thank you for your booking";
 
@@ -56,7 +72,7 @@ class Booking {
         }
 
         // Add a back button to return to the main page
-        bookingDetails += '<tr><td colspan="3"><a href="http://localhost:3000"><button id="backButton">Back</button></a></td></tr></table>';        
+        bookingDetails += '<tr><td colspan="3"><a href="http://localhost:3000"><button id="backButton">Back</button></a></td></tr></table>';
         return { header, bookingDetails };
     }
 
@@ -75,10 +91,9 @@ class Booking {
 
     /**
      * Get a list of all bookings
-     * @param {Object} req - Express request object
      * @returns {Object} - An object containing the header and booking list
      */
-    async getList(req) {
+    async getList() {
 
         // Create page header
         const header = "booking list";
@@ -93,15 +108,11 @@ class Booking {
         bookings.forEach((booking) => {
 
             for (let key in booking) {
-                if (key === "submitButton") {
-                    continue;
-                }
-
                 bookingList += "<tr><td>" + key + "</td><td>" + booking[key] + "</td></tr>";
             }
-            // Add an update and delete button to each booking
-            bookingList += `<tr><td colspan="3"><a href="http://localhost:3000/update?id=${booking._id}"><button id="updateButton">Update</button></a></td></tr>`;
-            // bookingList += `<tr><td colspan="3"><a href="http://localhost:3000/delete?id=${booking._id}"><button id="deleteButton">Delete</button></a></td></tr>`;
+
+            bookingList += `<tr><td colspan="2"><a href="http://localhost:3000/update?id=${booking._id}"><button id="updateButton">Update</button></a></td>`;
+            bookingList += `<tr><td colspan="2"><a href="http://localhost:3000/delete?id=${booking._id}"><button id="deleteButton">Delete</button></a></td>`;
 
             // Add a horizontal rule between bookings
             bookingList += "<tr><td colspan='3'><hr></td></tr>";
@@ -112,6 +123,15 @@ class Booking {
         bookingList += "</table>";
 
         return { header, bookingList };
+    }
+    
+    /**
+    * Delete a booking 
+    * @param {String} id - The booking ID
+    */
+    async delete(id) {
+        await this.client.db('nickemacdonald').collection('bookings').deleteOne({ "_id": new ObjectId(id) });
+        console.log("Booking deleted");
     }
 }
 
