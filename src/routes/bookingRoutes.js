@@ -24,9 +24,14 @@ router.use(bodyParser.urlencoded({ extended: true }));
  * @param {Object} res - Express response object
  */
 router.get('/', (req, res) => {
-    const header = "hotel booking form";
-    const bookingForm = buildForm({}, '/booking');
-    res.render("index", { header, html: bookingForm });
+    try {
+        const header = "hotel booking form";
+        const bookingForm = buildForm({}, '/booking');
+        res.render("index", { header, html: bookingForm });
+    } catch (error) {
+        console.error("error rendering main page:", error);
+        res.status(500).json({ message: 'internal server error' });
+    }
 });
 
 /**
@@ -36,13 +41,18 @@ router.get('/', (req, res) => {
  * @param {Object} res - Express response object
  */
 router.post('/booking', formValidationRules(), validate, async (req, res) => {
-    const booking = new Booking();
-    const { submitButton, ...bookingObject } = req.body;
+    try {
+        const booking = new Booking();
+        const { submitButton, ...bookingObject } = req.body;
 
-    booking.insert(bookingObject);
+        booking.insert(bookingObject);
 
-    const { header, bookingDetails } = await booking.getDetails(bookingObject);
-    await res.render("index", { header: header, html: bookingDetails });
+        const { header, bookingDetails } = await booking.getDetails(bookingObject);
+        await res.render("index", { header: header, html: bookingDetails });
+    } catch (error) {
+        console.error("error creating booking:", error);
+        res.status(500).json({ message: 'internal server error' });
+    }
 });
 
 /**
@@ -52,14 +62,19 @@ router.post('/booking', formValidationRules(), validate, async (req, res) => {
  * @param {Object} res - Express response object
  */
 router.get('/update', async (req, res) => {
-    const header = "update booking";
-    const id = req.query.id;
+    try {
+        const header = "update booking";
+        const id = req.query.id;
 
-    const booking = new Booking();
-    const bookingDetails = await booking.getDetailsById(id);
+        const booking = new Booking();
+        const bookingDetails = await booking.getDetailsById(id);
 
-    const updateForm = buildForm(bookingDetails, "update");
-    res.render("index", { header, html: updateForm });
+        const updateForm = buildForm(bookingDetails, "update");
+        res.render("index", { header, html: updateForm });
+    } catch (error) {
+        console.error("error fetching booking details:", error);
+        res.status(500).json({ message: 'internal server error' });
+    }
 });
 
 /**
@@ -69,13 +84,18 @@ router.get('/update', async (req, res) => {
  * @param {Object} res - Express response object
  */
 router.post('/update', formValidationRules(), validate, async (req, res) => {
-    const booking = new Booking();
+    try {
+        const booking = new Booking();
 
-    const { submitButton, ...bookingObject } = req.body;
-    await booking.update(bookingObject);
+        const { submitButton, ...bookingObject } = req.body;
+        await booking.update(bookingObject);
 
-    const { header, bookingDetails } = await booking.getDetails(bookingObject);
-    res.render("index", { header: header, html: bookingDetails });
+        const { header, bookingDetails } = await booking.getDetails(bookingObject);
+        res.render("index", { header: header, html: bookingDetails });
+    } catch (error) {
+        console.error("error updating booking:", error);
+        res.status(500).json({ message: 'internal server error' });
+    }
 });
 
 /**
@@ -85,9 +105,14 @@ router.post('/update', formValidationRules(), validate, async (req, res) => {
  * @param {Object} res - Express response object
  */
 router.get('/bookingList', async (req, res) => {
-    const booking = new Booking();
-    const { header, bookingList } = await booking.getList();
-    res.render("index", { header, html: bookingList });
+    try {
+        const booking = new Booking();
+        const { header, bookingList } = await booking.getList();
+        res.render("index", { header, html: bookingList });
+    } catch (error) {
+        console.error("error fetching booking list:", error);
+        res.status(500).json({ message: 'internal server error' });
+    }
 });
 
 /**
@@ -100,12 +125,12 @@ router.get('/delete', async (req, res) => {
     try {
         const id = req.query.id;
         const booking = new Booking();
-        await booking.delete(id);        
-        res.status(200).json({ message: 'Booking deleted successfully...' });                  
-                
+        await booking.delete(id);
+        res.status(200).json({ message: 'booking deleted successfully' });
+
     } catch (error) {
-        console.error("Error deleting booking:", error);
-        res.status(500).json({ message: 'Internal server error' });
+        console.error("error deleting booking:", error);
+        res.status(500).json({ message: 'internal server error' });
     }
 });
 
