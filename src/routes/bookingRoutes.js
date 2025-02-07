@@ -86,7 +86,7 @@ router.post('/update', formValidationRules(), validate, async (req, res) => {
  */
 router.get('/bookingList', async (req, res) => {
     const booking = new Booking();
-    const { header, bookingList } = await booking.getList(req);
+    const { header, bookingList } = await booking.getList();
     res.render("index", { header, html: bookingList });
 });
 
