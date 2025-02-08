@@ -53,7 +53,7 @@ router.post('/booking', formValidationRules(), validate, async (req, res) => {
         await res.render("index", { header: header, html: bookingDetails });
 
     } catch (error) {
-        console.error("error creating booking:", error);
+        console.error("error in POST /booking route:", error);
         res.status(500).json({ message: 'internal server error' });
     }
 });
@@ -76,7 +76,7 @@ router.get('/update', async (req, res) => {
         res.render("index", { header, html: updateForm });
 
     } catch (error) {
-        console.error("error fetching booking details:", error);
+        console.error("error in GET /update route:", error);
         res.status(500).json({ message: 'internal server error' });
     }
 });
@@ -98,7 +98,7 @@ router.post('/update', formValidationRules(), validate, async (req, res) => {
         res.render("index", { header: header, html: bookingDetails });
 
     } catch (error) {
-        console.error("error updating booking:", error);
+        console.error("error in POST /update route:", error);
         res.status(500).json({ message: 'internal server error' });
     }
 });
@@ -117,7 +117,7 @@ router.get('/bookingList', async (req, res) => {
         res.render("index", { header, html: bookingList });
 
     } catch (error) {
-        console.error("error fetching booking list:", error);
+        console.error("error in GET /bookingList route:", error);
         res.status(500).json({ message: 'internal server error' });
     }
 });
@@ -136,9 +136,10 @@ router.delete('/bookingList', async (req, res) => {
         
         await booking.delete(id);
         res.status(200).json({ message: 'booking deleted successfully' });
+        console.log("booking deleted successfully");
 
     } catch (error) {
-        console.error("error deleting booking:", error);
+        console.error("error in DELETE /delete route:", error);
         res.status(500).json({ message: 'internal server error' });
     }
 });

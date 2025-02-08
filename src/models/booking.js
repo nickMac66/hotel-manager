@@ -16,9 +16,19 @@ class Booking {
      * Insert booking data into the database
      * @param {Object} req - Express request object containing booking data
      */
-    insert(bookingObject) {
-        this.client.db('nickemacdonald').collection('bookings').insertOne(bookingObject);
-        console.log("Booking inserted");
+    async insert(bookingObject) {
+        try {
+            this.client.db('nickemacdonald').collection('bookings').insertOne(bookingObject);
+            console.log("Booking inserted");
+
+        } catch (error) {
+            console.error("error inserting the booking", error);
+            throw new Error("error inserting the booking");
+
+        } finally {
+            await this.client.close();
+            console.log("db conn closed");
+        }
     }
 
     /**
@@ -29,13 +39,21 @@ class Booking {
     async update(bookingObject) {
         const { id, submitButton, ...filteredBookingObject } = bookingObject;
 
-        // Update the booking data in the database
-        await this.client.db('nickemacdonald').collection('bookings').updateOne(
-            { "_id": new ObjectId(id) },
-            { $set: filteredBookingObject }
-        );
+        try {
+            // Update the booking data in the database
+            await this.client.db('nickemacdonald').collection('bookings').updateOne(
+                { "_id": new ObjectId(id) },
+                { $set: filteredBookingObject }
+            );
+            console.log("booking updated");
 
-        console.log("Booking updated");
+        } catch (error) {
+            console.error("error updating the booking")
+            throw new Error("error updating the booking");
+
+        } finally {
+            await this.client.close();
+        }
     }
 
     /**
@@ -111,7 +129,7 @@ class Booking {
                 bookingList += "<tr><td>" + key + "</td><td>" + booking[key] + "</td></tr>";
             }
 
-            bookingList += `<tr><td colspan="2"><a href="http://localhost:3000/update?id=${booking._id}"><button id="updateButton">Update</button></a></td>`;            
+            bookingList += `<tr><td colspan="2"><a href="http://localhost:3000/update?id=${booking._id}"><button id="updateButton">Update</button></a></td>`;
             bookingList += `<tr><td colspan="2"><button class="deleteButton" data-id="${booking._id}">Delete</button></a></td>`;
 
             // Add a horizontal rule between bookings
@@ -124,7 +142,7 @@ class Booking {
 
         return { header, bookingList };
     }
-    
+
     /**
     * Delete a booking 
     * @param {String} id - The booking ID
