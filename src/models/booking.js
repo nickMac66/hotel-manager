@@ -112,7 +112,7 @@ class Booking {
             }
 
             bookingList += `<tr><td colspan="2"><a href="http://localhost:3000/update?id=${booking._id}"><button id="updateButton">Update</button></a></td>`;            
-            bookingList += `<tr><td colspan="2"><button class="deleteButton" data-id="${booking._id}">Delete</button></a></td>`;
+            bookingList += `<td colspan="2"><button class="deleteButton" data-id="${booking._id}">Delete</button></a></td></tr>`;
 
             // Add a horizontal rule between bookings
             bookingList += "<tr><td colspan='3'><hr></td></tr>";
