@@ -9,16 +9,32 @@ const { ObjectId } = require('mongodb');
 
 class Booking {
     constructor() {
-        this.client = mongoConnect(); // Initialize the MongoDB client connection
+        try {
+            this.client = mongoConnect(); // Initialize the MongoDB client connection
+
+        } catch (error) {
+            console.error("error connection to the client", error);
+            throw new Error("error connecting to the client");
+        }
     }
 
     /**
      * Insert booking data into the database
      * @param {Object} req - Express request object containing booking data
      */
-    insert(bookingObject) {
-        this.client.db('nickemacdonald').collection('bookings').insertOne(bookingObject);
-        console.log("Booking inserted");
+    async insert(bookingObject) {
+        try {
+            this.client.db('nickemacdonald').collection('bookings').insertOne(bookingObject);
+            console.log("Booking inserted");
+
+        } catch (error) {
+            console.error("error inserting the booking", error);
+            throw new Error("error inserting the booking");
+
+        } finally {
+            await this.client.close();
+            console.log("db conn closed");
+        }
     }
 
     /**
@@ -29,29 +45,22 @@ class Booking {
     async update(bookingObject) {
         const { id, submitButton, ...filteredBookingObject } = bookingObject;
 
-        // Update the booking data in the database
-        await this.client.db('nickemacdonald').collection('bookings').updateOne(
-            { "_id": new ObjectId(id) },
-            { $set: filteredBookingObject }
-        );
+        try {
+            // Update the booking data in the database
+            await this.client.db('nickemacdonald').collection('bookings').updateOne(
+                { "_id": new ObjectId(id) },
+                { $set: filteredBookingObject }
+            );
+            console.log("booking updated");
 
-        console.log("Booking updated");
-    }
+        } catch (error) {
+            console.error("error updating the booking")
+            throw new Error("error updating the booking");
 
-    /**
-     * Delete a booking 
-     * @param {string} id - The ID of the booking to delete
-     */
-    async delete(bookingObject) {
-        const { id } = bookingObject;
-        console.log("...deleting");
-
-        // Delete the booking data from the database
-        await this.client.db('nickemacdonald').collection('bookings').deleteOne(
-            { "_id": new ObjectId(id) }
-        );
-
-        console.log("Booking deleted");
+        } finally {
+            await this.client.close();
+            console.log("db conn closed");
+        }
     }
 
     /**
@@ -60,7 +69,7 @@ class Booking {
      * @returns {Object} - An object containing the header and booking details
      */
     async getDetails(bookingObject) {
-        // Create page header
+        // Create web page header
         const header = "thank you for your booking";
 
         // Create a table to display booking details
@@ -83,9 +92,18 @@ class Booking {
      */
     async getDetailsById(id) {
 
-        const bookingDetails = await this.client.db('nickemacdonald').collection('bookings').findOne({ "_id": new ObjectId(id) });
+        try {
+            const bookingDetails = await this.client.db('nickemacdonald').collection('bookings').findOne({ "_id": new ObjectId(id) });
+            return { booking: bookingDetails };
 
-        return { booking: bookingDetails };
+        } catch (error) {
+            console.error("error getting booking details", error);
+            throw new Error("error getting the booking details");
+
+        } finally {
+            this.client.close();
+            console.log("db conn closed");
+        }
     }
 
 
@@ -95,28 +113,38 @@ class Booking {
      */
     async getList() {
 
-        // Create page header
+        // Create web page header
         const header = "booking list";
 
         // Create a table to display booking details
         let bookingList = "<table>";
 
         // Get all bookings from the database    
-        const bookings = await this.client.db('nickemacdonald').collection('bookings').find().toArray();
+        try {
+            const bookings = await this.client.db('nickemacdonald').collection('bookings').find().toArray();
 
-        // Build a table to display the bookings
-        bookings.forEach((booking) => {
+            // Build a table to display the bookings
+            bookings.forEach((booking) => {
 
-            for (let key in booking) {
-                bookingList += "<tr><td>" + key + "</td><td>" + booking[key] + "</td></tr>";
-            }
+                for (let key in booking) {
+                    bookingList += "<tr><td>" + key + "</td><td>" + booking[key] + "</td></tr>";
+                }
 
             bookingList += `<tr><td colspan="2"><a href="http://localhost:3000/update?id=${booking._id}"><button id="updateButton">Update</button></a></td>`;            
             bookingList += `<td colspan="2"><button class="deleteButton" data-id="${booking._id}">Delete</button></a></td></tr>`;
 
-            // Add a horizontal rule between bookings
-            bookingList += "<tr><td colspan='3'><hr></td></tr>";
-        });
+                // Add a horizontal rule between bookings
+                bookingList += "<tr><td colspan='3'><hr></td></tr>";
+            });
+
+        } catch (error) {
+            console.error("error getting the booking list", error);
+            throw new Error("error geting the booking list");
+
+        } finally {
+            this.client.close();
+            console.log("db conn closed");
+        }
 
         // Add a back button to return to the main page and close the table
         bookingList += '<tr><td colspan="3"><a href="http://localhost:3000"><button id="backButton">Back</button></a></td></tr>';
@@ -124,13 +152,23 @@ class Booking {
 
         return { header, bookingList };
     }
-    
+
     /**
     * Delete a booking 
     * @param {String} id - The booking ID
     */
     async delete(id) {
-        await this.client.db('nickemacdonald').collection('bookings').deleteOne({ "_id": new ObjectId(id) });
+        try {
+            await this.client.db('nickemacdonald').collection('bookings').deleteOne({ "_id": new ObjectId(id) });
+
+        } catch (error) {
+            console.error("error deleting the booking", error);
+            throw new Error("error deleting the booking");
+
+        } finally {
+            this.client.close();
+            console.log("db conn closed");
+        }
         console.log("Booking deleted");
     }
 }

@@ -1,10 +1,11 @@
-/**
- *  Dropdown menu functionality
- *  This script manages the behavior of the dropdown menu in the header.
- *  It toggles the visibility of the menu when the button is clicked,
- *  and closes the menu if the user clicks outside of it.
- */
 $(document).ready(function () {
+
+    /**
+    *  Dropdown menu functionality
+    *  This script manages the behavior of the dropdown menu in the header.
+    *  It toggles the visibility of the menu when the button is clicked,
+    *  and closes the menu if the user clicks outside of it.
+    */
     $("#menuButton").click(function () {
         document.getElementById("myDropdown").classList.toggle("show");
     });
@@ -22,6 +23,12 @@ $(document).ready(function () {
         }
     };
 
+    /**
+    * Sends a DELETE request to remove a booking from the booking list.
+    *
+    * @param {string} id - The ID of the booking to be deleted.
+    * @returns {Promise<Response>} The response from the server.
+    */
     $(".deleteButton").click(async function () {
         const id = $(this).data('id');
         try {
