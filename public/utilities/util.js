@@ -22,21 +22,22 @@ $(document).ready(function () {
         }
     };
 
-    $("#deleteButton").click(async function () {        
+    $(".deleteButton").click(async function () {
+        const id = $(this).data('id');
         try {
-            const response = await fetch(`/delete`, {
-                method: 'GET',
+            const response = await fetch(`/bookingList?id=${id}`, {
+                method: 'DELETE',
             });
             const result = await response.json();
             if (response.ok) {
-                alert(result.message);                
+                alert(result.message);
                 location.reload(); // Reload the page to reflect the changes
             } else {
                 alert(result.message);
             }
         } catch (error) {
             console.error('Error deleting booking:', error);
-            alert('Error deleting booking');
+            alert('util - Error deleting booking');
         }
     });
 });
