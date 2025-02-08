@@ -59,29 +59,7 @@ class Booking {
 
         } finally {
             await this.client.close();
-        }
-    }
-
-    /**
-     * Delete a booking 
-     * @param {string} id - The ID of the booking to delete
-     */
-    async delete(bookingObject) {
-        const { id } = bookingObject;
-
-        // Delete the booking data from the database
-        try {
-            await this.client.db('nickemacdonald').collection('bookings').deleteOne(
-                { "_id": new ObjectId(id) }
-            );
-            console.log("Booking deleted");
-
-        } catch (error) {
-            console.error("error deleting the booking", error);
-            throw new Error("error deleting the booking");
-
-        } finally {
-            await this.client.close();
+            console.log("db conn closed");
         }
     }
 
@@ -91,7 +69,7 @@ class Booking {
      * @returns {Object} - An object containing the header and booking details
      */
     async getDetails(bookingObject) {
-        // Create page header
+        // Create web page header
         const header = "thank you for your booking";
 
         // Create a table to display booking details
@@ -114,9 +92,18 @@ class Booking {
      */
     async getDetailsById(id) {
 
-        const bookingDetails = await this.client.db('nickemacdonald').collection('bookings').findOne({ "_id": new ObjectId(id) });
+        try {
+            const bookingDetails = await this.client.db('nickemacdonald').collection('bookings').findOne({ "_id": new ObjectId(id) });
+            return { booking: bookingDetails };
 
-        return { booking: bookingDetails };
+        } catch (error) {
+            console.error("error getting booking details", error);
+            throw new Error("error getting the booking details");
+
+        } finally {
+            this.client.close();
+            console.log("db conn closed");
+        }
     }
 
 
@@ -126,28 +113,38 @@ class Booking {
      */
     async getList() {
 
-        // Create page header
+        // Create web page header
         const header = "booking list";
 
         // Create a table to display booking details
         let bookingList = "<table>";
 
         // Get all bookings from the database    
-        const bookings = await this.client.db('nickemacdonald').collection('bookings').find().toArray();
+        try {
+            const bookings = await this.client.db('nickemacdonald').collection('bookings').find().toArray();
 
-        // Build a table to display the bookings
-        bookings.forEach((booking) => {
+            // Build a table to display the bookings
+            bookings.forEach((booking) => {
 
-            for (let key in booking) {
-                bookingList += "<tr><td>" + key + "</td><td>" + booking[key] + "</td></tr>";
-            }
+                for (let key in booking) {
+                    bookingList += "<tr><td>" + key + "</td><td>" + booking[key] + "</td></tr>";
+                }
 
-            bookingList += `<tr><td colspan="2"><a href="http://localhost:3000/update?id=${booking._id}"><button id="updateButton">Update</button></a></td>`;
-            bookingList += `<tr><td colspan="2"><button class="deleteButton" data-id="${booking._id}">Delete</button></a></td>`;
+                bookingList += `<tr><td colspan="2"><a href="http://localhost:3000/update?id=${booking._id}"><button id="updateButton">Update</button></a></td>`;
+                bookingList += `<td colspan="2"><button class="deleteButton" data-id="${booking._id}">Delete</button></a></td></tr>`;
 
-            // Add a horizontal rule between bookings
-            bookingList += "<tr><td colspan='3'><hr></td></tr>";
-        });
+                // Add a horizontal rule between bookings
+                bookingList += "<tr><td colspan='3'><hr></td></tr>";
+            });
+
+        } catch (error) {
+            console.error("error getting the booking list", error);
+            throw new Error("error geting the booking list");
+
+        } finally {
+            this.client.close();
+            console.log("db conn closed");
+        }
 
         // Add a back button to return to the main page and close the table
         bookingList += '<tr><td colspan="3"><a href="http://localhost:3000"><button id="backButton">Back</button></a></td></tr>';
@@ -161,7 +158,17 @@ class Booking {
     * @param {String} id - The booking ID
     */
     async delete(id) {
-        await this.client.db('nickemacdonald').collection('bookings').deleteOne({ "_id": new ObjectId(id) });
+        try {
+            await this.client.db('nickemacdonald').collection('bookings').deleteOne({ "_id": new ObjectId(id) });
+
+        } catch (error) {
+            console.error("error deleting the booking", error);
+            throw new Error("error deleting the booking");
+
+        } finally {
+            this.client.close();
+            console.log("db conn closed");
+        }
         console.log("Booking deleted");
     }
 }
