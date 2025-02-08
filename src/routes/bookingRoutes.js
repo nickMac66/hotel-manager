@@ -123,48 +123,24 @@ router.get('/bookingList', async (req, res) => {
 });
 
 /**
- * GET /delete
- * Handles the deletion of a booking from the database
- * @param {Object} req - Express request object
- * @param {Object} res - Express response object
- */
-// router.get('/delete', async (req, res) => {
-//     try {
-//         const id = req.query.id;
-
-//         const booking = new Booking();
-        
-//         await booking.delete(id);
-//         res.status(200).json({ message: 'booking deleted successfully' });
-
-//     } catch (error) {
-//         console.error("error deleting booking:", error);
-//         res.status(500).json({ message: 'internal server error' });
-//     }
-// });
-
-/**
  * DELETE /delete
  * Handles the deletion of a booking from the database
  * @param {Object} req - Express request object
  * @param {Object} res - Express response object
  */
-router.delete('/bookingList', async (req, res) => {
-    console.log("delete request...");
+router.delete('/bookingList', async (req, res) => {    
     try {
         const id = req.query.id;
 
         const booking = new Booking();
         
         await booking.delete(id);
-        res.status(200).json({ message: 'booking deleted successfully with a delete request' });
+        res.status(200).json({ message: 'booking deleted successfully' });
 
     } catch (error) {
-        console.error("routes - error deleting booking:", error);
+        console.error("error deleting booking:", error);
         res.status(500).json({ message: 'internal server error' });
     }
 });
-
-
 
 module.exports = router;

@@ -111,8 +111,7 @@ class Booking {
                 bookingList += "<tr><td>" + key + "</td><td>" + booking[key] + "</td></tr>";
             }
 
-            bookingList += `<tr><td colspan="2"><a href="http://localhost:3000/update?id=${booking._id}"><button id="updateButton">Update</button></a></td>`;
-            // bookingList += `<tr><td colspan="2"><a href="http://localhost:3000/bookingList?id=${booking._id}"><button id="deleteButton">Delete</button></a></td>`;
+            bookingList += `<tr><td colspan="2"><a href="http://localhost:3000/update?id=${booking._id}"><button id="updateButton">Update</button></a></td>`;            
             bookingList += `<tr><td colspan="2"><button class="deleteButton" data-id="${booking._id}">Delete</button></a></td>`;
 
             // Add a horizontal rule between bookings
