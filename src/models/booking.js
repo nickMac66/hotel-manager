@@ -9,7 +9,13 @@ const { ObjectId } = require('mongodb');
 
 class Booking {
     constructor() {
-        this.client = mongoConnect(); // Initialize the MongoDB client connection
+        try {
+            this.client = mongoConnect(); // Initialize the MongoDB client connection
+
+        } catch (error) {
+            console.error("error connection to the client", error);
+            throw new Error("error connecting to the client");
+        }
     }
 
     /**
@@ -62,14 +68,21 @@ class Booking {
      */
     async delete(bookingObject) {
         const { id } = bookingObject;
-        console.log("...deleting");
 
         // Delete the booking data from the database
-        await this.client.db('nickemacdonald').collection('bookings').deleteOne(
-            { "_id": new ObjectId(id) }
-        );
+        try {
+            await this.client.db('nickemacdonald').collection('bookings').deleteOne(
+                { "_id": new ObjectId(id) }
+            );
+            console.log("Booking deleted");
 
-        console.log("Booking deleted");
+        } catch (error) {
+            console.error("error deleting the booking", error);
+            throw new Error("error deleting the booking");
+
+        } finally {
+            await this.client.close();
+        }
     }
 
     /**

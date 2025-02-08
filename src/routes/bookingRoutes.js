@@ -24,10 +24,12 @@ router.use(bodyParser.urlencoded({ extended: true }));
  * @param {Object} res - Express response object
  */
 router.get('/', (req, res) => {
-    try {
-        const header = "hotel booking form";
 
-        const bookingForm = buildForm({}, '/booking');
+    const header = "hotel booking form";
+
+    const bookingForm = buildForm({}, '/booking');
+    
+    try {
         res.render("index", { header, html: bookingForm });
 
     } catch (error) {
@@ -112,7 +114,7 @@ router.post('/update', formValidationRules(), validate, async (req, res) => {
 router.get('/bookingList', async (req, res) => {
     try {
         const booking = new Booking();
-        
+
         const { header, bookingList } = await booking.getList();
         res.render("index", { header, html: bookingList });
 
@@ -128,12 +130,12 @@ router.get('/bookingList', async (req, res) => {
  * @param {Object} req - Express request object
  * @param {Object} res - Express response object
  */
-router.delete('/bookingList', async (req, res) => {    
+router.delete('/bookingList', async (req, res) => {
     try {
         const id = req.query.id;
 
         const booking = new Booking();
-        
+
         await booking.delete(id);
         res.status(200).json({ message: 'booking deleted successfully' });
         console.log("booking deleted successfully");
