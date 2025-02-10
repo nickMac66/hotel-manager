@@ -25,7 +25,7 @@ const buildForm = (bookingDetails = {}, formAction) => {
 
     // If updating a booking, pre-fill the 'booking id' field
     if (formAction === 'update') {
-        form += `<tr><th><label for='id'>Booking Id</label></th>`;
+        form += `<div class="form-group"><tr><th><label for='id'>Booking Id</label></th>`;
         form += `<td><input type='text' id='id' name='id' value='${bookingDetails.booking._id}'></td>`;
     }
 

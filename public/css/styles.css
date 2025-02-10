@@ -40,6 +40,12 @@ input[type=date] {
     width: 50%;
 }
 
+/* input[type=date], */
+/* input[type=text] { */
+    /* display: flex;
+    flex-direction: column; */
+/* } */
+
 input[type=submit],
 button {
     font-family: monospace;
@@ -48,6 +54,7 @@ button {
 
 input[type=submit] {
     margin-right: 5px;
+    margin-top: 10px;
 }
 
 button {
@@ -123,3 +130,8 @@ button[id=deleteButton] {
     background-color: #e9ecef;
     color: #6c757d;
 }
+
+.form-group {    
+    min-height: 100px;
+}
+

@@ -13,8 +13,7 @@ const { body, matchedData, validationResult } = require('express-validator');
  */
 const formValidationRules = () => {
 
-    return [
-        // Sanitize and ensure all fields are not empty
+    return [        
         body('*')
             .trim()
             .escape()
@@ -29,7 +28,7 @@ const formValidationRules = () => {
             .isLength({ max: 20 })
             .withMessage('max 20 characters'),
 
-        // Only validate if phone is not empty
+        // Only validate if phone & email are not empty
         body('phone')
             .if((value, { req }) => req.body.phone !== '')
             .isMobilePhone()
@@ -37,7 +36,7 @@ const formValidationRules = () => {
 
         // Only validate if email is not empty
         body('email')
-            .if((value, { req }) => req.body.email !== '')
+            .if(({ req }) => req.body.email !== '')
             .isEmail()
             .normalizeEmail()
             .withMessage('not a valid e-mail address'),
@@ -56,9 +55,9 @@ const validate = (req, res, next) => {
     const errors = validationResult(req);
     
     // If there are validation errors, return a 400 response
-    if (!errors.isEmpty()) {
-        
-        return res.status(400).json({ errors: errors.array() });
+    if (!errors.isEmpty()) {        
+        return res.status(400).json({ eRrOrS: errors.array() });        
+        // return res.json({ eRrOrS: errors.array() });  
     }
     next();
 };

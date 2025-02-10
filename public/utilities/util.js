@@ -46,5 +46,5 @@ $(document).ready(function () {
             console.error('Error deleting booking:', error);
             alert('util - Error deleting booking');
         }
-    });
+    });    
 });

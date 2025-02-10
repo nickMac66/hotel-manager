@@ -32,8 +32,8 @@ class Booking {
             throw new Error("error inserting the booking");
 
         } finally {
-            await this.client.close();
-            console.log("db conn closed");
+            // await this.client.close();
+            // console.log("db conn closed");
         }
     }
 
@@ -105,7 +105,6 @@ class Booking {
             console.log("db conn closed");
         }
     }
-
 
     /**
      * Get a list of all bookings

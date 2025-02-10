@@ -28,7 +28,7 @@ router.get('/', (req, res) => {
     const header = "hotel booking form";
 
     const bookingForm = buildForm({}, '/booking');
-    
+
     try {
         res.render("index", { header, html: bookingForm });
 
@@ -36,6 +36,17 @@ router.get('/', (req, res) => {
         console.error("error rendering main page:", error);
         res.status(500).json({ message: 'internal server error' });
     }
+});
+
+/**
+ * GET /booking
+ * Handles the booking validation errors
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ */
+router.get('/booking', async (req, res) => {
+    const result = res.json();
+    console.log(result);
 });
 
 /**
@@ -52,6 +63,10 @@ router.post('/booking', formValidationRules(), validate, async (req, res) => {
         booking.insert(bookingObject);
 
         const { header, bookingDetails } = await booking.getDetails(bookingObject);
+
+        await booking.client.close();
+        console.log("db connection closed");
+
         await res.render("index", { header: header, html: bookingDetails });
 
     } catch (error) {
