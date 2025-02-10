@@ -40,12 +40,6 @@ input[type=date] {
     width: 50%;
 }
 
-/* input[type=date], */
-/* input[type=text] { */
-    /* display: flex;
-    flex-direction: column; */
-/* } */
-
 input[type=submit],
 button {
     font-family: monospace;
@@ -55,6 +49,7 @@ button {
 input[type=submit] {
     margin-right: 5px;
     margin-top: 10px;
+    width: 100%;
 }
 
 button {
@@ -131,7 +126,22 @@ button[id=deleteButton] {
     color: #6c757d;
 }
 
-.form-group {    
-    min-height: 100px;
+.form-group {
+    font-family: monospace;
+    font-weight: bold;
+    color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
 }
 
+form {
+    width: 50%;
+    margin: auto;
+    /* padding: 10px; */
+}
+
+.error-message {
+    font-weight: lighter;
+    color: #9932CC;
+    margin-bottom: 15px;    
+}

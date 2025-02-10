@@ -21,12 +21,12 @@ const formObject = {
  * @returns {String} - The HTML string for the booking form
  */
 const buildForm = (bookingDetails = {}, formAction) => {
-    let form = `<form id="bookingForm" action="${formAction}" method="post"><table>`;
+    let form = `<form id="bookingForm" action="${formAction}" method="post">`;
 
     // If updating a booking, pre-fill the 'booking id' field
     if (formAction === 'update') {
-        form += `<div class="form-group"><tr><th><label for='id'>Booking Id</label></th>`;
-        form += `<td><input type='text' id='id' name='id' value='${bookingDetails.booking._id}'></td>`;
+        form += `<div class="form-group"><label for='id'>Booking Id</label>`;
+        form += `<input type='text' id='id' name='id' value='${bookingDetails.booking._id}'>`;
     }
 
     // Add form fields
@@ -34,12 +34,14 @@ const buildForm = (bookingDetails = {}, formAction) => {
         let { label, input, id, name } = formObject[key];
         let value = bookingDetails[key] || '';
 
-        form += `<tr><th><label for='${id}'>${label}</label></th>`;
-        form += `<td><input type='${input}' id='${id}' name='${name}' value='${value}'></td>`;
+        form += `<div class="form-group">`
+        form += `<label for='${id}'>${label}</label>`;
+        form += `<input type='${input}' id='${id}' name='${name}' value='${value}'>`;
+        form += `<label id="${id}-error class="error-message"></label>`
     }
 
     // Add the submit button and close the form
-    form += `<tr><td colspan="3"><input type="submit" action="/${formAction}" id="submitButton" name="submitButton"></td></tr></table>`;
+    form += `<td colspan="3"><input type="submit" action="/${formAction}" id="submitButton" name="submitButton">`;
     return form;
 };
 

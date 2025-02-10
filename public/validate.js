@@ -2,6 +2,7 @@ $(document).ready(function () {
     console.log("validate.js")
 
     $("#bookingForm").validate({
+        errorClass: "error-message",
         rules: {
             fname: "required",
             lname: "required",
@@ -17,6 +18,6 @@ $(document).ready(function () {
             email: "email is required",
             checkin: "checkin date is required",
             checkout: "checkout date is required"
-        }    
+        }
     });
 }); 
