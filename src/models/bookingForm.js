@@ -37,7 +37,7 @@ const buildForm = (bookingDetails = {}, formAction) => {
         form += `<div class="form-group">`
         form += `<label for='${id}'>${label}</label>`;
         form += `<input type='${input}' id='${id}' name='${name}' value='${value}'>`;
-        form += `<label id="${id}-error class="error-message"></label>`
+        form += `<label class="error-message"></label>`
     }
 
     // Add the submit button and close the form

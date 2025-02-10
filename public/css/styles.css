@@ -32,13 +32,16 @@ label {
 
 input[type=date],
 input[type=text] {
-    width: 100%;
     margin: 10px 0;
 }
 
 input[type=date] {
-    width: 50%;
+    width: 30%;
 }
+
+/* input[type=text] {
+    
+} */
 
 input[type=submit],
 button {
@@ -136,12 +139,15 @@ button[id=deleteButton] {
 
 form {
     width: 50%;
-    margin: auto;
-    /* padding: 10px; */
+    margin: auto;    
 }
 
 .error-message {
     font-weight: lighter;
     color: #9932CC;
-    margin-bottom: 15px;    
+    margin-bottom: 15px;
 }
+
+/* #_id {
+    display: none;
+} */
