@@ -25,7 +25,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
  */
 router.get('/', (req, res) => {
 
-    const header = "Booking Form";
+    const header = "<h2> Booking Form </h2>";
 
     const bookingForm = buildForm({}, '/booking');
 
@@ -83,7 +83,7 @@ router.post('/booking', formValidationRules(), validate, async (req, res) => {
  */
 router.get('/update', async (req, res) => {
     try {
-        const header = "update booking";
+        const header = "<h2> Update booking </h2>";
         const id = req.query.id;
 
         const booking = new Booking();

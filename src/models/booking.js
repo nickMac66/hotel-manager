@@ -70,7 +70,7 @@ class Booking {
      */
     async getDetails(bookingObject) {
         // Create web page header
-        const header = "thank you for your booking";
+        const header = "<h2>Thank you for your booking</h2>";
 
         // Create a table to display booking details
         let bookingDetails = "<table>";
@@ -113,7 +113,7 @@ class Booking {
     async getList() {
 
         // Create web page header
-        const header = "Displaying all bookings";
+        const header = "<h2>All Bookings</h2>";
 
         // Create a table to display booking details
         let bookingList = '<div class="booking-container"><table id="bookingList">';
@@ -124,14 +124,11 @@ class Booking {
 
             // Build a table to display the bookings
             bookings.forEach((booking) => {
-                bookingList += `<tr><td colspan="2"><a href="http://localhost:3000/update?id=${booking._id}" class="icon-btn"><i class="fas fa-edit"></i></a></td>`;
-                bookingList += `<td colspan="2"><button class="icon-btn deleteButton" data-id="${booking._id}"><i class="fas fa-trash"></i></button></tr>`;
+                const { _id, fname, lname, phone, email, checkin, checkout } = booking;                                
 
-                const { _id, fname, lname, phone, email, checkin, checkout } = booking;
-
-                console.log(_id, fname, lname, email);
-
-                bookingList += `<tr><td>Name: ${fname} ${lname}</td></tr>`;
+                bookingList += `<tr><td>Name: ${fname} ${lname}</td>`;
+                bookingList += `<td class="fixed-width"><a href="http://localhost:3000/update?id=${booking._id}" class="icon-btn"><i class="fas fa-edit"></i></a></td>`;
+                bookingList += `<td class="fixed-width"><button class="icon-btn deleteButton" data-id="${booking._id}"><i class="fas fa-trash"></i></button></td></tr>`;
                 bookingList += `<tr><td>Phone: ${phone}</td></tr>`;
                 bookingList += `<tr><td>Email: ${email}</td></tr>`;
                 bookingList += `<tr><td>Check in: ${checkin}</td></tr>`;
