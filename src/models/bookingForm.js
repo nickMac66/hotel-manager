@@ -21,11 +21,11 @@ const formObject = {
  * @returns {String} - The HTML string for the booking form
  */
 const buildForm = (bookingDetails = {}, formAction) => {
+    
     let form = `<form id="bookingForm" action="${formAction}" method="post">`;
 
     // If updating a booking, pre-fill the 'booking id' field
     if (formAction === 'update') {
-        form += `<div class="form-group"><label for='id'>Booking Id</label>`;
         form += `<input type='text' id='id' name='id' value='${bookingDetails.booking._id}'>`;
     }
 

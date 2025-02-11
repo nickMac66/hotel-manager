@@ -1,5 +1,7 @@
 body {
-    background-color: #28282b;
+    background-color: #f0f4f9;
+    font-family: "Google Sans", roboto, "Noto Sans Myanmar UI", arial, sans-serif;
+    color: #1f1f1f;    
 }
 
 .btn {
@@ -9,21 +11,22 @@ body {
 .container {
     margin: auto;    
     padding: 10px;
-    border: 5px solid #3498DB;
+    background-color: #fff;
+    border-radius: 28px;
 }
 
 .header-container {
     align-items: center;
-    color: orange;
+    color: #1f1f1f;;
     display: flex;
-    font-family: monospace;
+    /* font-family: monospace; */
     justify-content: space-between;
     /* margin: auto; */
     width: 50%;
 }
 
 /* label { */
-    /* float: left; */
+/* float: left; */
 /* } */
 
 input[type=date],
@@ -37,7 +40,7 @@ input[type=date] {
 
 input[type=submit],
 button {
-    font-family: monospace;
+    /* font-family: monospace; */
     padding: 5px;
 }
 
@@ -116,7 +119,7 @@ button[id=deleteButton] {
 }
 
 #id {
-    display: none;
+    /* display: none; */
     /* pointer-events: none;
     background-color: #e9ecef;
     color: #6c757d; */
@@ -124,8 +127,8 @@ button[id=deleteButton] {
 
 .form-group {
     font-size: 14px;
-    font-family: monospace;
-    font-weight: bold;
+    /* font-family: monospace; */
+    /* font-weight: bold; */
     /* color: #f0f0f0; */
     display: flex;
     flex-direction: column;
