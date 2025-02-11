@@ -7,13 +7,9 @@ body {
 }
 
 .container {
-    margin: auto;
-    width: 50%;
+    margin: auto;    
     padding: 10px;
-}
-
-form td[colspan="3"] {
-    text-align: right;
+    border: 5px solid #3498DB;
 }
 
 .header-container {
@@ -22,13 +18,13 @@ form td[colspan="3"] {
     display: flex;
     font-family: monospace;
     justify-content: space-between;
-    margin: auto;
+    /* margin: auto; */
     width: 50%;
 }
 
-label {
-    float: left;
-}
+/* label { */
+    /* float: left; */
+/* } */
 
 input[type=date],
 input[type=text] {
@@ -36,12 +32,8 @@ input[type=text] {
 }
 
 input[type=date] {
-    width: 30%;
+    width: 50%;
 }
-
-/* input[type=text] {
-    
-} */
 
 input[type=submit],
 button {
@@ -49,17 +41,17 @@ button {
     padding: 5px;
 }
 
-input[type=submit] {
+/* input[type=submit] {
     margin-right: 5px;
     margin-top: 10px;
     width: 100%;
-}
+} */
 
 button {
     float: right;
 }
 
-table {
+/* table {
     color: #F5F5DC;
     font-family: monospace;
     border: 3px solid #F5F5DC;
@@ -67,12 +59,12 @@ table {
     margin: auto;
     width: 50%;
     padding: 10px;
-}
+} */
 
-table[id='bookingDetailsTable'] {
+/* table[id='bookingDetailsTable'] {
     padding: 10px;
     text-align: left;
-}
+} */
 
 .dropbtn {
     background-color: #3498DB;
@@ -124,22 +116,24 @@ button[id=deleteButton] {
 }
 
 #id {
-    pointer-events: none;
+    display: none;
+    /* pointer-events: none;
     background-color: #e9ecef;
-    color: #6c757d;
+    color: #6c757d; */
 }
 
 .form-group {
+    font-size: 14px;
     font-family: monospace;
     font-weight: bold;
-    color: #f0f0f0;
+    /* color: #f0f0f0; */
     display: flex;
     flex-direction: column;
 }
 
 form {
-    width: 50%;
-    margin: auto;    
+    width: 25%;
+    /* margin: auto;     */
 }
 
 .error-message {
