@@ -1,7 +1,7 @@
 body {
     background-color: #f0f4f9;
     font-family: "Google Sans", roboto, "Noto Sans Myanmar UI", arial, sans-serif;
-    color: #1f1f1f;    
+    color: #1f1f1f;
 }
 
 .btn {
@@ -9,7 +9,7 @@ body {
 }
 
 .container {
-    margin: auto;    
+    margin: auto;
     padding: 10px;
     background-color: #fff;
     border-radius: 28px;
@@ -17,7 +17,8 @@ body {
 
 .header-container {
     align-items: center;
-    color: #1f1f1f;;
+    color: #1f1f1f;
+    ;
     display: flex;
     /* font-family: monospace; */
     justify-content: space-between;
@@ -136,13 +137,39 @@ button[id=deleteButton] {
 
 form {
     width: 25%;
-    /* margin: auto;     */
+    margin: auto;    
 }
 
 .error-message {
     font-weight: lighter;
     color: #9932CC;
     margin-bottom: 15px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+li {
+    margin: 0 10px;
+}
+
+li {
+    /* float: left; */
+}
+
+a {
+    display: block;
+    padding: 8px;
+}
+
+.menu-bar {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
 }
 
 /* #_id {
