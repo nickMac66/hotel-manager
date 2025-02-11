@@ -123,14 +123,16 @@ class Booking {
             const bookings = await this.client.db('nickemacdonald').collection('bookings').find().toArray();
 
             // Build a table to display the bookings
-            bookings.forEach((booking) => {
+            bookings.forEach((booking) => {            
+                bookingList += `<tr><td colspan="2"><a href="http://localhost:3000/update?id=${booking._id}" class="icon-btn"><i class="fas fa-edit"></i></a></td>`;
+                bookingList += `<td colspan="2"><button class="icon-btn deleteButton" data-id="${booking._id}"><i class="fas fa-trash"></i></button></tr>`;
 
                 for (let key in booking) {
                     bookingList += "<tr><td>" + key + "</td><td>" + booking[key] + "</td></tr>";
                 }
 
-            bookingList += `<tr><td colspan="2"><a href="http://localhost:3000/update?id=${booking._id}"><button id="updateButton">Update</button></a></td>`;            
-            bookingList += `<td colspan="2"><button class="deleteButton" data-id="${booking._id}">Delete</button></a></td></tr>`;
+                // bookingList += `<tr><td colspan="2"><a href="http://localhost:3000/update?id=${booking._id}"><button id="updateButton">Update</button></a></td>`;
+                // bookingList += `<td colspan="2"><button class="deleteButton" data-id="${booking._id}">Delete</button></a></td></tr > `;
 
                 // Add a horizontal rule between bookings
                 bookingList += "<tr><td colspan='3'><hr></td></tr>";
