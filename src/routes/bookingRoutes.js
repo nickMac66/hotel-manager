@@ -25,7 +25,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
  */
 router.get('/', (req, res) => {
 
-    const header = "hotel booking form";
+    const header = "Booking Form";
 
     const bookingForm = buildForm({}, '/booking');
 

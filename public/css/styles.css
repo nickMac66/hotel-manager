@@ -13,6 +13,7 @@ body {
     padding: 10px;
     background-color: #fff;
     border-radius: 28px;
+    height: 100%;
 }
 
 input[type=date],
@@ -130,4 +131,12 @@ form {
 .app-home {
     font-weight: bold;
     font-size: 1.5em;
+}
+
+.header-container {
+    width: 100%;    
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

@@ -17,18 +17,13 @@
 <body>
     <div class="navbar">
         <a href="http://localhost:3000" class="app-home">Hotel Manager</a>
-        <a href="#">Edit Bookings</a>
+        <a href="http://localhost:3000/bookingList">Edit Bookings</a>
     </div>
 
     <div class="container">
 
         <div class="header-container">
-            <div class="dropdown">
-                <button id="menuButton" class="dropbtn"><i class="fa fa-bars"></i></button>
-                <div id="myDropdown" class="dropdown-content">
-                    <a href="http://localhost:3000/bookingList">Edit booking</a>
-                </div>
-            </div>
+            <h1> <%- header %></h1>
         </div>
 
         <%- html %>
