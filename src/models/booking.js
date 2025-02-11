@@ -116,7 +116,7 @@ class Booking {
         const header = "<h2>All Bookings</h2>";
 
         // Create a table to display booking details
-        let bookingList = '<div class="booking-container"><table id="bookingList">';
+        let bookingList = '<div class="booking-container"><table>';
 
         // Get all bookings from the database    
         try {
