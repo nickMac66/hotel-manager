@@ -69,19 +69,23 @@ class Booking {
      * @returns {Object} - An object containing the header and booking details
      */
     async getDetails(bookingObject) {
+
+        const { fname, lname, phone, email, checkin, checkout } = bookingObject;
+
         // Create web page header
         const header = "<h2>Thank you for your booking</h2>";
 
         // Create a table to display booking details
-        let bookingDetails = "<table>";
+        let bookingDetails = '<div class="booking-container"><table>';
 
-        const entries = Object.entries(bookingObject);
-        for (const [key, value] of entries) {
-            bookingDetails += "<tr><td>" + key + "</td><td>" + value + "</td></tr>";
-        }
+        bookingDetails += `<tr><td>Name: ${fname} ${lname}</td></tr>`;
+        bookingDetails += `<tr><td>Phone: ${phone}</td></tr>`;
+        bookingDetails += `<tr><td>Email: ${email}</td></tr>`;
+        bookingDetails += `<tr><td>Check in: ${checkin}</td></tr>`;
+        bookingDetails += `<tr><td>Check out: ${checkout}</td></tr>`;
 
         // Add a back button to return to the main page
-        bookingDetails += '<tr><td colspan="3"><a href="http://localhost:3000"><button id="backButton">Back</button></a></td></tr></table>';
+        bookingDetails += '<tr><td colspan="3"><a href="http://localhost:3000"><button>Back</button></a></td></tr></div></table>';
         return { header, bookingDetails };
     }
 
@@ -124,7 +128,7 @@ class Booking {
 
             // Build a table to display the bookings
             bookings.forEach((booking) => {
-                const { _id, fname, lname, phone, email, checkin, checkout } = booking;                                
+                const { _id, fname, lname, phone, email, checkin, checkout } = booking;
 
                 bookingList += `<tr><td>Name: ${fname} ${lname}</td>`;
                 bookingList += `<td class="fixed-width"><a href="http://localhost:3000/update?id=${booking._id}" class="icon-btn"><i class="fas fa-edit"></i></a></td>`;

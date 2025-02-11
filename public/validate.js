@@ -23,18 +23,18 @@ $(document).ready(function () {
             checkout: "required"
         },
         messages: {
-            fname: "first name is required",
-            lname: "last name is required",
+            fname: "First name is required",
+            lname: "Last name is required",
             phone: {
-                required: "phone number is required",
-                phone: "please enter  a valid phone number"
+                required: "Phone number is required",
+                phone: "Please enter  a valid phone number"
             },
             email: {
-                required: "email is required",
+                required: "Email is required",
                 email: "Your email address must be in the format of name@domain.com"
             },
-            checkin: "checkin date is required",
-            checkout: "checkout date is required"
+            checkin: "Checkin date is required",
+            checkout: "Checkout date is required"
         }
     });
 }); 
