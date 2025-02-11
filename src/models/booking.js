@@ -113,7 +113,7 @@ class Booking {
     async getList() {
 
         // Create web page header
-        const header = "booking list";
+        const header = "Booking List";
 
         // Create a table to display booking details
         let bookingList = "<table>";
