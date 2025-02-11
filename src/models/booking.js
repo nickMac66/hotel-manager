@@ -116,7 +116,7 @@ class Booking {
         const header = "Displaying all bookings";
 
         // Create a table to display booking details
-        let bookingList = '<table id="bookingList">';
+        let bookingList = '<div class="booking-container"><table id="bookingList">';
 
         // Get all bookings from the database    
         try {
@@ -137,7 +137,7 @@ class Booking {
                 bookingList += `<tr><td>Check in: ${checkin}</td></tr>`;
                 bookingList += `<tr><td>Check out: ${checkout}</td></tr>`;
 
-                bookingList += "<tr><td colspan='3'><hr></td></tr>";
+                bookingList += "<tr><td colspan='3'><hr></td></tr></div>";
             });
 
         } catch (error) {
@@ -149,8 +149,6 @@ class Booking {
             console.log("db conn closed");
         }
 
-        // Add a back button to return to the main page and close the table
-        bookingList += '<tr><td colspan="3"><a href="http://localhost:3000"><button id="backButton">Back</button></a></td></tr>';
         bookingList += "</table>";
 
         return { header, bookingList };

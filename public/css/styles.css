@@ -13,6 +13,7 @@ body {
     padding: 10px;
     background-color: #fff;
     border-radius: 28px;
+    margin-bottom: 28px;
 }
 
 input[type=date],
@@ -99,6 +100,8 @@ button[id=deleteButton] {
 form {
     width: 25%;
     margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .error-message {
@@ -134,7 +137,6 @@ form {
 
 .header-container {
     width: 100%;
-    padding: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -160,10 +162,11 @@ table tr {
     color: #333;
 }
 
+.booking-container {
+    width: 50%;
+    margin: auto;
+}
+
 #bookingList {
     width: 100%;
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
