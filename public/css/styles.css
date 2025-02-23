@@ -8,6 +8,8 @@ body {
     margin: auto;
     padding: 10px;
     background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
     border-radius: 28px;
     margin-bottom: 28px;
 }
@@ -88,8 +90,8 @@ form {
 
 button:hover,
 input[type=submit]:hover {
-    background-color: #d9d9d9;    
-    
+    background-color: #d9d9d9;
+
 }
 
 .navbar-home {
@@ -106,10 +108,10 @@ input[type=submit]:hover {
 table {
     width: 100%;
     margin-top: 28px;
-    padding: 15px;
 }
 
 table td {
+    /* border: 5px solid greenyellow; */
     padding: 5px;
 }
 
@@ -126,6 +128,7 @@ table td {
     cursor: pointer;
     color: #333;
     margin: 0;
+
 }
 
 .fixed-width {
