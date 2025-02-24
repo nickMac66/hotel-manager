@@ -4,9 +4,9 @@
  * Author: NicMac 
  */
 
-// const Booking = require('../booking');
+require('dotenv').config();
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://nickemacdonald:hotelmanager@hotelmanager.occa5.mongodb.net/?retryWrites=true&w=majority&appName=HotelManager";
+const uri = process.env.MONGO_URI
 
 const mongoConnect = () => {
 
