@@ -98,7 +98,7 @@ form {
 
 button:hover,
 input[type=submit]:hover {
-    background-color: var(--accent-color);
+    background-color: var(--secondary-color);
 
 }
 
