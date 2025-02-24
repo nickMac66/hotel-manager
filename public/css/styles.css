@@ -1,3 +1,10 @@
+:root {
+    --primary-color: #605DC8;
+    --secondary-color: #8B89E6;
+    --accent-color: #e8e7fa;
+    --shadow-color: #E8E8E8;
+}
+
 body {
     background-color: #f0f4f9;
     font-family: "Google Sans", roboto, "Noto Sans Myanmar UI", arial, sans-serif;
@@ -61,6 +68,7 @@ form {
 
 .error-message {
     color: #9932CC;
+    font-size: 12px;
     margin-bottom: 5px;
 }
 
@@ -88,8 +96,8 @@ form {
 
 button:hover,
 input[type=submit]:hover {
-    background-color: #d9d9d9;    
-    
+    background-color: #d9d9d9;
+
 }
 
 .navbar-home {
