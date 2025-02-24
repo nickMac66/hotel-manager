@@ -4,7 +4,8 @@
  * Author: NicMac 
  */
 
-require('dotenv').config();
+// require('dotenv').config();
+require('dotenv').config({ path: '.config.env' });
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = process.env.MONGO_URI
 
